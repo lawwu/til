@@ -3,6 +3,10 @@ project:
 
 website:
   title: "til"
+  site-url: https://lawwu.github.io/til/
+  description: "Lawrence Wu's Today I Learned"
+  google-analytics: "G-LN4GM4FVCJ"
+  cookie-consent: true  
   navbar:
     right:
       - icon: github
