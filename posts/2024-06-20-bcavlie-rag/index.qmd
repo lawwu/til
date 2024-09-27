@@ -2,7 +2,7 @@
 title: "Notes from Benjamin Clavie's RAG talk"
 author: "Lawrence"
 date: "2024-06-19"
-categories: [quarto]
+categories: [rag, llm]
 ---
 
 Hamel Hussain finished hosting an LLM conference. All of the talks are listed [here](https://parlance-labs.com/education/). One of the best talks was from Benjamin Clavie. I first heard about him because he's the author of the great [RAGatouille](https://github.com/AnswerDotAI/RAGatouille) library that made ColBERT embeddings much easier to work with.

@@ -1,0 +1,17 @@
+---
+title: "JJ Allaire's Inspect Framework for LLM Evals"
+author: "Lawrence"
+date: "2024-06-19"
+categories: [evals, llm]
+---
+
+Hamel Hussain finished hosting an LLM conference. All of the talks are listed [here](https://parlance-labs.com/education/). One of the talks was from JJ Allaire, the creator of RStudio. I owe RStudio and all of the open source R developers like [Hadley Wickham](https://hadley.nz/) a lot of credit as it jump started my data science career. His [tidy data paper](https://vita.had.co.nz/papers/tidy-data.pdf) (and now [chapter in his book](https://r4ds.had.co.nz/tidy-data.html)) was really helpful to frame how to structure data.
+
+That talk is here:
+
+{{< video https://www.youtube.com/watch?v=kNaZU9bz-UM&ab_channel=HamelHusain >}}
+
+- Repo: <https://github.com/UKGovernmentBEIS/inspect_ai>
+- Workshop slides: <https://github.com/jjallaire/inspect-llm-workshop>
+
+One thing that is also cool is he [used Quarto to create slides in code](https://github.com/jjallaire/inspect-llm-workshop/blob/main/slides/inspect.qmd) (something I'd like to do going forward instead of manually creating powerpoint slides).

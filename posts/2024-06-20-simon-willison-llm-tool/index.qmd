@@ -1,0 +1,16 @@
+---
+title: "Simon Willison's CLI tools"
+author: "Lawrence"
+date: "2024-06-19"
+categories: [cli, llm]
+---
+
+Hamel Hussain finished hosting an LLM conference. All of the talks are listed [here](https://parlance-labs.com/education/). One of the talks was from Simon Willison. He spoke about his [llm](https://github.com/simonw/llm) tool that integrates with most API models and local LLMs. and other CLI tools he's made.
+
+That talk is here:
+
+{{< video https://www.youtube.com/watch?v=QUXQNi6jQ30&t=3s&ab_channel=HamelHusain >}}
+
+Here are his notes: <https://github.com/simonw/language-models-on-the-command-line/tree/main>
+
+Another tool he demo'd was called [shot-scraper](https://github.com/simonw/shot-scraper) which takes screenshots and scrapes webpages. He also has a [template](https://github.com/simonw/shot-scraper-template/) to use shot-scraper in Github Actions to programmatically take screenshots of webpages.
