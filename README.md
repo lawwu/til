@@ -2,7 +2,7 @@
 
 Finally got around to creating a TIL. Was inspired by the prolific [Simon Willison's TIL](https://til.simonwillison.net/).
 
-I'm using Quarto and will host this on Github Pages. Was pretty easy to get started. Just need to install Quarto and I was off and running.
+I'm using Quarto and host this on Github Pages. Was pretty easy to get started. Just need to install Quarto and I was off and running.
 
 ```bash
 # install quarto
