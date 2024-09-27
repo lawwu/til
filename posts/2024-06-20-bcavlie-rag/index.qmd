@@ -1,7 +1,7 @@
 ---
 title: "Notes from Benjamin Clavie's RAG talk"
 author: "Lawrence"
-date: "2024-06-19"
+date: "2024-06-20"
 categories: [rag, llm]
 ---
 
