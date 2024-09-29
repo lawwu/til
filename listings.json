@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2024-06-28-azure-prompt/index.html",
       "/posts/2024-06-20-bcavlie-rag/index.html",
       "/posts/2024-06-20-inspect-eval-framework/index.html",
       "/posts/2024-06-20-simon-willison-llm-tool/index.html",
