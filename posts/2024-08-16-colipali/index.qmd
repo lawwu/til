@@ -1,0 +1,15 @@
+---
+title: "ColiPali: Efficient Document Retrieval with Vision Language Models"
+author: "Lawrence Wu"
+date: "2024-08-16"
+categories: [llm, vision]
+---
+
+Learned about ColiPali via [Twitter/X](https://x.com/tonywu_71/status/1824194413469503764?s=12).
+
+![Tony Wu on ColiPali](colipali_tweet.png)
+
+- Blog Post: <https://huggingface.co/blog/manu/colpali>
+- Demo: <https://huggingface.co/spaces/manu/ColPali-demo>
+- Model: <https://huggingface.co/vidore/colpali>
+- Then in September 2024, Ben Clavie released the [`byaldi`](https://github.com/AnswerDotAI/byaldi) to make it easier to use ColiPali models. Haven't used it yet but it sounds like the equivalent of what [RAGatouille](https://github.com/AnswerDotAI/RAGatouille) did for [ColBERT](https://github.com/stanford-futuredata/ColBERT).

@@ -1,0 +1,37 @@
+---
+title: "How to Create Slides in Code with Quarto & Revealjs"
+author: "Lawrence Wu"
+date: "2024-07-12"
+categories: [quarto, revealjs, slides]
+---
+
+I learned today how to create slides programatically using Quarto & revealjs. Quarto's documentation is wonderful and their [Revealjs documentation](https://quarto.org/docs/presentations/revealjs/) is no different.
+
+This is an example of a slideshow with two slides:
+
+```markdown
+---
+title: "Habits"
+author: "John Doe"
+format: revealjs
+---
+
+## Getting up
+
+- Turn off alarm
+- Get out of bed
+
+## Going to sleep
+
+- Get in bed
+- Count sheep
+```
+
+This is an [example](https://github.com/quarto-dev/quarto-web/blob/main/docs/presentations/revealjs/demo/index.qmd) of a more complicated slidedeck.
+
+Some benefits:
+
+- they are in code, no more manual work rearranging images/text in Powerpoint
+- the default slides look nice
+- can be version controlled
+- code snippets are very nicely rendered and scrollable

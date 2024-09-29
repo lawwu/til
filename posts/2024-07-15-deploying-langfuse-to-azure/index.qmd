@@ -1,0 +1,8 @@
+---
+title: "Deploying langfuse to Azure"
+author: "Lawrence Wu"
+date: "2024-07-15"
+categories: [azure, langfuse]
+---
+
+I learned today how to deploy [`langfuse`](https://github.com/langfuse/langfuse) to Azure. langfuse is essentially an open source version of langsmith. I just used this [template](https://github.com/Azure-Samples/langfuse-on-azure) to deploy langfuse and all of it's associated containers to Azure. It comes with Azure AD authentication. Actually [Azure-Samples](https://github.com/Azure-Samples) is a fantastic resource for learning about Azure.
