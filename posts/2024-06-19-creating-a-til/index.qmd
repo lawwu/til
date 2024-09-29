@@ -17,4 +17,4 @@ brew install --cask quarto
 quarto create project blog til
 ```
 
-You can also use the Quarto VS extension to do this through the command pallete. Instructions [here](https://quarto.org/docs/websites/website-blog.html).
+You can also use the Quarto VS extension to do this through the command pallete. The Quarto documentation to create a blog is [here](https://quarto.org/docs/websites/website-blog.html). There are multiple ways to publish to Github Pages, I opted to use a Github Action, the instructions are [here](https://quarto.org/docs/publishing/github-pages.html#github-action).
