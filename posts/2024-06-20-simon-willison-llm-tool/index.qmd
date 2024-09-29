@@ -1,6 +1,6 @@
 ---
 title: "Simon Willison's CLI tools"
-author: "Lawrence"
+author: "Lawrence Wu"
 date: "2024-06-20"
 categories: [cli, llm]
 ---

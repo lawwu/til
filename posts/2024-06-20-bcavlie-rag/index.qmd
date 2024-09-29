@@ -1,6 +1,6 @@
 ---
 title: "Notes from Benjamin Clavie's RAG talk"
-author: "Lawrence"
+author: "Lawrence Wu"
 date: "2024-06-20"
 categories: [rag, llm]
 ---
