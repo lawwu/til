@@ -1,27 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://lawwu.github.io/til/posts/2024-07-26-vscode-port-forwards/index.html</loc>
+    <lastmod>2024-09-29T07:06:52.987Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-07-19-positron/index.html</loc>
+    <lastmod>2024-09-29T07:06:52.987Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-08-16-colipali/index.html</loc>
+    <lastmod>2024-09-29T07:06:52.990Z</lastmod>
+  </url>
+  <url>
     <loc>https://lawwu.github.io/til/posts/2024-06-20-simon-willison-llm-tool/index.html</loc>
-    <lastmod>2024-09-29T06:16:51.882Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lawwu.github.io/til/posts/2024-06-20-inspect-eval-framework/index.html</loc>
-    <lastmod>2024-09-29T06:16:51.882Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lawwu.github.io/til/posts/2024-06-20-bcavlie-rag/index.html</loc>
-    <lastmod>2024-09-29T06:16:51.876Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lawwu.github.io/til/index.html</loc>
-    <lastmod>2024-09-29T06:16:51.876Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lawwu.github.io/til/posts/2024-06-28-azure-prompt/index.html</loc>
-    <lastmod>2024-09-29T06:16:51.882Z</lastmod>
+    <lastmod>2024-09-29T07:06:52.986Z</lastmod>
   </url>
   <url>
     <loc>https://lawwu.github.io/til/posts/2024-06-19-creating-a-til/index.html</loc>
-    <lastmod>2024-09-29T06:16:51.876Z</lastmod>
+    <lastmod>2024-09-29T07:06:52.980Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-06-28-azure-prompt/index.html</loc>
+    <lastmod>2024-09-29T07:06:52.986Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-07-18-python-type-hints/index.html</loc>
+    <lastmod>2024-09-29T07:06:52.987Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/index.html</loc>
+    <lastmod>2024-09-29T07:06:52.980Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-06-20-bcavlie-rag/index.html</loc>
+    <lastmod>2024-09-29T07:06:52.980Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-06-20-inspect-eval-framework/index.html</loc>
+    <lastmod>2024-09-29T07:06:52.986Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-08-13-excalidraw/index.html</loc>
+    <lastmod>2024-09-29T07:06:52.987Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-07-12-quarto-slides/index.html</loc>
+    <lastmod>2024-09-29T07:06:52.986Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-08-15-llamacoder/index.html</loc>
+    <lastmod>2024-09-29T07:06:52.987Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-07-15-deploying-langfuse-to-azure/index.html</loc>
+    <lastmod>2024-09-29T07:06:52.986Z</lastmod>
   </url>
 </urlset>

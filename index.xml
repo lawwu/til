@@ -10,7 +10,281 @@
 <atom:link href="https://lawwu.github.io/til/index.xml" rel="self" type="application/rss+xml"/>
 <description>Lawrence Wu&#39;s Today I Learned</description>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Fri, 28 Jun 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 16 Aug 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>ColiPali: Efficient Document Retrieval with Vision Language Models</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-08-16-colipali/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Learned about ColiPali via <a href="https://x.com/tonywu_71/status/1824194413469503764?s=12">Twitter/X</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://lawwu.github.io/til/posts/2024-08-16-colipali/colipali_tweet.png" class="img-fluid figure-img"></p>
+<figcaption>Tony Wu on ColiPali</figcaption>
+</figure>
+</div>
+<ul>
+<li>Blog Post: <a href="https://huggingface.co/blog/manu/colpali" class="uri">https://huggingface.co/blog/manu/colpali</a></li>
+<li>Demo: <a href="https://huggingface.co/spaces/manu/ColPali-demo" class="uri">https://huggingface.co/spaces/manu/ColPali-demo</a></li>
+<li>Model: <a href="https://huggingface.co/vidore/colpali" class="uri">https://huggingface.co/vidore/colpali</a></li>
+<li>Then in September 2024, Ben Clavie released the <a href="https://github.com/AnswerDotAI/byaldi"><code>byaldi</code></a> to make it easier to use ColiPali models. Haven’t used it yet but it sounds like the equivalent of what <a href="https://github.com/AnswerDotAI/RAGatouille">RAGatouille</a> did for <a href="https://github.com/stanford-futuredata/ColBERT">ColBERT</a>.</li>
+</ul>
+
+
+
+ ]]></description>
+  <category>llm</category>
+  <category>vision</category>
+  <guid>https://lawwu.github.io/til/posts/2024-08-16-colipali/</guid>
+  <pubDate>Fri, 16 Aug 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>LlamaCoder</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-08-15-llamacoder/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><a href="https://llamacoder.together.ai/">LlamaCoder</a> is an AI agent that takes natural language and generates a React app. It’s billed as an “open source version of Claude Artifacts.” The Github repo is <a href="https://github.com/Nutlope/llamacoder">here</a>.</p>
+<p>It uses llama 3.1 405B. I built a snake game that actually works… incredible.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://lawwu.github.io/til/posts/2024-08-15-llamacoder/snake.png" class="img-fluid figure-img"></p>
+<figcaption>Snake Game</figcaption>
+</figure>
+</div>
+<p>The <a href="https://github.com/Nutlope/llamacoder/blob/bdf2a059ab30b620ec47855ddc6eac985d490fea/app/api/generateCode/route.ts#L86">system prompt</a> is interesting. “I will tip you $1 million if you do a good job” 😂</p>
+<pre><code>You are an expert frontend React engineer who is also a great UI/UX designer. Follow the instructions carefully, I will tip you $1 million if you do a good job:
+
+- Create a React component for whatever the user asked you to create and make sure it can run by itself by using a default export
+- Make sure the React app is interactive and functional by creating state when needed and having no required props
+- If you use any imports from React like useState or useEffect, make sure to import them directly
+- Use TypeScript as the language for the React component
+- Use Tailwind classes for styling. DO NOT USE ARBITRARY VALUES (e.g. \`h-[600px]\`). Make sure to use a consistent color palette.
+- Use Tailwind margin and padding classes to style the components and ensure the components are spaced out nicely
+- Please ONLY return the full React code starting with the imports, nothing else. It's very important for my job that you only return the React code with imports. DO NOT START WITH \`\`\`typescript or \`\`\`javascript or \`\`\`tsx or \`\`\`.
+- ONLY IF the user asks for a dashboard, graph or chart, the recharts library is available to be imported, e.g. \`import { LineChart, XAxis, ... } from "recharts"\` &amp; \`&lt;LineChart ...&gt;&lt;XAxis dataKey="name"&gt; ...\`. Please only use this when needed.
+`;
+
+// Removed because it causes too many errors
+// - The lucide-react@0.263.1 library is also available to be imported. If you need an icon, use one from lucide-react. Here's an example of importing and using one: import { Camera } from "lucide-react"\` &amp; \`&lt;Camera color="red" size={48} /&gt;\`
+</code></pre>
+
+
+
+ ]]></description>
+  <category>llm</category>
+  <category>agent</category>
+  <guid>https://lawwu.github.io/til/posts/2024-08-15-llamacoder/</guid>
+  <pubDate>Thu, 15 Aug 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Excalidraw</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-08-13-excalidraw/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I didn’t realize <a href="https://excalidraw.com/">Excalidraw</a> was open source. Heard about it a year ago from a presentation.</p>
+<ul>
+<li>Github: <a href="https://github.com/excalidraw/excalidraw" class="uri">https://github.com/excalidraw/excalidraw</a></li>
+<li>VS Code Extension: <a href="https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor" class="uri">https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor</a></li>
+<li>just need to create a new file with a .excalidraw extension and open it. Excalidraw saves data in JSON.</li>
+</ul>
+<p>Also a list of public libraries/extensions: <a href="https://libraries.excalidraw.com/" class="uri">https://libraries.excalidraw.com/</a></p>
+
+
+
+ ]]></description>
+  <category>tools</category>
+  <guid>https://lawwu.github.io/til/posts/2024-08-13-excalidraw/</guid>
+  <pubDate>Tue, 13 Aug 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>VS Code &amp; Port Forwarding</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-07-26-vscode-port-forwards/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Today I ran into this issue where I wasn’t able to call some Azure Functions I was developing locally. When Remote SSH’ing into a VM using VS Code, if you start a webserver on that machine, the port is automatically forwarded to your machine’s localhost. Since my webserver was using the same port 7072, and forward to <code>localhost:7072</code>, the Azure Functions running locally also at <code>localhost:7072</code> were not accessible since calls to that address were being sent to the webserver (via the port forward).</p>
+<p>Clicking the Ports tab in VS Code shows the port being Auto Forwarded:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://lawwu.github.io/til/posts/2024-07-26-vscode-port-forwards/port_forward.png" class="img-fluid figure-img"></p>
+<figcaption>Port Forward</figcaption>
+</figure>
+</div>
+
+
+
+ ]]></description>
+  <category>IDE</category>
+  <category>port forwarding</category>
+  <guid>https://lawwu.github.io/til/posts/2024-07-26-vscode-port-forwards/</guid>
+  <pubDate>Fri, 26 Jul 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Positron IDE from Posit</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-07-19-positron/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Today I learned, <a href="https://posit.co/">Posit</a> (use to be RStudio) is working on a new data science IDE that looks like RStudio built on the same underlying code as VS Code: <a href="https://github.com/posit-dev/positron" class="uri">https://github.com/posit-dev/positron</a> built on Code OSS.</p>
+<p>Also learned that “Code OSS” is another name for VS Code: <a href="https://github.com/microsoft/vscode" class="uri">https://github.com/microsoft/vscode</a>.</p>
+
+
+
+ ]]></description>
+  <category>software</category>
+  <guid>https://lawwu.github.io/til/posts/2024-07-19-positron/</guid>
+  <pubDate>Fri, 19 Jul 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Python Variable Type Hints</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-07-18-python-type-hints/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Today I learned you can use in-line type hints. Below you are specifying that the object <code>react_prompt</code> is of type <code>PromptTemplate</code>.</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> langchain_core.prompts <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> PromptTemplate</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> langchain <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> hub</span>
+<span id="cb1-3">react_prompt: PromptTemplate <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> hub.pull(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"hwchase17/react"</span>)</span></code></pre></div>
+
+
+
+ ]]></description>
+  <category>python</category>
+  <guid>https://lawwu.github.io/til/posts/2024-07-18-python-type-hints/</guid>
+  <pubDate>Thu, 18 Jul 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Deploying langfuse to Azure</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-07-15-deploying-langfuse-to-azure/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I learned today how to deploy <a href="https://github.com/langfuse/langfuse"><code>langfuse</code></a> to Azure. langfuse is essentially an open source version of langsmith. I just used this <a href="https://github.com/Azure-Samples/langfuse-on-azure">template</a> to deploy langfuse and all of it’s associated containers to Azure. It comes with Azure AD authentication. Actually <a href="https://github.com/Azure-Samples">Azure-Samples</a> is a fantastic resource for learning about Azure.</p>
+
+
+
+ ]]></description>
+  <category>azure</category>
+  <category>langfuse</category>
+  <guid>https://lawwu.github.io/til/posts/2024-07-15-deploying-langfuse-to-azure/</guid>
+  <pubDate>Mon, 15 Jul 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>How to Create Slides in Code with Quarto &amp; Revealjs</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-07-12-quarto-slides/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I learned today how to create slides programatically using Quarto &amp; revealjs. Quarto’s documentation is wonderful and their <a href="https://quarto.org/docs/presentations/revealjs/">Revealjs documentation</a> is no different.</p>
+<p>This is an example of a slideshow with two slides:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">---</span></span>
+<span id="cb1-2"><span class="an" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">title:</span><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"> "Habits"</span></span>
+<span id="cb1-3"><span class="an" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">author:</span><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"> "John Doe"</span></span>
+<span id="cb1-4"><span class="an" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">format:</span><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"> revealjs</span></span>
+<span id="cb1-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">---</span></span>
+<span id="cb1-6"></span>
+<span id="cb1-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">## Getting up</span></span>
+<span id="cb1-8"></span>
+<span id="cb1-9"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Turn off alarm</span>
+<span id="cb1-10"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Get out of bed</span>
+<span id="cb1-11"></span>
+<span id="cb1-12"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">## Going to sleep</span></span>
+<span id="cb1-13"></span>
+<span id="cb1-14"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Get in bed</span>
+<span id="cb1-15"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Count sheep</span></code></pre></div>
+<p>This is an <a href="https://github.com/quarto-dev/quarto-web/blob/main/docs/presentations/revealjs/demo/index.qmd">example</a> of a more complicated slidedeck.</p>
+<p>Some benefits:</p>
+<ul>
+<li>they are in code, no more manual work rearranging images/text in Powerpoint</li>
+<li>the default slides look nice</li>
+<li>can be version controlled</li>
+<li>code snippets are very nicely rendered and scrollable</li>
+</ul>
+
+
+
+ ]]></description>
+  <category>quarto</category>
+  <category>revealjs</category>
+  <category>slides</category>
+  <guid>https://lawwu.github.io/til/posts/2024-07-12-quarto-slides/</guid>
+  <pubDate>Fri, 12 Jul 2024 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Azure AI Prompts</title>
   <dc:creator>Lawrence Wu</dc:creator>
@@ -209,7 +483,7 @@ user:
 </section>
 
  ]]></description>
-  <category>cli</category>
+  <category>prompts</category>
   <category>llm</category>
   <guid>https://lawwu.github.io/til/posts/2024-06-28-azure-prompt/</guid>
   <pubDate>Fri, 28 Jun 2024 00:00:00 GMT</pubDate>
