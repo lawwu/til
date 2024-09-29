@@ -1,6 +1,6 @@
 ---
 title: "JJ Allaire's Inspect Framework for LLM Evals"
-author: "Lawrence"
+author: "Lawrence Wu"
 date: "2024-06-20"
 categories: [evals, llm]
 ---
