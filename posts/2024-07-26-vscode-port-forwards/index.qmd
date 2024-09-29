@@ -1,0 +1,12 @@
+---
+title: "VS Code & Port Forwarding"
+author: "Lawrence Wu"
+date: "2024-07-26"
+categories: [IDE, port forwarding]
+---
+
+Today I ran into this issue where I wasn't able to call some Azure Functions I was developing locally. When Remote SSH'ing into a VM using VS Code, if you start a webserver on that machine, the port is automatically forwarded to your machine's localhost. Since my webserver was using the same port 7072, and forward to `localhost:7072`, the Azure Functions running locally also at `localhost:7072` were not accessible since calls to that address were being sent to the webserver (via the port forward).
+
+Clicking the Ports tab in VS Code shows the port being Auto Forwarded:
+
+![Port Forward](port_forward.png)

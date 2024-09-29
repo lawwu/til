@@ -1,0 +1,14 @@
+---
+title: "Excalidraw"
+author: "Lawrence Wu"
+date: "2024-08-13"
+categories: [tools]
+---
+
+I didn't realize [Excalidraw](https://excalidraw.com/) was open source. Heard about it a year ago from a presentation.
+
+- Github: <https://github.com/excalidraw/excalidraw>
+- VS Code Extension: <https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor>
+- just need to create a new file with a .excalidraw extension and open it. Excalidraw saves data in JSON.
+
+Also a list of public libraries/extensions: <https://libraries.excalidraw.com/>

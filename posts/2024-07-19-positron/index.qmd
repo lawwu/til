@@ -1,0 +1,10 @@
+---
+title: "Positron IDE from Posit"
+author: "Lawrence Wu"
+date: "2024-07-19"
+categories: [software]
+---
+
+Today I learned, [Posit](https://posit.co/) (use to be RStudio) is working on a new data science IDE that looks like RStudio built on the same underlying code as VS Code: <https://github.com/posit-dev/positron> built on Code OSS.
+
+Also learned that "Code OSS" is another name for VS Code: <https://github.com/microsoft/vscode>.

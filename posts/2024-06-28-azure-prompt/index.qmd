@@ -2,7 +2,7 @@
 title: "Azure AI Prompts"
 author: "Lawrence Wu"
 date: "2024-06-28"
-categories: [cli, llm]
+categories: [prompts, llm]
 ---
 
 Microsoft's Azure has some good examples of prompts. In the Azure AI Studio, in the Chat Playground, if you create a chat application and then click the Prompt Flow button, it will take the chat app and drop you into an editable Prompt Flow template. There are two prompts that are quite interesting:

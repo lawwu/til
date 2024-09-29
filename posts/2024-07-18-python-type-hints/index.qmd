@@ -1,0 +1,14 @@
+---
+title: "Python Variable Type Hints"
+author: "Lawrence Wu"
+date: "2024-07-18"
+categories: [python]
+---
+
+Today I learned you can use in-line type hints. Below you are specifying that the object `react_prompt` is of type `PromptTemplate`.
+
+```python
+from langchain_core.prompts import PromptTemplate
+from langchain import hub
+react_prompt: PromptTemplate = hub.pull("hwchase17/react")
+```
