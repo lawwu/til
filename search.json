@@ -32,7 +32,7 @@
     "href": "posts/2024-06-19-creating-a-til/index.html",
     "title": "How to create a TIL with Quarto",
     "section": "",
-    "text": "Finally got around to creating a TIL. Was inspired by the prolific Simon Willison’s TIL.\nI’m using Quarto and will host this on Github Pages. Was pretty easy to get started. Just need to install Quarto and I was off and running.\n# install quarto\nbrew install --cask quarto\n\n# create a quarto project that is a blog\nquarto create project blog til\nYou can also use the Quarto VS extension to do this through the command pallete. Instructions here."
+    "text": "Finally got around to creating a TIL. Was inspired by the prolific Simon Willison’s TIL.\nI’m using Quarto and will host this on Github Pages. Was pretty easy to get started. Just need to install Quarto and I was off and running.\n# install quarto\nbrew install --cask quarto\n\n# create a quarto project that is a blog\nquarto create project blog til\nYou can also use the Quarto VS extension to do this through the command pallete. The Quarto documentation to create a blog is here. There are multiple ways to publish to Github Pages, I opted to use a Github Action, the instructions are here."
   },
   {
     "objectID": "posts/2024-06-28-azure-prompt/index.html",
