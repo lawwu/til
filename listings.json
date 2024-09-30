@@ -2,6 +2,15 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2024-09-27-github-copilot-workspace/index.html",
+      "/posts/2024-09-26-github-jupyter-diffs/index.html",
+      "/posts/2024-09-20-moshi-real-time-chatbot/index.html",
+      "/posts/2024-09-19-apple-focus/index.html",
+      "/posts/2024-09-17-python-http-clients/index.html",
+      "/posts/2024-09-16-alphaxiv/index.html",
+      "/posts/2024-09-12-o1-preview/index.html",
+      "/posts/2024-09-11-learn-to-rank/index.html",
+      "/posts/2024-08-30-caffiene-replacement/index.html",
       "/posts/2024-08-29-greattables/index.html",
       "/posts/2024-08-28-opensource-sora/index.html",
       "/posts/2024-08-27-runnablepassthrough/index.html",

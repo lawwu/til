@@ -2,74 +2,110 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lawwu.github.io/til/posts/2024-07-26-vscode-port-forwards/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.769Z</lastmod>
+    <lastmod>2024-09-30T23:37:21.115Z</lastmod>
   </url>
   <url>
-    <loc>https://lawwu.github.io/til/posts/2024-07-19-positron/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.769Z</lastmod>
+    <loc>https://lawwu.github.io/til/posts/2024-09-16-alphaxiv/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.128Z</lastmod>
   </url>
   <url>
-    <loc>https://lawwu.github.io/til/posts/2024-08-28-opensource-sora/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.772Z</lastmod>
+    <loc>https://lawwu.github.io/til/posts/2024-09-11-learn-to-rank/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.118Z</lastmod>
   </url>
   <url>
-    <loc>https://lawwu.github.io/til/posts/2024-07-12-quarto-slides/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.769Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lawwu.github.io/til/posts/2024-06-20-simon-willison-llm-tool/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.769Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lawwu.github.io/til/posts/2024-06-19-creating-a-til/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.762Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lawwu.github.io/til/posts/2024-06-28-azure-prompt/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.769Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lawwu.github.io/til/posts/2024-08-29-greattables/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.772Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lawwu.github.io/til/posts/2024-07-18-python-type-hints/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.769Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lawwu.github.io/til/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.762Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lawwu.github.io/til/posts/2024-06-20-bcavlie-rag/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.763Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lawwu.github.io/til/posts/2024-08-26-webvoyager/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.772Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lawwu.github.io/til/posts/2024-06-20-inspect-eval-framework/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.768Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lawwu.github.io/til/posts/2024-08-13-excalidraw/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.770Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lawwu.github.io/til/posts/2024-08-27-runnablepassthrough/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.772Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lawwu.github.io/til/posts/2024-08-16-colipali/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.772Z</lastmod>
+    <loc>https://lawwu.github.io/til/posts/2024-08-30-caffiene-replacement/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.118Z</lastmod>
   </url>
   <url>
     <loc>https://lawwu.github.io/til/posts/2024-08-15-llamacoder/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.770Z</lastmod>
+    <lastmod>2024-09-30T23:37:21.116Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-08-16-colipali/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.118Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-08-27-runnablepassthrough/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.118Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-09-12-o1-preview/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.118Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-06-19-creating-a-til/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.108Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-06-28-azure-prompt/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.114Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-08-26-webvoyager/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.118Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-08-29-greattables/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.118Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-07-18-python-type-hints/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.115Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.108Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-09-26-github-jupyter-diffs/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.131Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-06-20-bcavlie-rag/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.108Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-09-20-moshi-real-time-chatbot/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.131Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-09-19-apple-focus/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.131Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-06-20-inspect-eval-framework/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.114Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-08-13-excalidraw/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.115Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-06-20-simon-willison-llm-tool/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.114Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-07-12-quarto-slides/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.114Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-08-28-opensource-sora/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.118Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-09-27-github-copilot-workspace/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.139Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-07-19-positron/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.115Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lawwu.github.io/til/posts/2024-09-17-python-http-clients/index.html</loc>
+    <lastmod>2024-09-30T23:37:21.131Z</lastmod>
   </url>
   <url>
     <loc>https://lawwu.github.io/til/posts/2024-07-15-deploying-langfuse-to-azure/index.html</loc>
-    <lastmod>2024-09-30T23:00:04.769Z</lastmod>
+    <lastmod>2024-09-30T23:37:21.115Z</lastmod>
   </url>
 </urlset>
