@@ -1,0 +1,11 @@
+---
+title: "CogVideoX-5B aka Open source Sora"
+author: "Lawrence Wu"
+date: "2024-08-28"
+categories: [llm, agent, video]
+---
+
+It's neat how when OpenAI or another model provider creates a new model (e.g. text-to-video like Sora), the open source community gets to work and produces an open source version. This happened with Sora (although the quality is not quite there yet):
+
+- Space: <https://huggingface.co/spaces/THUDM/CogVideoX-5B-Space>
+- Model Card: <https://huggingface.co/THUDM/CogVideoX-5b>

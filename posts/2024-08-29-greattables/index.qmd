@@ -1,0 +1,8 @@
+---
+title: "great-tables Python package"
+author: "Lawrence Wu"
+date: "2024-08-29"
+categories: [python]
+---
+
+Repo from posit to create beautiful tables in Python: <https://github.com/posit-dev/great-tables>. Basically the Python version of R's <https://github.com/rstudio/gt>. I love how posit is now contributing to the Python open source ecosystem.
