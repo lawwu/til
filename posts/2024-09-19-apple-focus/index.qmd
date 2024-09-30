@@ -1,0 +1,12 @@
+---
+title: "How to configure Apple Focus to help minimize distractions"
+author: "Lawrence Wu"
+date: "2024-09-19"
+categories: [apple, tool]
+---
+
+Focus modes on Apple devices (iOS and MacOS) are useful. You can configure these to allow notifications from certain people and/or apps when the
+focus mode is on (e.g. allow notifications from a spouse and/or calls from your Favorites). You can also schedule these modes for example to turn on
+during working hours.
+
+See these instructions for iOS (but will be available anywhere you are signed into your Apple account): <https://support.apple.com/guide/iphone/set-up-a-focus-iphd6288a67f/ios>

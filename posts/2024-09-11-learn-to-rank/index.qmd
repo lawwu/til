@@ -1,0 +1,12 @@
+---
+title: "Learn-to-Rank and Learning with ChatGPT"
+author: "Lawrence Wu"
+date: "2024-09-11"
+categories: [learning]
+---
+
+I recently learned about algorithms called Learn-to-Rank (LTR) from a talk that Doug Turnbell gave (he works at Reddit). I actually didn't know they
+existed. "LTR models are specifically designed for ranking tasks, optimizing metrics like NDCG or MAP, which are more aligned with ranking quality." Also
+learned that xgboost has an implementation of LTR here: <https://xgboost.readthedocs.io/en/stable/tutorials/learning_to_rank.html>.
+
+I then had a [conversation with ChatGPT](https://chatgpt.com/share/c973b294-64a9-42d3-892e-3bced47891c6) on how this could be applied to Candidate Match. (Side note: I find LLMs to be fantastic for this type of thinking/research, I copy pasted the xgboost LTR documentation into the prompt for context).

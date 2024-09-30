@@ -1,0 +1,22 @@
+---
+title: "Moshi - Real-Time Voice Chatbot"
+author: "Lawrence Wu"
+date: "2024-09-20"
+categories: [llm, voice]
+---
+
+To install:
+
+```bash
+# on a M series Mac
+# brew install rust
+python3 -m venv venv
+source venv/bin/activate
+pip install moshi_mlx
+# run moshi (will download the quantized model) and you can chat with it
+python -m moshi_mlx.local -q 4
+```
+
+I setup this up on two laptops and recorded Moshi talking to Moshi (after seeding it with a topic on basketball):
+
+{{< video https://www.youtube.com/watch?v=bL-hYq2F7ow&feature=youtu.be >}}

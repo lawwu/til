@@ -1,0 +1,12 @@
+---
+title: "alphaXiv"
+author: "Lawrence Wu"
+date: "2024-09-16"
+categories: [tool]
+---
+
+This is a neat project: <https://www.alphaxiv.org/>
+
+This project from students at Stanford creates an open discussion forum for arXiv papers. You can post questions and comments directly on top of any arXiv paper by changing arXiv to alphaXiv in any URL.
+
+There's also a trending papers view: <https://www.alphaxiv.org/explore>

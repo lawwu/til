@@ -8,8 +8,9 @@
 render:
 	quarto render
 
+## Publish to github pages
 publish:
-	quarto publish
+	quarto publish gh-pages
 
 #################################################################################
 # Self Documenting Commands                                                     #
