@@ -1,0 +1,9 @@
+---
+title: "RunnablePassthrough.assign"
+author: "Lawrence Wu"
+date: "2024-08-27"
+categories: [llm, agent, langgraph]
+---
+
+I'm learning more about LangGraph and I didn't know what `RunnablePassthrough.assign` was doing (I've seen this in some of the LangGraph
+tutorials). This page explains it really well: <https://python.langchain.com/v0.1/docs/expression_language/primitives/assign/>
