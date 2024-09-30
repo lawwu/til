@@ -10,7 +10,195 @@
 <atom:link href="https://lawwu.github.io/til/index.xml" rel="self" type="application/rss+xml"/>
 <description>Lawrence Wu&#39;s Today I Learned</description>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Fri, 16 Aug 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 29 Aug 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>great-tables Python package</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-08-29-greattables/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Repo from posit to create beautiful tables in Python: <a href="https://github.com/posit-dev/great-tables" class="uri">https://github.com/posit-dev/great-tables</a>. Basically the Python version of R’s <a href="https://github.com/rstudio/gt" class="uri">https://github.com/rstudio/gt</a>. I love how posit is now contributing to the Python open source ecosystem.</p>
+
+
+
+ ]]></description>
+  <category>python</category>
+  <guid>https://lawwu.github.io/til/posts/2024-08-29-greattables/</guid>
+  <pubDate>Thu, 29 Aug 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>CogVideoX-5B aka Open source Sora</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-08-28-opensource-sora/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>It’s neat how when OpenAI or another model provider creates a new model (e.g.&nbsp;text-to-video like Sora), the open source community gets to work and produces an open source version. This happened with Sora (although the quality is not quite there yet):</p>
+<ul>
+<li>Space: <a href="https://huggingface.co/spaces/THUDM/CogVideoX-5B-Space" class="uri">https://huggingface.co/spaces/THUDM/CogVideoX-5B-Space</a></li>
+<li>Model Card: <a href="https://huggingface.co/THUDM/CogVideoX-5b" class="uri">https://huggingface.co/THUDM/CogVideoX-5b</a></li>
+</ul>
+
+
+
+ ]]></description>
+  <category>llm</category>
+  <category>agent</category>
+  <category>video</category>
+  <guid>https://lawwu.github.io/til/posts/2024-08-28-opensource-sora/</guid>
+  <pubDate>Wed, 28 Aug 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>RunnablePassthrough.assign</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-08-27-runnablepassthrough/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I’m learning more about LangGraph and I didn’t know what <code>RunnablePassthrough.assign</code> was doing (I’ve seen this in some of the LangGraph tutorials). This page explains it really well: <a href="https://python.langchain.com/v0.1/docs/expression_language/primitives/assign/" class="uri">https://python.langchain.com/v0.1/docs/expression_language/primitives/assign/</a></p>
+
+
+
+ ]]></description>
+  <category>llm</category>
+  <category>agent</category>
+  <category>langgraph</category>
+  <guid>https://lawwu.github.io/til/posts/2024-08-27-runnablepassthrough/</guid>
+  <pubDate>Tue, 27 Aug 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>WebVoyager implemented in LangGraph</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-08-26-webvoyager/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Really cool agent that can navigate the web. It uses Playwright to take screenshots, annotates those screenshot images with bounding boxes of parts of the webpage that are interactable and then generates the next best action (click, scroll, wait, type). Implemented in LangGraph. I learned about <code>ImagePromptTemplate</code> from this tutorial. I originally thought langchain didn’t handle images well.</p>
+<p><a href="https://langchain-ai.github.io/langgraph/tutorials/web-navigation/web_voyager/" class="uri">https://langchain-ai.github.io/langgraph/tutorials/web-navigation/web_voyager/</a></p>
+<p>The prompt is available in the LangChain Hub <a href="https://smith.langchain.com/hub/wfh/web-voyager">here</a>:</p>
+<pre><code>from typing import List, Union, Dict
+from langchain_core.messages import AIMessage, HumanMessage, ChatMessage, SystemMessage, FunctionMessage,
+ToolMessage
+from langchain_core.prompts import SystemMessagePromptTemplate, MessagesPlaceholder,
+HumanMessagePromptTemplate, PromptTemplate
+from langchain_core.prompts.image import ImagePromptTemplate
+from langchain_core.prompts.chat import ChatPromptTemplate
+def create_chat_prompt_template() -&gt; ChatPromptTemplate:
+input_variables = ['bbox_descriptions', 'img', 'input']
+optional_variables = ['scratchpad']
+input_types = {
+'scratchpad': List[Union[
+AIMessage,
+HumanMessage,
+ChatMessage,
+SystemMessage,
+FunctionMessage,
+ToolMessage
+]]
+}
+partial_variables = {'scratchpad': []}
+# metadata = {
+# 'lc_hub_owner': 'wfh',
+# 'lc_hub_repo': 'web-voyager',
+# 'lc_hub_commit_hash': '8b9276048be8aec78203e8c45c9e15bc3a46e4b3275b05ef727563a2887ebaab'
+# }
+system_prompt = SystemMessagePromptTemplate(
+prompt=[
+PromptTemplate(
+input_variables=[],
+template="""
+Imagine you are a robot browsing the web, just like humans. Now you need to complete a task. In each iteration, you will receive an Observation that includes a screenshot of a webpage and some texts. This screenshot will feature Numerical Labels placed in the TOP LEFT corner of each Web Element. Carefully analyze the visual
+information to identify the Numerical Label corresponding to the Web Element that requires interaction, then follow
+the guidelines and choose one of the following actions:
+1. Click a Web Element.
+2. Delete existing content in a textbox and then type content.
+3. Scroll up or down.
+4. Wait 
+5. Go back
+7. Return to google to start over.
+8. Respond with the final answer
+
+Correspondingly, Action should STRICTLY follow the format:
+- Click [Numerical_Label] 
+- Type [Numerical_Label]; [Content] 
+- Scroll [Numerical_Label or WINDOW]; [up or down] 
+- Wait 
+- GoBack
+- Google
+- ANSWER; [content]
+
+Key Guidelines You MUST follow:
+* Action guidelines *
+1) Execute only one action per iteration.
+2) When clicking or typing, ensure to select the correct bounding box.
+3) Numeric labels lie in the top-left corner of their corresponding bounding boxes and are colored the same.
+
+* Web Browsing Guidelines *
+1) Don't interact with useless web elements like Login, Sign-in, donation that appear in Webpages
+2) Select strategically to minimize time wasted.
+
+Your reply should strictly follow the format:
+Thought: {{Your brief thoughts (briefly summarize the info that will help ANSWER)}}
+Action: {{One Action format you choose}}
+Then the User will provide:
+Observation: {{A labeled screenshot Given by User}}
+"""
+)
+]
+)
+human_prompt = HumanMessagePromptTemplate(
+prompt=[
+ImagePromptTemplate(
+input_variables=['img'],
+template={'url': 'data:image/png;base64,{img}'}
+),
+PromptTemplate(
+input_variables=['bbox_descriptions'],
+template='{bbox_descriptions}'
+),
+PromptTemplate(
+input_variables=['input'],
+template='{input}'
+)
+]
+)
+messages = [
+system_prompt,
+MessagesPlaceholder(variable_name='scratchpad', optional=True),
+human_prompt
+]
+return ChatPromptTemplate(
+input_variables=input_variables,
+optional_variables=optional_variables,
+input_types=input_types,
+partial_variables=partial_variables,
+# metadata=metadata,
+messages=messages
+)
+prompt = create_chat_prompt_template()</code></pre>
+
+
+
+ ]]></description>
+  <category>llm</category>
+  <category>agent</category>
+  <category>langgraph</category>
+  <guid>https://lawwu.github.io/til/posts/2024-08-26-webvoyager/</guid>
+  <pubDate>Mon, 26 Aug 2024 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>ColiPali: Efficient Document Retrieval with Vision Language Models</title>
   <dc:creator>Lawrence Wu</dc:creator>
