@@ -1,0 +1,122 @@
+---
+title: "OpenAI Releases o1-preview"
+author: "Lawrence Wu"
+date: "2024-09-12"
+categories: [llm, reasoning]
+---
+
+- Model Card: <https://cdn.openai.com/o1-system-card.pdf>
+- Simon Willison's notes: <https://simonwillison.net/2024/Sep/12/openai-o1/>
+
+# Summary
+This model was trained on chain-of-thought chains. These were not human annotations but were LLM-generated. The CoT chains ultimately used for
+training were the ones which led to correct answers in questions. New ideas being coined: reasoning tokens, and inference or "test-time compute".
+
+# Model Description
+The o1 large language model family is trained with reinforcement learning to perform complex reasoning. o1 thinks before it answers—it can produce a long chain of thought before responding to the user. OpenAI o1-preview is the early version of this model, while OpenAI o1-mini is a faster version of this model that is particularly effective at coding. Through training, the models learn to refine their thinking process, try different strategies, and recognize their mistakes. Reasoning allows o1 models to follow specific guidelines and model policies we’ve set, ensuring they act in line with our safety expectations. This means they are better at providing helpful answers and resisting attempts to bypass safety rules, to avoid producing unsafe or inappropriate content. o1-preview is state-of-the-art (SOTA) on various evaluations spanning coding, math, and known jailbreaks benchmarks [1, 2, 3, 4].
+
+# My Usage
+A new output is "The model thinks for N seconds"
+
+![o1-preview thinking](o1_preview.png)
+
+If you un-hide the menu, you can see the steps it went through. Many times the model is checking if the output meets OpenAI's content policies. It feels
+like I am interacting with an agent now where the agent is:
+
+- Evaluating how difficult the problem is
+- Planning out the steps - this part is really amazing and the real new aspect of these models
+- Providing the answer
+- Checking the answer
+
+```
+CHUNK:
+Crafting an interactive model
+I’m crafting an HTML and JavaScript model to visualize self-attention in a Transformer model, focusing on hovering and clicking functionalities, token
+alignment, and LaTeX rendering for attention scores.
+
+Crafting the code
+I’m figuring out how to write HTML and JavaScript code to create an interactive visualization of Transformer self-attention, displaying tokens and
+connecting them with edges based on attention scores. No external libraries allowed.
+
+Mapping out tokenization
+Mapping out the process involves outlining tokens, drawing curved, non-overlapping edges proportional to attention scores, and visualizing these scores
+with CSS instead of MathJax.
+
+Structuring HTML with attention scores
+I'm thinking about how to display tokens in HTML using spans and defining a 4x4 attention score matrix. Each token's focus on others should sum to 1,
+ensuring clarity and precision.
+
+Mapping attention
+I'm working through visualizing how attention flows from "The" to other tokens in a sentence. The edges, curved for clarity, will show proportional thickness
+and start/end at token centers, avoiding overlap.
+
+Setting up the stage
+I’m working through creating an HTML structure with 50px spacing at the top, presenting tokens, indicating edges on hover, and showing attention scores
+on click, all while ensuring clarity and alignment.
+
+Setting up the layout
+I’m beginning with a minimal HTML structure, adding CSS for styling (like margin, padding, font size) and positioning. This foundation sets up token and
+edge elements for attention scores.
+
+Setting up event handling
+I’m defining attention scores and referencing SVG elements. Tokens get mouseover, mouseout, and click event listeners, with functions to show/hide
+attention scores and draw/clear SVG edges.
+
+Tracing connections
+I’m detailing how to visualize and manage connections among tokens, their attention scores, and paths in SVG format. This involves removing old edges,
+adding new paths, and updating attention score displays.
+
+Enhancing table layout
+I’m adding CSS to style the table, centering it and adjusting padding and alignment. Next, I’ll tackle overlapping paths and curved edges for clarity.
+Tweaking the plot
+OK, let me see. I’m enhancing the drawEdges function to incorporate quadratic Bezier curves, aiming to boost graph visualization.
+
+Enhancing edges
+I’m thinking through the drawEdges function to add quadratic Bezier curves. The function dynamically adjusts stroke widths based on attention scores.
+
+Refining curvature adjustment
+I'm digging into the idea of tweaking curve profiles by matching curvature changes with index differences to avoid overlaps. Considering control point shifts
+or even slight overlaps might be practical due to time limits.
+
+Improving map functionality
+I'm working on the function, enhancing control points to prevent paths from overlapping. By clearing existing edges and mapping tokens to drawEdges
+their respective SVG elements, I’m reducing intersections and breaking up any overlap.
+
+Presenting attention scores
+I'm considering how to visually represent attention scores, aiming for neutrality and alignment. Utilizing a table with two columns for tokens and scores
+seems like the best approach.
+
+Ensuring table clarity
+I'm thinking through the use of a table for neatness, focusing on CSS for token and score alignment. Hover effects and consistent vertical spacing are
+considered.
+
+Showcasing the code
+I’m starting with a clear HTML structure, setting up styles and an SVG for edges. The script shows attention scores on token interaction, utilizing mouse
+events.
+```
+
+## Reasoning Tokens
+
+Questions on reasoning tokens
+- Are these using a different vocabulary from the wider model?
+- This does make OpenAI reasoning based models more black boxy.
+
+<https://platform.openai.com/docs/guides/reasoning/how-reasoning-works>
+
+![o1-preview reasoning tokens](o1_reasoning_tokens.png)
+
+## AI Explained Review
+
+On AI Explained's simple-bench benchmark, o1-preview does seem like a step change from the previous generation of models.
+
+o1-preview is getting ~50% compared to other models 27% or less (though temperature was 1.0 when tested which is higher than other models)
+
+![o1-preview on simple bench](simple_bench_o1.png)
+
+He think it is a new paradigm based on the step change improvement across a wide variety of domains and his benchmark Simple Bench. 
+
+![o1-preview benchmarks](o1_benchmarks.png)
+
+o1 outperforms expert humans in GPQA Diamond (PhD-Level Science questions)!
+
+![o1-preview beats expert humans](o1_reasoning.png)

@@ -1,0 +1,18 @@
+---
+title: "Amphetamine/Caffeine Replacement"
+author: "Lawrence Wu"
+date: "2024-08-30"
+categories: [utility]
+---
+
+Mac OSX Applications like Caffeine and now Amphetamine are simple apps that cause them not to go to sleep.
+
+You can also use a simple terminal command:
+
+Open a terminal and type:
+
+```bash
+caffeinate -d
+```
+
+h/t [Reddit](https://www.reddit.com/r/macapps/comments/tgxtnu/is_amphetamine_still_the_best_app_to_prevent_sleep/)

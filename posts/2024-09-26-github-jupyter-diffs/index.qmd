@@ -1,0 +1,14 @@
+---
+title: "Turn on Rich Jupyter diff's in Github"
+author: "Lawrence Wu"
+date: "2024-09-26"
+categories: [github, jupyter]
+---
+
+Github.com has different features hidden behind a "Feature Preview" menu. You can get there by clicking your profile and go to "Feature Preview."
+
+One of the options is to turn on Rich Jupyter Diff's in Github:
+
+![Rich Jupyter Diffs in Github, nice](jupyter_diffs.png)
+
+This follows a trend of large companies (Microsoft who owns Githbub) using open source tooling (the diff software likely is just using [nbdime](https://github.com/jupyter/nbdime)), making it free and making paid services like [ReviewNB](https://www.reviewnb.com/#pricing) obsolete.

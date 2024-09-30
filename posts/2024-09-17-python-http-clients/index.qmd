@@ -1,0 +1,12 @@
+---
+title: "History of Python HTTP Clients"
+author: "Lawrence Wu"
+date: "2024-09-17"
+categories: [python]
+---
+
+Learned about the history of Python HTTP clients: `urllib` to `Requests` to now `httpx` and `aiohttp` from this article by [SpeakEasy](https://www.speakeasy.com/post/python-http-clients-requests-vs-httpx-vs-aiohttp).
+
+![Python HTTP Clients](http_clients.png)
+
+The above company, SpeakEasy generates SDKs from an OpenAPI spec (looks Mistral uses them). I think OpenAI uses a competitor called [Stainless](https://www.stainlessapi.com.

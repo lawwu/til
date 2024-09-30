@@ -1,0 +1,32 @@
+---
+title: "Github Copilot Workspace"
+author: "Lawrence Wu"
+date: "2024-09-27"
+categories: [github, agent]
+---
+
+I was granted access to Github Copilot Workspace. It's Github's AI Coding Assistant built into Github.com where you can go from Github Issue to a Pull Request. I tried it, it's pretty cool. The PR the service generated in my [transcripts](https://github.com/lawwu/transcripts) repo is [here](https://github.com/lawwu/transcripts/pull/3). The workspace is viewable [here](https://copilot-workspace.githubnext.com/lawwu/transcripts/issues/2?shareId=685875ce-8d8a-4c54-9376-f58bd34f89fe).
+
+The workflow is:
+
+## 1. Create an Issue
+
+![Create an Issue](0_issue.png)
+
+## 2. Agent will create a spec
+
+That you can edit
+
+![Agent will create a specification](1_spec.png)
+
+## 3. Agent will create a plan
+
+The agent creates a plans of what files will be edited according to your spec.
+
+![Agent will create a plan](2_plan.png)
+
+## 4. Agent will create commits
+
+The agent then creates commits and a pull request! There's also a chat interface to make revisions which is cool.
+
+![Agent will create a PR](3_commits_with_revise.png)
