@@ -1,0 +1,23 @@
+---
+title: "Juan Carlos Izpisua Belmonte & Yamanaka Factors"
+author: "Lawrence Wu"
+date: "2024-10-02"
+categories: [aging, exercise]
+---
+
+I was watching one of the videos from the All-In Summit 2024:
+
+{{< video https://www.youtube.com/watch?v=uUjF3RG28SQ&ab_channel=All-InPodcast >}}
+
+Sometimes YouTube videos are too long so I will grab the [transcript](https://lawwu.github.io/transcripts/transcript_uUjF3RG28SQ.html), also possible to do [programmatically](https://github.com/jdepoix/youtube-transcript-api) or via web tools like this [one](https://youtubetranscript.com/). And then I'll drop it into ChatGPT with a prompt: "What are the main points and takeaways from this talk?". Example [here](https://chatgpt.com/share/66fda61a-5d8c-8011-a679-eebeb0c51d35). 
+
+Aging and Disease Connection: The speaker, Juan Carlos Izpisua Belmonte, explains how age is the biggest risk factor for many diseases. As we age, cells lose their resilience or "buffer capacity," making them more vulnerable to disease.
+
+- Yamanaka Factors and Cell Reprogramming: Yamanaka's discovery of four proteins (Yamanaka factors) that can reprogram adult cells into embryonic-like stem cells plays a crucial role. The focus now is on "partial reprogramming," where a short pulse of these factors can rejuvenate cells without causing them to lose their identity (which could otherwise lead to cancer or malfunction).
+- Chromatin and the Epigenome: Belmonte explains how chromatin (DNA packaging) can either be open (leading to aging and disease) or closed (correlating with health and youth). Altering the chromatin to a more closed state can rejuvenate cells and potentially reverse disease.
+- Application Beyond Mice: This rejuvenation technology has been successfully tested in mice, including fixing genetic mutations and extending the lifespan of diseased mice. The next step is to apply these findings to human cells and organs, focusing on improving their resilience to disease without altering their genome.
+- Potential for Human Applications: Altos Labs aims to apply these techniques in humans, starting with ex vivo organ rejuvenation (e.g., preparing discarded organs for transplantation). The ultimate goal is to develop methods that can increase human cells' buffer capacity, thereby extending health span and delaying or reversing aging-related diseases.
+- Future of Rejuvenation Therapies: The talk emphasizes the long-term potential of partial cell reprogramming to revolutionize human health by combating diseases linked to aging. The approach is described as a combination of cutting-edge science and industry, with billions of dollars invested in fundamental research and safe applications for human health. 
+- Chamath asks whether lifestyle choices like exercise can slow the aging process or improve cellular buffer capacity. Belmonte reveals that the gene expression changes induced by exercise resemble those triggered by the short pulses of Yamanaka factors, showing that lifestyle interventions can have a significant impact on cellular health and longevity.
+
+I found it fascinating that cellular aging could be reversed. The easiest way we have access to that is through simple exercise which triggers gene expression changes induced by short pulses of Yamanka factors!
