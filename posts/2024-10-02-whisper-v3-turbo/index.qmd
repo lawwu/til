@@ -1,0 +1,23 @@
+---
+title: "Whisper large-v3-turbo"
+author: "Lawrence Wu"
+date: "2024-10-02"
+categories: [whisper, llm, asr]
+---
+
+OpenAI released a new version of their Whisper model caled `large-v3-turbo`. There is already `ggml` versions available [here](https://huggingface.co/ggerganov/whisper.cpp/tree/main).
+
+- `ggml-large-v3-turbo.bin`
+- `ggml-large-v3-turbo-q5_0.bin`
+
+HuggingFace has a model card [here](https://huggingface.co/openai/whisper-large-v3-turbo). There's a Github discussion [here](https://github.com/openai/whisper/discussions/2363) talking about the model. It's basically a distilled version of `large-v3`:
+
+```
+We’re releasing a new Whisper model named large-v3-turbo, or turbo for short. It is an optimized version of Whisper large-v3 and has only 4 decoder layers—just like the tiny model—down from the 32 in the large series.
+
+This work is inspired by Distil-Whisper, where the authors observed that using a smaller decoder can greatly improve transcription speed while causing minimal degradation in accuracy. Unlike Distil-Whisper, which used distillation to train a smaller model, Whisper turbo was fine-tuned for two more epochs over the same amount of multilingual transcription data used for training large-v3, i.e. excluding translation data, on which we don’t expect turbo to perform well.
+
+Across languages, the turbo model performs similarly to large-v2, though it shows larger degradation on some languages like Thai and Cantonese. Whisper turbo performs better on FLEURS, which consists of cleaner recordings than Common Voice. The figure below shows the turbo model’s performance on the subset of languages in the Common Voice 15 and FLEURS datasets where large-v3 scored a 20% error rate or lower.
+```
+
+I started using this model in my [transcripts repo](https://github.com/lawwu/transcripts/commit/4385305b1bf928e46d9f323cd1d4295dd231add8).
