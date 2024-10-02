@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2024-10-02-whisper-v3-turbo/index.html",
       "/posts/2024-09-27-github-copilot-workspace/index.html",
       "/posts/2024-09-26-github-jupyter-diffs/index.html",
       "/posts/2024-09-20-moshi-real-time-chatbot/index.html",
