@@ -1,0 +1,12 @@
+---
+title: "Best Month to Get a Flu Shot"
+author: "Lawrence Wu"
+date: "2024-08-23"
+categories: [data, flu]
+---
+
+The best month to get a flu shot is October. This is based on a natural experiment of 800,000 kids across 7 flu seasons in America.
+
+[Source: WSJ](https://www.wsj.com/health/yes-there-is-a-best-month-to-get-your-flu-shot-03bf2e00?mod=hp_lista_pos2).
+
+![Time to get flu shots in October](best_time_flu_shot.png)
