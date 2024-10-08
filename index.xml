@@ -664,6 +664,33 @@ prompt = create_chat_prompt_template()</code></pre>
   <pubDate>Mon, 26 Aug 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>Best Month to Get a Flu Shot</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-08-23-flu-shot-best-month/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>The best month to get a flu shot is October. This is based on a natural experiment of 800,000 kids across 7 flu seasons in America.</p>
+<p><a href="https://www.wsj.com/health/yes-there-is-a-best-month-to-get-your-flu-shot-03bf2e00?mod=hp_lista_pos2">Source: WSJ</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://lawwu.github.io/til/posts/2024-08-23-flu-shot-best-month/best_time_flu_shot.png" class="img-fluid figure-img"></p>
+<figcaption>Time to get flu shots in October</figcaption>
+</figure>
+</div>
+
+
+
+ ]]></description>
+  <category>data</category>
+  <category>flu</category>
+  <guid>https://lawwu.github.io/til/posts/2024-08-23-flu-shot-best-month/</guid>
+  <pubDate>Fri, 23 Aug 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
   <title>ColiPali: Efficient Document Retrieval with Vision Language Models</title>
   <dc:creator>Lawrence Wu</dc:creator>
   <link>https://lawwu.github.io/til/posts/2024-08-16-colipali/</link>
@@ -789,26 +816,6 @@ prompt = create_chat_prompt_template()</code></pre>
   <category>port forwarding</category>
   <guid>https://lawwu.github.io/til/posts/2024-07-26-vscode-port-forwards/</guid>
   <pubDate>Fri, 26 Jul 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Positron IDE from Posit</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-07-19-positron/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Today I learned, <a href="https://posit.co/">Posit</a> (use to be RStudio) is working on a new data science IDE that looks like RStudio built on the same underlying code as VS Code: <a href="https://github.com/posit-dev/positron" class="uri">https://github.com/posit-dev/positron</a> built on Code OSS.</p>
-<p>Also learned that “Code OSS” is another name for VS Code: <a href="https://github.com/microsoft/vscode" class="uri">https://github.com/microsoft/vscode</a>.</p>
-
-
-
- ]]></description>
-  <category>software</category>
-  <guid>https://lawwu.github.io/til/posts/2024-07-19-positron/</guid>
-  <pubDate>Fri, 19 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
