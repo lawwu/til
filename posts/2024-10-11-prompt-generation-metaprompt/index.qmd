@@ -7,6 +7,8 @@ categories: [prompt, llms, meta]
 
 OpenAI added a system prompt generate button that lets you generate prompts, functions and schemas from just describing the task.
 
+![OpenAI Playground New Generate Button](./openai_playground_generate.png)
+
 They use "meta-prompts" and "meta-schemas" to do this.
 
 - Prompts: We use meta-prompts that incorporate best practices to generate or improve prompts.
