@@ -10,38 +10,1991 @@
 <atom:link href="https://lawwu.github.io/til/index.xml" rel="self" type="application/rss+xml"/>
 <description>Lawrence Wu&#39;s Today I Learned</description>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Wed, 02 Oct 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 11 Oct 2024 00:00:00 GMT</lastBuildDate>
 <item>
-  <title>Whisper large-v3-turbo</title>
+  <title>Prompt Generation &amp; Meta-Prompting</title>
   <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-10-02-whisper-v3-turbo/</link>
+  <link>https://lawwu.github.io/til/posts/2024-10-11-prompt-generation-metaprompt/</link>
   <description><![CDATA[ 
 
 
 
 
 
-<p>OpenAI released a new version of their Whisper model caled <code>large-v3-turbo</code>. There is already <code>ggml</code> versions available <a href="https://huggingface.co/ggerganov/whisper.cpp/tree/main">here</a>.</p>
+<p>OpenAI added a system prompt generate button that lets you generate prompts, functions and schemas from just describing the task.</p>
+<p>They use “meta-prompts” and “meta-schemas” to do this.</p>
 <ul>
-<li><code>ggml-large-v3-turbo.bin</code></li>
-<li><code>ggml-large-v3-turbo-q5_0.bin</code></li>
+<li>Prompts: We use meta-prompts that incorporate best practices to generate or improve prompts.</li>
+<li>Schemas: We use meta-schemas that produce valid JSON and function syntax.</li>
 </ul>
-<p>HuggingFace has a model card <a href="https://huggingface.co/openai/whisper-large-v3-turbo">here</a>. There’s a Github discussion <a href="https://github.com/openai/whisper/discussions/2363">here</a> talking about the model. It’s basically a distilled version of <code>large-v3</code>:</p>
-<pre><code>We’re releasing a new Whisper model named large-v3-turbo, or turbo for short. It is an optimized version of Whisper large-v3 and has only 4 decoder layers—just like the tiny model—down from the 32 in the large series.
+<p>They also say they may use more advanced techniques like DSPy and <a href="https://arxiv.org/abs/2305.03495">Gradient Descent</a>.</p>
+<p>The meta prompt is quite instructive. It’s awesome they’ve open sourced this. I’ve started to use LLMs to generate prompts too. They generally do a better job than I do at being comphrehensive. Of course I will then modify what the LLM generates for my specific use case and run some evaluations. Below are two meta-prompt examples and two meta-schema examples.</p>
+<section id="meta-prompt-text-out" class="level2">
+<h2 class="anchored" data-anchor-id="meta-prompt-text-out">Meta-Prompt: Text-Out</h2>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"></span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> openai <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> OpenAI</span>
+<span id="cb1-3"></span>
+<span id="cb1-4">client <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> OpenAI()</span>
+<span id="cb1-5"></span>
+<span id="cb1-6">META_PROMPT <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"""</span></span>
+<span id="cb1-7"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Given a task description or existing prompt, produce a detailed system prompt to guide a language model in completing the task effectively.</span></span>
+<span id="cb1-8"></span>
+<span id="cb1-9"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"># Guidelines</span></span>
+<span id="cb1-10"></span>
+<span id="cb1-11"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- Understand the Task: Grasp the main objective, goals, requirements, constraints, and expected output.</span></span>
+<span id="cb1-12"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- Minimal Changes: If an existing prompt is provided, improve it only if it's simple. For complex prompts, enhance clarity and add missing elements without altering the original structure.</span></span>
+<span id="cb1-13"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- Reasoning Before Conclusions**: Encourage reasoning steps before any conclusions are reached. ATTENTION! If the user provides examples where the reasoning happens afterward, REVERSE the order! NEVER START EXAMPLES WITH CONCLUSIONS!</span></span>
+<span id="cb1-14"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    - Reasoning Order: Call out reasoning portions of the prompt and conclusion parts (specific fields by name). For each, determine the ORDER in which this is done, and whether it needs to be reversed.</span></span>
+<span id="cb1-15"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    - Conclusion, classifications, or results should ALWAYS appear last.</span></span>
+<span id="cb1-16"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- Examples: Include high-quality examples if helpful, using placeholders [in brackets] for complex elements.</span></span>
+<span id="cb1-17"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">   - What kinds of examples may need to be included, how many, and whether they are complex enough to benefit from placeholders.</span></span>
+<span id="cb1-18"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- Clarity and Conciseness: Use clear, specific language. Avoid unnecessary instructions or bland statements.</span></span>
+<span id="cb1-19"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- Formatting: Use markdown features for readability. DO NOT USE ``` CODE BLOCKS UNLESS SPECIFICALLY REQUESTED.</span></span>
+<span id="cb1-20"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- Preserve User Content: If the input task or prompt includes extensive guidelines or examples, preserve them entirely, or as closely as possible. If they are vague, consider breaking down into sub-steps. Keep any details, guidelines, examples, variables, or placeholders provided by the user.</span></span>
+<span id="cb1-21"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- Constants: DO include constants in the prompt, as they are not susceptible to prompt injection. Such as guides, rubrics, and examples.</span></span>
+<span id="cb1-22"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- Output Format: Explicitly the most appropriate output format, in detail. This should include length and syntax (e.g. short sentence, paragraph, JSON, etc.)</span></span>
+<span id="cb1-23"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    - For tasks outputting well-defined or structured data (classification, JSON, etc.) bias toward outputting a JSON.</span></span>
+<span id="cb1-24"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    - JSON should never be wrapped in code blocks (```) unless explicitly requested.</span></span>
+<span id="cb1-25"></span>
+<span id="cb1-26"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">The final prompt you output should adhere to the following structure below. Do not include any additional commentary, only output the completed system prompt. SPECIFICALLY, do not include any additional messages at the start or end of the prompt. (e.g. no "---")</span></span>
+<span id="cb1-27"></span>
+<span id="cb1-28"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">[Concise instruction describing the task - this should be the first line in the prompt, no section header]</span></span>
+<span id="cb1-29"></span>
+<span id="cb1-30"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">[Additional details as needed.]</span></span>
+<span id="cb1-31"></span>
+<span id="cb1-32"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">[Optional sections with headings or bullet points for detailed steps.]</span></span>
+<span id="cb1-33"></span>
+<span id="cb1-34"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"># Steps [optional]</span></span>
+<span id="cb1-35"></span>
+<span id="cb1-36"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">[optional: a detailed breakdown of the steps necessary to accomplish the task]</span></span>
+<span id="cb1-37"></span>
+<span id="cb1-38"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"># Output Format</span></span>
+<span id="cb1-39"></span>
+<span id="cb1-40"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">[Specifically call out how the output should be formatted, be it response length, structure e.g. JSON, markdown, etc]</span></span>
+<span id="cb1-41"></span>
+<span id="cb1-42"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"># Examples [optional]</span></span>
+<span id="cb1-43"></span>
+<span id="cb1-44"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">[Optional: 1-3 well-defined examples with placeholders if necessary. Clearly mark where examples start and end, and what the input and output are. User placeholders as necessary.]</span></span>
+<span id="cb1-45"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">[If the examples are shorter than what a realistic example is expected to be, make a reference with () explaining how real examples should be longer / shorter / different. AND USE PLACEHOLDERS! ]</span></span>
+<span id="cb1-46"></span>
+<span id="cb1-47"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"># Notes [optional]</span></span>
+<span id="cb1-48"></span>
+<span id="cb1-49"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">[optional: edge cases, details, and an area to call or repeat out specific important considerations]</span></span>
+<span id="cb1-50"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"""</span>.strip()</span>
+<span id="cb1-51"></span>
+<span id="cb1-52"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> generate_prompt(task_or_prompt: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>):</span>
+<span id="cb1-53">    completion <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> client.chat.completions.create(</span>
+<span id="cb1-54">        model<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"gpt-4o"</span>,</span>
+<span id="cb1-55">        messages<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>[</span>
+<span id="cb1-56">            {</span>
+<span id="cb1-57">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"role"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"system"</span>,</span>
+<span id="cb1-58">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"content"</span>: META_PROMPT,</span>
+<span id="cb1-59">            },</span>
+<span id="cb1-60">            {</span>
+<span id="cb1-61">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"role"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"user"</span>,</span>
+<span id="cb1-62">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"content"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Task, Goal, or Current Prompt:</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> task_or_prompt,</span>
+<span id="cb1-63">            },</span>
+<span id="cb1-64">        ],</span>
+<span id="cb1-65">    )</span>
+<span id="cb1-66"></span>
+<span id="cb1-67">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> completion.choices[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>].message.content</span></code></pre></div>
+</section>
+<section id="meta-prompt-audio-out" class="level2">
+<h2 class="anchored" data-anchor-id="meta-prompt-audio-out">Meta-Prompt: Audio-Out</h2>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"></span>
+<span id="cb2-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> openai <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> OpenAI</span>
+<span id="cb2-3"></span>
+<span id="cb2-4">client <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> OpenAI()</span>
+<span id="cb2-5"></span>
+<span id="cb2-6">META_PROMPT <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"""</span></span>
+<span id="cb2-7"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Given a task description or existing prompt, produce a detailed system prompt to guide a realtime audio output language model in completing the task effectively.</span></span>
+<span id="cb2-8"></span>
+<span id="cb2-9"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"># Guidelines</span></span>
+<span id="cb2-10"></span>
+<span id="cb2-11"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- Understand the Task: Grasp the main objective, goals, requirements, constraints, and expected output.</span></span>
+<span id="cb2-12"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- Tone: Make sure to specifically call out the tone. By default it should be emotive and friendly, and speak quickly to avoid keeping the user just waiting.</span></span>
+<span id="cb2-13"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- Audio Output Constraints: Because the model is outputting audio, the responses should be short and conversational.</span></span>
+<span id="cb2-14"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- Minimal Changes: If an existing prompt is provided, improve it only if it's simple. For complex prompts, enhance clarity and add missing elements without altering the original structure.</span></span>
+<span id="cb2-15"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- Examples: Include high-quality examples if helpful, using placeholders [in brackets] for complex elements.</span></span>
+<span id="cb2-16"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">   - What kinds of examples may need to be included, how many, and whether they are complex enough to benefit from placeholders.</span></span>
+<span id="cb2-17"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">  - It is very important that any examples included reflect the short, conversational output responses of the model.</span></span>
+<span id="cb2-18"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Keep the sentences very short by default. Instead of 3 sentences in a row by the assistant, it should be split up with a back and forth with the user instead.</span></span>
+<span id="cb2-19"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">  - By default each sentence should be a few words only (5-20ish words). However, if the user specifically asks for "short" responses, then the examples should truly have 1-10 word responses max.</span></span>
+<span id="cb2-20"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">  - Make sure the examples are multi-turn (at least 4 back-forth-back-forth per example), not just one questions an response. They should reflect an organic conversation.</span></span>
+<span id="cb2-21"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- Clarity and Conciseness: Use clear, specific language. Avoid unnecessary instructions or bland statements.</span></span>
+<span id="cb2-22"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- Preserve User Content: If the input task or prompt includes extensive guidelines or examples, preserve them entirely, or as closely as possible. If they are vague, consider breaking down into sub-steps. Keep any details, guidelines, examples, variables, or placeholders provided by the user.</span></span>
+<span id="cb2-23"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- Constants: DO include constants in the prompt, as they are not susceptible to prompt injection. Such as guides, rubrics, and examples.</span></span>
+<span id="cb2-24"></span>
+<span id="cb2-25"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">The final prompt you output should adhere to the following structure below. Do not include any additional commentary, only output the completed system prompt. SPECIFICALLY, do not include any additional messages at the start or end of the prompt. (e.g. no "---")</span></span>
+<span id="cb2-26"></span>
+<span id="cb2-27"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">[Concise instruction describing the task - this should be the first line in the prompt, no section header]</span></span>
+<span id="cb2-28"></span>
+<span id="cb2-29"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">[Additional details as needed.]</span></span>
+<span id="cb2-30"></span>
+<span id="cb2-31"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">[Optional sections with headings or bullet points for detailed steps.]</span></span>
+<span id="cb2-32"></span>
+<span id="cb2-33"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"># Examples [optional]</span></span>
+<span id="cb2-34"></span>
+<span id="cb2-35"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">[Optional: 1-3 well-defined examples with placeholders if necessary. Clearly mark where examples start and end, and what the input and output are. User placeholders as necessary.]</span></span>
+<span id="cb2-36"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">[If the examples are shorter than what a realistic example is expected to be, make a reference with () explaining how real examples should be longer / shorter / different. AND USE PLACEHOLDERS! ]</span></span>
+<span id="cb2-37"></span>
+<span id="cb2-38"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"># Notes [optional]</span></span>
+<span id="cb2-39"></span>
+<span id="cb2-40"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">[optional: edge cases, details, and an area to call or repeat out specific important considerations]</span></span>
+<span id="cb2-41"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"""</span>.strip()</span>
+<span id="cb2-42"></span>
+<span id="cb2-43"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> generate_prompt(task_or_prompt: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>):</span>
+<span id="cb2-44">    completion <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> client.chat.completions.create(</span>
+<span id="cb2-45">        model<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"gpt-4o"</span>,</span>
+<span id="cb2-46">        messages<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>[</span>
+<span id="cb2-47">            {</span>
+<span id="cb2-48">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"role"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"system"</span>,</span>
+<span id="cb2-49">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"content"</span>: META_PROMPT,</span>
+<span id="cb2-50">            },</span>
+<span id="cb2-51">            {</span>
+<span id="cb2-52">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"role"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"user"</span>,</span>
+<span id="cb2-53">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"content"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Task, Goal, or Current Prompt:</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> task_or_prompt,</span>
+<span id="cb2-54">            },</span>
+<span id="cb2-55">        ],</span>
+<span id="cb2-56">    )</span>
+<span id="cb2-57"></span>
+<span id="cb2-58">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> completion.choices[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>].message.content</span></code></pre></div>
+</section>
+<section id="meta-schema-structured-output" class="level2">
+<h2 class="anchored" data-anchor-id="meta-schema-structured-output">Meta-Schema: Structured Output</h2>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"></span>
+<span id="cb3-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> openai <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> OpenAI</span>
+<span id="cb3-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> json</span>
+<span id="cb3-4"></span>
+<span id="cb3-5">client <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> OpenAI()</span>
+<span id="cb3-6"></span>
+<span id="cb3-7">META_SCHEMA <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {</span>
+<span id="cb3-8">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"metaschema"</span>,</span>
+<span id="cb3-9">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"schema"</span>: {</span>
+<span id="cb3-10">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"object"</span>,</span>
+<span id="cb3-11">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"properties"</span>: {</span>
+<span id="cb3-12">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: {</span>
+<span id="cb3-13">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"string"</span>,</span>
+<span id="cb3-14">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"description"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"The name of the schema"</span></span>
+<span id="cb3-15">      },</span>
+<span id="cb3-16">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: {</span>
+<span id="cb3-17">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"string"</span>,</span>
+<span id="cb3-18">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"enum"</span>: [</span>
+<span id="cb3-19">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"object"</span>,</span>
+<span id="cb3-20">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"array"</span>,</span>
+<span id="cb3-21">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"string"</span>,</span>
+<span id="cb3-22">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"number"</span>,</span>
+<span id="cb3-23">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"boolean"</span>,</span>
+<span id="cb3-24">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"null"</span></span>
+<span id="cb3-25">        ]</span>
+<span id="cb3-26">      },</span>
+<span id="cb3-27">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"properties"</span>: {</span>
+<span id="cb3-28">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"object"</span>,</span>
+<span id="cb3-29">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"additionalProperties"</span>: {</span>
+<span id="cb3-30">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"$ref"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#/$defs/schema_definition"</span></span>
+<span id="cb3-31">        }</span>
+<span id="cb3-32">      },</span>
+<span id="cb3-33">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"items"</span>: {</span>
+<span id="cb3-34">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"anyOf"</span>: [</span>
+<span id="cb3-35">          {</span>
+<span id="cb3-36">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"$ref"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#/$defs/schema_definition"</span></span>
+<span id="cb3-37">          },</span>
+<span id="cb3-38">          {</span>
+<span id="cb3-39">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"array"</span>,</span>
+<span id="cb3-40">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"items"</span>: {</span>
+<span id="cb3-41">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"$ref"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#/$defs/schema_definition"</span></span>
+<span id="cb3-42">            }</span>
+<span id="cb3-43">          }</span>
+<span id="cb3-44">        ]</span>
+<span id="cb3-45">      },</span>
+<span id="cb3-46">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"required"</span>: {</span>
+<span id="cb3-47">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"array"</span>,</span>
+<span id="cb3-48">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"items"</span>: {</span>
+<span id="cb3-49">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"string"</span></span>
+<span id="cb3-50">        }</span>
+<span id="cb3-51">      },</span>
+<span id="cb3-52">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"additionalProperties"</span>: {</span>
+<span id="cb3-53">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"boolean"</span></span>
+<span id="cb3-54">      }</span>
+<span id="cb3-55">    },</span>
+<span id="cb3-56">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"required"</span>: [</span>
+<span id="cb3-57">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span></span>
+<span id="cb3-58">    ],</span>
+<span id="cb3-59">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"additionalProperties"</span>: <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>,</span>
+<span id="cb3-60">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"if"</span>: {</span>
+<span id="cb3-61">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"properties"</span>: {</span>
+<span id="cb3-62">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: {</span>
+<span id="cb3-63">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"const"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"object"</span></span>
+<span id="cb3-64">        }</span>
+<span id="cb3-65">      }</span>
+<span id="cb3-66">    },</span>
+<span id="cb3-67">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"then"</span>: {</span>
+<span id="cb3-68">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"required"</span>: [</span>
+<span id="cb3-69">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"properties"</span></span>
+<span id="cb3-70">      ]</span>
+<span id="cb3-71">    },</span>
+<span id="cb3-72">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"$defs"</span>: {</span>
+<span id="cb3-73">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"schema_definition"</span>: {</span>
+<span id="cb3-74">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"object"</span>,</span>
+<span id="cb3-75">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"properties"</span>: {</span>
+<span id="cb3-76">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: {</span>
+<span id="cb3-77">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"string"</span>,</span>
+<span id="cb3-78">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"enum"</span>: [</span>
+<span id="cb3-79">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"object"</span>,</span>
+<span id="cb3-80">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"array"</span>,</span>
+<span id="cb3-81">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"string"</span>,</span>
+<span id="cb3-82">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"number"</span>,</span>
+<span id="cb3-83">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"boolean"</span>,</span>
+<span id="cb3-84">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"null"</span></span>
+<span id="cb3-85">            ]</span>
+<span id="cb3-86">          },</span>
+<span id="cb3-87">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"properties"</span>: {</span>
+<span id="cb3-88">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"object"</span>,</span>
+<span id="cb3-89">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"additionalProperties"</span>: {</span>
+<span id="cb3-90">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"$ref"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#/$defs/schema_definition"</span></span>
+<span id="cb3-91">            }</span>
+<span id="cb3-92">          },</span>
+<span id="cb3-93">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"items"</span>: {</span>
+<span id="cb3-94">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"anyOf"</span>: [</span>
+<span id="cb3-95">              {</span>
+<span id="cb3-96">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"$ref"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#/$defs/schema_definition"</span></span>
+<span id="cb3-97">              },</span>
+<span id="cb3-98">              {</span>
+<span id="cb3-99">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"array"</span>,</span>
+<span id="cb3-100">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"items"</span>: {</span>
+<span id="cb3-101">                  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"$ref"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#/$defs/schema_definition"</span></span>
+<span id="cb3-102">                }</span>
+<span id="cb3-103">              }</span>
+<span id="cb3-104">            ]</span>
+<span id="cb3-105">          },</span>
+<span id="cb3-106">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"required"</span>: {</span>
+<span id="cb3-107">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"array"</span>,</span>
+<span id="cb3-108">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"items"</span>: {</span>
+<span id="cb3-109">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"string"</span></span>
+<span id="cb3-110">            }</span>
+<span id="cb3-111">          },</span>
+<span id="cb3-112">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"additionalProperties"</span>: {</span>
+<span id="cb3-113">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"boolean"</span></span>
+<span id="cb3-114">          }</span>
+<span id="cb3-115">        },</span>
+<span id="cb3-116">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"required"</span>: [</span>
+<span id="cb3-117">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span></span>
+<span id="cb3-118">        ],</span>
+<span id="cb3-119">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"additionalProperties"</span>: <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>,</span>
+<span id="cb3-120">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"if"</span>: {</span>
+<span id="cb3-121">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"properties"</span>: {</span>
+<span id="cb3-122">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: {</span>
+<span id="cb3-123">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"const"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"object"</span></span>
+<span id="cb3-124">            }</span>
+<span id="cb3-125">          }</span>
+<span id="cb3-126">        },</span>
+<span id="cb3-127">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"then"</span>: {</span>
+<span id="cb3-128">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"required"</span>: [</span>
+<span id="cb3-129">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"properties"</span></span>
+<span id="cb3-130">          ]</span>
+<span id="cb3-131">        }</span>
+<span id="cb3-132">      }</span>
+<span id="cb3-133">    }</span>
+<span id="cb3-134">  }</span>
+<span id="cb3-135">}</span>
+<span id="cb3-136"></span>
+<span id="cb3-137">META_PROMPT <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"""</span></span>
+<span id="cb3-138"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"># Instructions</span></span>
+<span id="cb3-139"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Return a valid schema for the described JSON.</span></span>
+<span id="cb3-140"></span>
+<span id="cb3-141"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">You must also make sure:</span></span>
+<span id="cb3-142"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- all fields in an object are set as required</span></span>
+<span id="cb3-143"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- I REPEAT, ALL FIELDS MUST BE MARKED AS REQUIRED</span></span>
+<span id="cb3-144"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- all objects must have additionalProperties set to false</span></span>
+<span id="cb3-145"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    - because of this, some cases like "attributes" or "metadata" properties that would normally allow additional properties should instead have a fixed set of properties</span></span>
+<span id="cb3-146"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- all objects must have properties defined</span></span>
+<span id="cb3-147"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- field order matters. any form of "thinking" or "explanation" should come before the conclusion</span></span>
+<span id="cb3-148"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- $defs must be defined under the schema param</span></span>
+<span id="cb3-149"></span>
+<span id="cb3-150"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Notable keywords NOT supported include:</span></span>
+<span id="cb3-151"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- For strings: minLength, maxLength, pattern, format</span></span>
+<span id="cb3-152"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- For numbers: minimum, maximum, multipleOf</span></span>
+<span id="cb3-153"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- For objects: patternProperties, unevaluatedProperties, propertyNames, minProperties, maxProperties</span></span>
+<span id="cb3-154"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- For arrays: unevaluatedItems, contains, minContains, maxContains, minItems, maxItems, uniqueItems</span></span>
+<span id="cb3-155"></span>
+<span id="cb3-156"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Other notes:</span></span>
+<span id="cb3-157"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- definitions and recursion are supported</span></span>
+<span id="cb3-158"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- only if necessary to include references e.g. "$defs", it must be inside the "schema" object</span></span>
+<span id="cb3-159"></span>
+<span id="cb3-160"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"># Examples</span></span>
+<span id="cb3-161"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Input: Generate a math reasoning schema with steps and a final answer.</span></span>
+<span id="cb3-162"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Output: {</span></span>
+<span id="cb3-163"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "name": "math_reasoning",</span></span>
+<span id="cb3-164"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "type": "object",</span></span>
+<span id="cb3-165"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "properties": {</span></span>
+<span id="cb3-166"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "steps": {</span></span>
+<span id="cb3-167"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "type": "array",</span></span>
+<span id="cb3-168"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "description": "A sequence of steps involved in solving the math problem.",</span></span>
+<span id="cb3-169"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "items": {</span></span>
+<span id="cb3-170"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "type": "object",</span></span>
+<span id="cb3-171"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "properties": {</span></span>
+<span id="cb3-172"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "explanation": {</span></span>
+<span id="cb3-173"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "type": "string",</span></span>
+<span id="cb3-174"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "description": "Description of the reasoning or method used in this step."</span></span>
+<span id="cb3-175"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    },</span></span>
+<span id="cb3-176"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "output": {</span></span>
+<span id="cb3-177"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "type": "string",</span></span>
+<span id="cb3-178"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "description": "Result or outcome of this specific step."</span></span>
+<span id="cb3-179"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    }</span></span>
+<span id="cb3-180"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                },</span></span>
+<span id="cb3-181"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "required": [</span></span>
+<span id="cb3-182"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "explanation",</span></span>
+<span id="cb3-183"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "output"</span></span>
+<span id="cb3-184"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                ],</span></span>
+<span id="cb3-185"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "additionalProperties": false</span></span>
+<span id="cb3-186"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            }</span></span>
+<span id="cb3-187"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        },</span></span>
+<span id="cb3-188"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "final_answer": {</span></span>
+<span id="cb3-189"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "type": "string",</span></span>
+<span id="cb3-190"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "description": "The final solution or answer to the math problem."</span></span>
+<span id="cb3-191"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        }</span></span>
+<span id="cb3-192"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    },</span></span>
+<span id="cb3-193"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "required": [</span></span>
+<span id="cb3-194"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "steps",</span></span>
+<span id="cb3-195"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "final_answer"</span></span>
+<span id="cb3-196"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    ],</span></span>
+<span id="cb3-197"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "additionalProperties": false</span></span>
+<span id="cb3-198"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb3-199"></span>
+<span id="cb3-200"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Input: Give me a linked list</span></span>
+<span id="cb3-201"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Output: {</span></span>
+<span id="cb3-202"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "name": "linked_list",</span></span>
+<span id="cb3-203"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "type": "object",</span></span>
+<span id="cb3-204"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "properties": {</span></span>
+<span id="cb3-205"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "linked_list": {</span></span>
+<span id="cb3-206"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "$ref": "#/$defs/linked_list_node",</span></span>
+<span id="cb3-207"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "description": "The head node of the linked list."</span></span>
+<span id="cb3-208"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        }</span></span>
+<span id="cb3-209"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    },</span></span>
+<span id="cb3-210"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "$defs": {</span></span>
+<span id="cb3-211"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "linked_list_node": {</span></span>
+<span id="cb3-212"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "type": "object",</span></span>
+<span id="cb3-213"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "description": "Defines a node in a singly linked list.",</span></span>
+<span id="cb3-214"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "properties": {</span></span>
+<span id="cb3-215"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "value": {</span></span>
+<span id="cb3-216"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "type": "number",</span></span>
+<span id="cb3-217"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "description": "The value stored in this node."</span></span>
+<span id="cb3-218"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                },</span></span>
+<span id="cb3-219"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "next": {</span></span>
+<span id="cb3-220"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "anyOf": [</span></span>
+<span id="cb3-221"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        {</span></span>
+<span id="cb3-222"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                            "$ref": "#/$defs/linked_list_node"</span></span>
+<span id="cb3-223"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        },</span></span>
+<span id="cb3-224"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        {</span></span>
+<span id="cb3-225"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                            "type": "null"</span></span>
+<span id="cb3-226"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        }</span></span>
+<span id="cb3-227"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    ],</span></span>
+<span id="cb3-228"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "description": "Reference to the next node; null if it is the last node."</span></span>
+<span id="cb3-229"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                }</span></span>
+<span id="cb3-230"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            },</span></span>
+<span id="cb3-231"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "required": [</span></span>
+<span id="cb3-232"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "value",</span></span>
+<span id="cb3-233"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "next"</span></span>
+<span id="cb3-234"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            ],</span></span>
+<span id="cb3-235"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "additionalProperties": false</span></span>
+<span id="cb3-236"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        }</span></span>
+<span id="cb3-237"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    },</span></span>
+<span id="cb3-238"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "required": [</span></span>
+<span id="cb3-239"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "linked_list"</span></span>
+<span id="cb3-240"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    ],</span></span>
+<span id="cb3-241"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "additionalProperties": false</span></span>
+<span id="cb3-242"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb3-243"></span>
+<span id="cb3-244"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Input: Dynamically generated UI</span></span>
+<span id="cb3-245"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Output: {</span></span>
+<span id="cb3-246"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "name": "ui",</span></span>
+<span id="cb3-247"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "type": "object",</span></span>
+<span id="cb3-248"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "properties": {</span></span>
+<span id="cb3-249"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "type": {</span></span>
+<span id="cb3-250"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "type": "string",</span></span>
+<span id="cb3-251"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "description": "The type of the UI component",</span></span>
+<span id="cb3-252"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "enum": [</span></span>
+<span id="cb3-253"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "div",</span></span>
+<span id="cb3-254"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "button",</span></span>
+<span id="cb3-255"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "header",</span></span>
+<span id="cb3-256"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "section",</span></span>
+<span id="cb3-257"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "field",</span></span>
+<span id="cb3-258"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "form"</span></span>
+<span id="cb3-259"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            ]</span></span>
+<span id="cb3-260"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        },</span></span>
+<span id="cb3-261"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "label": {</span></span>
+<span id="cb3-262"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "type": "string",</span></span>
+<span id="cb3-263"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "description": "The label of the UI component, used for buttons or form fields"</span></span>
+<span id="cb3-264"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        },</span></span>
+<span id="cb3-265"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "children": {</span></span>
+<span id="cb3-266"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "type": "array",</span></span>
+<span id="cb3-267"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "description": "Nested UI components",</span></span>
+<span id="cb3-268"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "items": {</span></span>
+<span id="cb3-269"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "$ref": "#"</span></span>
+<span id="cb3-270"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            }</span></span>
+<span id="cb3-271"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        },</span></span>
+<span id="cb3-272"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "attributes": {</span></span>
+<span id="cb3-273"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "type": "array",</span></span>
+<span id="cb3-274"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "description": "Arbitrary attributes for the UI component, suitable for any element",</span></span>
+<span id="cb3-275"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "items": {</span></span>
+<span id="cb3-276"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "type": "object",</span></span>
+<span id="cb3-277"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "properties": {</span></span>
+<span id="cb3-278"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "name": {</span></span>
+<span id="cb3-279"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "type": "string",</span></span>
+<span id="cb3-280"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "description": "The name of the attribute, for example onClick or className"</span></span>
+<span id="cb3-281"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    },</span></span>
+<span id="cb3-282"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "value": {</span></span>
+<span id="cb3-283"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "type": "string",</span></span>
+<span id="cb3-284"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "description": "The value of the attribute"</span></span>
+<span id="cb3-285"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    }</span></span>
+<span id="cb3-286"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                },</span></span>
+<span id="cb3-287"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "required": [</span></span>
+<span id="cb3-288"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "name",</span></span>
+<span id="cb3-289"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "value"</span></span>
+<span id="cb3-290"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                ],</span></span>
+<span id="cb3-291"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "additionalProperties": false</span></span>
+<span id="cb3-292"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            }</span></span>
+<span id="cb3-293"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        }</span></span>
+<span id="cb3-294"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    },</span></span>
+<span id="cb3-295"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "required": [</span></span>
+<span id="cb3-296"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "type",</span></span>
+<span id="cb3-297"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "label",</span></span>
+<span id="cb3-298"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "children",</span></span>
+<span id="cb3-299"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "attributes"</span></span>
+<span id="cb3-300"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    ],</span></span>
+<span id="cb3-301"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "additionalProperties": false</span></span>
+<span id="cb3-302"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb3-303"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"""</span>.strip()</span>
+<span id="cb3-304"></span>
+<span id="cb3-305"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> generate_schema(description: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>):</span>
+<span id="cb3-306">    completion <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> client.chat.completions.create(</span>
+<span id="cb3-307">        model<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"gpt-4o-mini"</span>,</span>
+<span id="cb3-308">        response_format<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>{<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"json_schema"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"json_schema"</span>: META_SCHEMA},</span>
+<span id="cb3-309">        messages<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>[</span>
+<span id="cb3-310">            {</span>
+<span id="cb3-311">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"role"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"system"</span>,</span>
+<span id="cb3-312">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"content"</span>: META_PROMPT,</span>
+<span id="cb3-313">            },</span>
+<span id="cb3-314">            {</span>
+<span id="cb3-315">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"role"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"user"</span>,</span>
+<span id="cb3-316">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"content"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Description:</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> description,</span>
+<span id="cb3-317">            },</span>
+<span id="cb3-318">        ],</span>
+<span id="cb3-319">    )</span>
+<span id="cb3-320"></span>
+<span id="cb3-321">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> json.loads(completion.choices[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>].message.content)</span></code></pre></div>
+</section>
+<section id="meta-schema-function-schema" class="level2">
+<h2 class="anchored" data-anchor-id="meta-schema-function-schema">Meta-Schema: Function Schema</h2>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"></span>
+<span id="cb4-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> openai <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> OpenAI</span>
+<span id="cb4-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> json</span>
+<span id="cb4-4"></span>
+<span id="cb4-5">client <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> OpenAI()</span>
+<span id="cb4-6"></span>
+<span id="cb4-7">META_SCHEMA <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {</span>
+<span id="cb4-8">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"function-metaschema"</span>,</span>
+<span id="cb4-9">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"schema"</span>: {</span>
+<span id="cb4-10">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"object"</span>,</span>
+<span id="cb4-11">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"properties"</span>: {</span>
+<span id="cb4-12">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: {</span>
+<span id="cb4-13">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"string"</span>,</span>
+<span id="cb4-14">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"description"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"The name of the function"</span></span>
+<span id="cb4-15">      },</span>
+<span id="cb4-16">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"description"</span>: {</span>
+<span id="cb4-17">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"string"</span>,</span>
+<span id="cb4-18">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"description"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A description of what the function does"</span></span>
+<span id="cb4-19">      },</span>
+<span id="cb4-20">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"parameters"</span>: {</span>
+<span id="cb4-21">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"$ref"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#/$defs/schema_definition"</span>,</span>
+<span id="cb4-22">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"description"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A JSON schema that defines the function's parameters"</span></span>
+<span id="cb4-23">      }</span>
+<span id="cb4-24">    },</span>
+<span id="cb4-25">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"required"</span>: [</span>
+<span id="cb4-26">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>,</span>
+<span id="cb4-27">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"description"</span>,</span>
+<span id="cb4-28">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"parameters"</span></span>
+<span id="cb4-29">    ],</span>
+<span id="cb4-30">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"additionalProperties"</span>: <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>,</span>
+<span id="cb4-31">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"$defs"</span>: {</span>
+<span id="cb4-32">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"schema_definition"</span>: {</span>
+<span id="cb4-33">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"object"</span>,</span>
+<span id="cb4-34">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"properties"</span>: {</span>
+<span id="cb4-35">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: {</span>
+<span id="cb4-36">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"string"</span>,</span>
+<span id="cb4-37">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"enum"</span>: [</span>
+<span id="cb4-38">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"object"</span>,</span>
+<span id="cb4-39">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"array"</span>,</span>
+<span id="cb4-40">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"string"</span>,</span>
+<span id="cb4-41">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"number"</span>,</span>
+<span id="cb4-42">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"boolean"</span>,</span>
+<span id="cb4-43">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"null"</span></span>
+<span id="cb4-44">            ]</span>
+<span id="cb4-45">          },</span>
+<span id="cb4-46">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"properties"</span>: {</span>
+<span id="cb4-47">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"object"</span>,</span>
+<span id="cb4-48">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"additionalProperties"</span>: {</span>
+<span id="cb4-49">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"$ref"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#/$defs/schema_definition"</span></span>
+<span id="cb4-50">            }</span>
+<span id="cb4-51">          },</span>
+<span id="cb4-52">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"items"</span>: {</span>
+<span id="cb4-53">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"anyOf"</span>: [</span>
+<span id="cb4-54">              {</span>
+<span id="cb4-55">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"$ref"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#/$defs/schema_definition"</span></span>
+<span id="cb4-56">              },</span>
+<span id="cb4-57">              {</span>
+<span id="cb4-58">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"array"</span>,</span>
+<span id="cb4-59">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"items"</span>: {</span>
+<span id="cb4-60">                  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"$ref"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#/$defs/schema_definition"</span></span>
+<span id="cb4-61">                }</span>
+<span id="cb4-62">              }</span>
+<span id="cb4-63">            ]</span>
+<span id="cb4-64">          },</span>
+<span id="cb4-65">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"required"</span>: {</span>
+<span id="cb4-66">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"array"</span>,</span>
+<span id="cb4-67">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"items"</span>: {</span>
+<span id="cb4-68">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"string"</span></span>
+<span id="cb4-69">            }</span>
+<span id="cb4-70">          },</span>
+<span id="cb4-71">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"additionalProperties"</span>: {</span>
+<span id="cb4-72">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"boolean"</span></span>
+<span id="cb4-73">          }</span>
+<span id="cb4-74">        },</span>
+<span id="cb4-75">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"required"</span>: [</span>
+<span id="cb4-76">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span></span>
+<span id="cb4-77">        ],</span>
+<span id="cb4-78">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"additionalProperties"</span>: <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>,</span>
+<span id="cb4-79">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"if"</span>: {</span>
+<span id="cb4-80">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"properties"</span>: {</span>
+<span id="cb4-81">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: {</span>
+<span id="cb4-82">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"const"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"object"</span></span>
+<span id="cb4-83">            }</span>
+<span id="cb4-84">          }</span>
+<span id="cb4-85">        },</span>
+<span id="cb4-86">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"then"</span>: {</span>
+<span id="cb4-87">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"required"</span>: [</span>
+<span id="cb4-88">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"properties"</span></span>
+<span id="cb4-89">          ]</span>
+<span id="cb4-90">        }</span>
+<span id="cb4-91">      }</span>
+<span id="cb4-92">    }</span>
+<span id="cb4-93">  }</span>
+<span id="cb4-94">}</span>
+<span id="cb4-95"></span>
+<span id="cb4-96">META_PROMPT <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"""</span></span>
+<span id="cb4-97"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"># Instructions</span></span>
+<span id="cb4-98"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Return a valid schema for the described function.</span></span>
+<span id="cb4-99"></span>
+<span id="cb4-100"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Pay special attention to making sure that "required" and "type" are always at the correct level of nesting. For example, "required" should be at the same level as "properties", not inside it.</span></span>
+<span id="cb4-101"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Make sure that every property, no matter how short, has a type and description correctly nested inside it.</span></span>
+<span id="cb4-102"></span>
+<span id="cb4-103"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"># Examples</span></span>
+<span id="cb4-104"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Input: Assign values to NN hyperparameters</span></span>
+<span id="cb4-105"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Output: {</span></span>
+<span id="cb4-106"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "name": "set_hyperparameters",</span></span>
+<span id="cb4-107"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "description": "Assign values to NN hyperparameters",</span></span>
+<span id="cb4-108"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "parameters": {</span></span>
+<span id="cb4-109"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "type": "object",</span></span>
+<span id="cb4-110"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "required": [</span></span>
+<span id="cb4-111"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "learning_rate",</span></span>
+<span id="cb4-112"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "epochs"</span></span>
+<span id="cb4-113"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        ],</span></span>
+<span id="cb4-114"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "properties": {</span></span>
+<span id="cb4-115"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "epochs": {</span></span>
+<span id="cb4-116"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "type": "number",</span></span>
+<span id="cb4-117"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "description": "Number of complete passes through dataset"</span></span>
+<span id="cb4-118"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            },</span></span>
+<span id="cb4-119"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "learning_rate": {</span></span>
+<span id="cb4-120"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "type": "number",</span></span>
+<span id="cb4-121"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "description": "Speed of model learning"</span></span>
+<span id="cb4-122"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            }</span></span>
+<span id="cb4-123"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        }</span></span>
+<span id="cb4-124"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    }</span></span>
+<span id="cb4-125"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-126"></span>
+<span id="cb4-127"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Input: Plans a motion path for the robot</span></span>
+<span id="cb4-128"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Output: {</span></span>
+<span id="cb4-129"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "name": "plan_motion",</span></span>
+<span id="cb4-130"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "description": "Plans a motion path for the robot",</span></span>
+<span id="cb4-131"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "parameters": {</span></span>
+<span id="cb4-132"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "type": "object",</span></span>
+<span id="cb4-133"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "required": [</span></span>
+<span id="cb4-134"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "start_position",</span></span>
+<span id="cb4-135"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "end_position"</span></span>
+<span id="cb4-136"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        ],</span></span>
+<span id="cb4-137"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "properties": {</span></span>
+<span id="cb4-138"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "end_position": {</span></span>
+<span id="cb4-139"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "type": "object",</span></span>
+<span id="cb4-140"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "properties": {</span></span>
+<span id="cb4-141"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "x": {</span></span>
+<span id="cb4-142"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "type": "number",</span></span>
+<span id="cb4-143"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "description": "End X coordinate"</span></span>
+<span id="cb4-144"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    },</span></span>
+<span id="cb4-145"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "y": {</span></span>
+<span id="cb4-146"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "type": "number",</span></span>
+<span id="cb4-147"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "description": "End Y coordinate"</span></span>
+<span id="cb4-148"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    }</span></span>
+<span id="cb4-149"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                }</span></span>
+<span id="cb4-150"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            },</span></span>
+<span id="cb4-151"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "obstacles": {</span></span>
+<span id="cb4-152"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "type": "array",</span></span>
+<span id="cb4-153"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "description": "Array of obstacle coordinates",</span></span>
+<span id="cb4-154"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "items": {</span></span>
+<span id="cb4-155"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "type": "object",</span></span>
+<span id="cb4-156"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "properties": {</span></span>
+<span id="cb4-157"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "x": {</span></span>
+<span id="cb4-158"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                            "type": "number",</span></span>
+<span id="cb4-159"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                            "description": "Obstacle X coordinate"</span></span>
+<span id="cb4-160"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        },</span></span>
+<span id="cb4-161"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "y": {</span></span>
+<span id="cb4-162"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                            "type": "number",</span></span>
+<span id="cb4-163"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                            "description": "Obstacle Y coordinate"</span></span>
+<span id="cb4-164"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        }</span></span>
+<span id="cb4-165"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    }</span></span>
+<span id="cb4-166"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                }</span></span>
+<span id="cb4-167"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            },</span></span>
+<span id="cb4-168"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "start_position": {</span></span>
+<span id="cb4-169"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "type": "object",</span></span>
+<span id="cb4-170"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "properties": {</span></span>
+<span id="cb4-171"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "x": {</span></span>
+<span id="cb4-172"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "type": "number",</span></span>
+<span id="cb4-173"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "description": "Start X coordinate"</span></span>
+<span id="cb4-174"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    },</span></span>
+<span id="cb4-175"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "y": {</span></span>
+<span id="cb4-176"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "type": "number",</span></span>
+<span id="cb4-177"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "description": "Start Y coordinate"</span></span>
+<span id="cb4-178"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    }</span></span>
+<span id="cb4-179"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                }</span></span>
+<span id="cb4-180"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            }</span></span>
+<span id="cb4-181"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        }</span></span>
+<span id="cb4-182"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    }</span></span>
+<span id="cb4-183"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-184"></span>
+<span id="cb4-185"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Input: Calculates various technical indicators</span></span>
+<span id="cb4-186"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Output: {</span></span>
+<span id="cb4-187"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "name": "technical_indicator",</span></span>
+<span id="cb4-188"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "description": "Calculates various technical indicators",</span></span>
+<span id="cb4-189"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    "parameters": {</span></span>
+<span id="cb4-190"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "type": "object",</span></span>
+<span id="cb4-191"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "required": [</span></span>
+<span id="cb4-192"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "ticker",</span></span>
+<span id="cb4-193"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "indicators"</span></span>
+<span id="cb4-194"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        ],</span></span>
+<span id="cb4-195"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        "properties": {</span></span>
+<span id="cb4-196"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "indicators": {</span></span>
+<span id="cb4-197"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "type": "array",</span></span>
+<span id="cb4-198"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "description": "List of technical indicators to calculate",</span></span>
+<span id="cb4-199"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "items": {</span></span>
+<span id="cb4-200"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "type": "string",</span></span>
+<span id="cb4-201"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "description": "Technical indicator",</span></span>
+<span id="cb4-202"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    "enum": [</span></span>
+<span id="cb4-203"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "RSI",</span></span>
+<span id="cb4-204"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "MACD",</span></span>
+<span id="cb4-205"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "Bollinger_Bands",</span></span>
+<span id="cb4-206"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                        "Stochastic_Oscillator"</span></span>
+<span id="cb4-207"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                    ]</span></span>
+<span id="cb4-208"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                }</span></span>
+<span id="cb4-209"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            },</span></span>
+<span id="cb4-210"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "period": {</span></span>
+<span id="cb4-211"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "type": "number",</span></span>
+<span id="cb4-212"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "description": "Time period for the analysis"</span></span>
+<span id="cb4-213"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            },</span></span>
+<span id="cb4-214"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            "ticker": {</span></span>
+<span id="cb4-215"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "type": "string",</span></span>
+<span id="cb4-216"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                "description": "Stock ticker symbol"</span></span>
+<span id="cb4-217"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            }</span></span>
+<span id="cb4-218"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">        }</span></span>
+<span id="cb4-219"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    }</span></span>
+<span id="cb4-220"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-221"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"""</span>.strip()</span>
+<span id="cb4-222"></span>
+<span id="cb4-223"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> generate_function_schema(description: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>):</span>
+<span id="cb4-224">    completion <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> client.chat.completions.create(</span>
+<span id="cb4-225">        model<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"gpt-4o-mini"</span>,</span>
+<span id="cb4-226">        response_format<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>{<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"json_schema"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"json_schema"</span>: META_SCHEMA},</span>
+<span id="cb4-227">        messages<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>[</span>
+<span id="cb4-228">            {</span>
+<span id="cb4-229">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"role"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"system"</span>,</span>
+<span id="cb4-230">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"content"</span>: META_PROMPT,</span>
+<span id="cb4-231">            },</span>
+<span id="cb4-232">            {</span>
+<span id="cb4-233">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"role"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"user"</span>,</span>
+<span id="cb4-234">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"content"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Description:</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> description,</span>
+<span id="cb4-235">            },</span>
+<span id="cb4-236">        ],</span>
+<span id="cb4-237">    )</span>
+<span id="cb4-238"></span>
+<span id="cb4-239">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> json.loads(completion.choices[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>].message.content)</span></code></pre></div>
 
-This work is inspired by Distil-Whisper, where the authors observed that using a smaller decoder can greatly improve transcription speed while causing minimal degradation in accuracy. Unlike Distil-Whisper, which used distillation to train a smaller model, Whisper turbo was fine-tuned for two more epochs over the same amount of multilingual transcription data used for training large-v3, i.e. excluding translation data, on which we don’t expect turbo to perform well.
 
-Across languages, the turbo model performs similarly to large-v2, though it shows larger degradation on some languages like Thai and Cantonese. Whisper turbo performs better on FLEURS, which consists of cleaner recordings than Common Voice. The figure below shows the turbo model’s performance on the subset of languages in the Common Voice 15 and FLEURS datasets where large-v3 scored a 20% error rate or lower.</code></pre>
-<p>I started using this model in my <a href="https://github.com/lawwu/transcripts/commit/4385305b1bf928e46d9f323cd1d4295dd231add8">transcripts repo</a>.</p>
-
-
+</section>
 
  ]]></description>
-  <category>whisper</category>
-  <category>llm</category>
-  <category>asr</category>
-  <guid>https://lawwu.github.io/til/posts/2024-10-02-whisper-v3-turbo/</guid>
-  <pubDate>Wed, 02 Oct 2024 00:00:00 GMT</pubDate>
+  <category>prompt</category>
+  <category>llms</category>
+  <category>meta</category>
+  <guid>https://lawwu.github.io/til/posts/2024-10-11-prompt-generation-metaprompt/</guid>
+  <pubDate>Fri, 11 Oct 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Juan Carlos Izpisua Belmonte &amp; Yamanaka Factors</title>
@@ -73,6 +2026,38 @@ Across languages, the turbo model performs similarly to large-v2, though it show
   <category>aging</category>
   <category>exercise</category>
   <guid>https://lawwu.github.io/til/posts/2024-10-03-yamanaka-factors/</guid>
+  <pubDate>Wed, 02 Oct 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Whisper large-v3-turbo</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-10-02-whisper-v3-turbo/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>OpenAI released a new version of their Whisper model caled <code>large-v3-turbo</code>. There is already <code>ggml</code> versions available <a href="https://huggingface.co/ggerganov/whisper.cpp/tree/main">here</a>.</p>
+<ul>
+<li><code>ggml-large-v3-turbo.bin</code></li>
+<li><code>ggml-large-v3-turbo-q5_0.bin</code></li>
+</ul>
+<p>HuggingFace has a model card <a href="https://huggingface.co/openai/whisper-large-v3-turbo">here</a>. There’s a Github discussion <a href="https://github.com/openai/whisper/discussions/2363">here</a> talking about the model. It’s basically a distilled version of <code>large-v3</code>:</p>
+<pre><code>We’re releasing a new Whisper model named large-v3-turbo, or turbo for short. It is an optimized version of Whisper large-v3 and has only 4 decoder layers—just like the tiny model—down from the 32 in the large series.
+
+This work is inspired by Distil-Whisper, where the authors observed that using a smaller decoder can greatly improve transcription speed while causing minimal degradation in accuracy. Unlike Distil-Whisper, which used distillation to train a smaller model, Whisper turbo was fine-tuned for two more epochs over the same amount of multilingual transcription data used for training large-v3, i.e. excluding translation data, on which we don’t expect turbo to perform well.
+
+Across languages, the turbo model performs similarly to large-v2, though it shows larger degradation on some languages like Thai and Cantonese. Whisper turbo performs better on FLEURS, which consists of cleaner recordings than Common Voice. The figure below shows the turbo model’s performance on the subset of languages in the Common Voice 15 and FLEURS datasets where large-v3 scored a 20% error rate or lower.</code></pre>
+<p>I started using this model in my <a href="https://github.com/lawwu/transcripts/commit/4385305b1bf928e46d9f323cd1d4295dd231add8">transcripts repo</a>.</p>
+
+
+
+ ]]></description>
+  <category>whisper</category>
+  <category>llm</category>
+  <category>asr</category>
+  <guid>https://lawwu.github.io/til/posts/2024-10-02-whisper-v3-turbo/</guid>
   <pubDate>Wed, 02 Oct 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
@@ -789,33 +2774,6 @@ prompt = create_chat_prompt_template()</code></pre>
   <category>tools</category>
   <guid>https://lawwu.github.io/til/posts/2024-08-13-excalidraw/</guid>
   <pubDate>Tue, 13 Aug 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>VS Code &amp; Port Forwarding</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-07-26-vscode-port-forwards/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Today I ran into this issue where I wasn’t able to call some Azure Functions I was developing locally. When Remote SSH’ing into a VM using VS Code, if you start a webserver on that machine, the port is automatically forwarded to your machine’s localhost. Since my webserver was using the same port 7072, and forward to <code>localhost:7072</code>, the Azure Functions running locally also at <code>localhost:7072</code> were not accessible since calls to that address were being sent to the webserver (via the port forward).</p>
-<p>Clicking the Ports tab in VS Code shows the port being Auto Forwarded:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://lawwu.github.io/til/posts/2024-07-26-vscode-port-forwards/port_forward.png" class="img-fluid figure-img"></p>
-<figcaption>Port Forward</figcaption>
-</figure>
-</div>
-
-
-
- ]]></description>
-  <category>IDE</category>
-  <category>port forwarding</category>
-  <guid>https://lawwu.github.io/til/posts/2024-07-26-vscode-port-forwards/</guid>
-  <pubDate>Fri, 26 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
