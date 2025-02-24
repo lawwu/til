@@ -9,8 +9,37 @@
 <link>https://lawwu.github.io/til/</link>
 <atom:link href="https://lawwu.github.io/til/index.xml" rel="self" type="application/rss+xml"/>
 <description>Lawrence Wu&#39;s Today I Learned</description>
-<generator>quarto-1.5.57</generator>
-<lastBuildDate>Fri, 11 Oct 2024 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.6.42</generator>
+<lastBuildDate>Mon, 24 Feb 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Claude 3.7 Sonnet</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-02-24-claude-sonnet-37/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Anthropic released Claude 3.7 Sonnet with a blog post <a href="https://www.anthropic.com/news/claude-3-7-sonnet">here</a>. Here’s the <a href="https://assets.anthropic.com/m/785e231869ea8b3b/original/claude-3-7-sonnet-system-card.pdf">system card</a>.</p>
+<p>Some highlights: - The reasoning and non-reasoning models are the same, you do have to select which one you want They’ve exposed the thinking tokens (which is different than OpenAI’s o1/o3 models) - I tried one of the examples in the system card to demonstrate the thinking tokens: https://claude.ai/share/919a9387-4cd0-4163-a216-6f5650c28c03 - Anthropic does do a fantastic job on safety testing. They did a controlled trial on bioweapons acquisitions.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://lawwu.github.io/til/posts/2025-02-24-claude-sonnet-37/bioweapons.png" class="img-fluid figure-img"></p>
+<figcaption>Bioweapons Research</figcaption>
+</figure>
+</div>
+<p>Some highlights from AI (<a href="https://claude.ai/share/7cef0dbc-fdba-453b-ae7d-87ac073bb62a">using Claude 3.7 Sonnet</a>): - Extended thinking mode - Claude 3.7 Sonnet features a new “extended thinking” capability that allows the model to reason through complex problems step-by-step before giving a final answer, particularly valuable for mathematical problems and multi-step reasoning tasks. - Hybrid reasoning model - Claude 3.7 Sonnet is described as a “hybrid reasoning model” that combines standard thinking with this extended reasoning capability. - Improved refusal rates - The model reduces unnecessary refusals by 45% in standard thinking mode and 31% in extended thinking mode compared to Claude 3.5 Sonnet, providing more helpful responses to ambiguous queries. - Visible reasoning process - Anthropic has decided to make Claude’s reasoning process visible to users, enhancing transparency and allowing users to better understand how the model reaches conclusions. - Safety evaluations - The model underwent comprehensive testing across CBRN (Chemical, Biological, Radiological, Nuclear), cybersecurity, and autonomy risks, with ASL-2 safeguards determined appropriate. - Capabilities improvements - Claude 3.7 Sonnet shows improved performance across multiple domains while maintaining strong bias and safety metrics. - Chain-of-thought faithfulness - Research shows that while reasoning chains improve outputs, they don’t always fully reveal all factors influencing the model’s conclusions. - Knowledge cutoff date - Claude 3.7 Sonnet’s reliable knowledge extends through October 2024.</p>
+<p>They also released Claude Code, an AI Coding agent. More of these are coming out. It does feel like the way software development is done is changing very rapidly.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/AJpK3YTTKZ4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+
+
+
+ ]]></description>
+  <category>llms</category>
+  <guid>https://lawwu.github.io/til/posts/2025-02-24-claude-sonnet-37/</guid>
+  <pubDate>Mon, 24 Feb 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Prompt Generation &amp; Meta-Prompting</title>
   <dc:creator>Lawrence Wu</dc:creator>
@@ -2004,38 +2033,6 @@ font-style: inherit;">0</span>].message.content)</span></code></pre></div>
   <pubDate>Fri, 11 Oct 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Juan Carlos Izpisua Belmonte &amp; Yamanaka Factors</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-10-03-yamanaka-factors/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>I was watching one of the videos from the All-In Summit 2024:</p>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/uUjF3RG28SQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>Sometimes YouTube videos are too long so I will grab the <a href="https://lawwu.github.io/transcripts/transcript_uUjF3RG28SQ.html">transcript</a>, also possible to do <a href="https://github.com/jdepoix/youtube-transcript-api">programmatically</a> or via web tools like this <a href="https://youtubetranscript.com/">one</a>. And then I’ll drop it into ChatGPT with a prompt: “What are the main points and takeaways from this talk?”. Example <a href="https://chatgpt.com/share/66fda61a-5d8c-8011-a679-eebeb0c51d35">here</a>.</p>
-<p>Aging and Disease Connection: The speaker, Juan Carlos Izpisua Belmonte, explains how age is the biggest risk factor for many diseases. As we age, cells lose their resilience or “buffer capacity,” making them more vulnerable to disease.</p>
-<ul>
-<li>Yamanaka Factors and Cell Reprogramming: Yamanaka’s discovery of four proteins (Yamanaka factors) that can reprogram adult cells into embryonic-like stem cells plays a crucial role. The focus now is on “partial reprogramming,” where a short pulse of these factors can rejuvenate cells without causing them to lose their identity (which could otherwise lead to cancer or malfunction).</li>
-<li>Chromatin and the Epigenome: Belmonte explains how chromatin (DNA packaging) can either be open (leading to aging and disease) or closed (correlating with health and youth). Altering the chromatin to a more closed state can rejuvenate cells and potentially reverse disease.</li>
-<li>Application Beyond Mice: This rejuvenation technology has been successfully tested in mice, including fixing genetic mutations and extending the lifespan of diseased mice. The next step is to apply these findings to human cells and organs, focusing on improving their resilience to disease without altering their genome.</li>
-<li>Potential for Human Applications: Altos Labs aims to apply these techniques in humans, starting with ex vivo organ rejuvenation (e.g., preparing discarded organs for transplantation). The ultimate goal is to develop methods that can increase human cells’ buffer capacity, thereby extending health span and delaying or reversing aging-related diseases.</li>
-<li>Future of Rejuvenation Therapies: The talk emphasizes the long-term potential of partial cell reprogramming to revolutionize human health by combating diseases linked to aging. The approach is described as a combination of cutting-edge science and industry, with billions of dollars invested in fundamental research and safe applications for human health.</li>
-<li>Chamath asks whether lifestyle choices like exercise can slow the aging process or improve cellular buffer capacity. Belmonte reveals that the gene expression changes induced by exercise resemble those triggered by the short pulses of Yamanaka factors, showing that lifestyle interventions can have a significant impact on cellular health and longevity.</li>
-</ul>
-<p>I found it fascinating that cellular aging could be reversed. The easiest way we have access to that is through simple exercise which triggers gene expression changes induced by short pulses of Yamanka factors!</p>
-
-
-
- ]]></description>
-  <category>aging</category>
-  <category>exercise</category>
-  <guid>https://lawwu.github.io/til/posts/2024-10-03-yamanaka-factors/</guid>
-  <pubDate>Wed, 02 Oct 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
   <title>Whisper large-v3-turbo</title>
   <dc:creator>Lawrence Wu</dc:creator>
   <link>https://lawwu.github.io/til/posts/2024-10-02-whisper-v3-turbo/</link>
@@ -2065,6 +2062,38 @@ Across languages, the turbo model performs similarly to large-v2, though it show
   <category>llm</category>
   <category>asr</category>
   <guid>https://lawwu.github.io/til/posts/2024-10-02-whisper-v3-turbo/</guid>
+  <pubDate>Wed, 02 Oct 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Juan Carlos Izpisua Belmonte &amp; Yamanaka Factors</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-10-03-yamanaka-factors/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I was watching one of the videos from the All-In Summit 2024:</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/uUjF3RG28SQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Sometimes YouTube videos are too long so I will grab the <a href="https://lawwu.github.io/transcripts/transcript_uUjF3RG28SQ.html">transcript</a>, also possible to do <a href="https://github.com/jdepoix/youtube-transcript-api">programmatically</a> or via web tools like this <a href="https://youtubetranscript.com/">one</a>. And then I’ll drop it into ChatGPT with a prompt: “What are the main points and takeaways from this talk?”. Example <a href="https://chatgpt.com/share/66fda61a-5d8c-8011-a679-eebeb0c51d35">here</a>.</p>
+<p>Aging and Disease Connection: The speaker, Juan Carlos Izpisua Belmonte, explains how age is the biggest risk factor for many diseases. As we age, cells lose their resilience or “buffer capacity,” making them more vulnerable to disease.</p>
+<ul>
+<li>Yamanaka Factors and Cell Reprogramming: Yamanaka’s discovery of four proteins (Yamanaka factors) that can reprogram adult cells into embryonic-like stem cells plays a crucial role. The focus now is on “partial reprogramming,” where a short pulse of these factors can rejuvenate cells without causing them to lose their identity (which could otherwise lead to cancer or malfunction).</li>
+<li>Chromatin and the Epigenome: Belmonte explains how chromatin (DNA packaging) can either be open (leading to aging and disease) or closed (correlating with health and youth). Altering the chromatin to a more closed state can rejuvenate cells and potentially reverse disease.</li>
+<li>Application Beyond Mice: This rejuvenation technology has been successfully tested in mice, including fixing genetic mutations and extending the lifespan of diseased mice. The next step is to apply these findings to human cells and organs, focusing on improving their resilience to disease without altering their genome.</li>
+<li>Potential for Human Applications: Altos Labs aims to apply these techniques in humans, starting with ex vivo organ rejuvenation (e.g., preparing discarded organs for transplantation). The ultimate goal is to develop methods that can increase human cells’ buffer capacity, thereby extending health span and delaying or reversing aging-related diseases.</li>
+<li>Future of Rejuvenation Therapies: The talk emphasizes the long-term potential of partial cell reprogramming to revolutionize human health by combating diseases linked to aging. The approach is described as a combination of cutting-edge science and industry, with billions of dollars invested in fundamental research and safe applications for human health.</li>
+<li>Chamath asks whether lifestyle choices like exercise can slow the aging process or improve cellular buffer capacity. Belmonte reveals that the gene expression changes induced by exercise resemble those triggered by the short pulses of Yamanaka factors, showing that lifestyle interventions can have a significant impact on cellular health and longevity.</li>
+</ul>
+<p>I found it fascinating that cellular aging could be reversed. The easiest way we have access to that is through simple exercise which triggers gene expression changes induced by short pulses of Yamanka factors!</p>
+
+
+
+ ]]></description>
+  <category>aging</category>
+  <category>exercise</category>
+  <guid>https://lawwu.github.io/til/posts/2024-10-03-yamanaka-factors/</guid>
   <pubDate>Wed, 02 Oct 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
@@ -2756,31 +2785,6 @@ prompt = create_chat_prompt_template()</code></pre>
   <category>agent</category>
   <guid>https://lawwu.github.io/til/posts/2024-08-15-llamacoder/</guid>
   <pubDate>Thu, 15 Aug 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Excalidraw</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-08-13-excalidraw/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>I didn’t realize <a href="https://excalidraw.com/">Excalidraw</a> was open source. Heard about it a year ago from a presentation.</p>
-<ul>
-<li>Github: <a href="https://github.com/excalidraw/excalidraw" class="uri">https://github.com/excalidraw/excalidraw</a></li>
-<li>VS Code Extension: <a href="https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor" class="uri">https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor</a></li>
-<li>just need to create a new file with a .excalidraw extension and open it. Excalidraw saves data in JSON.</li>
-</ul>
-<p>Also a list of public libraries/extensions: <a href="https://libraries.excalidraw.com/" class="uri">https://libraries.excalidraw.com/</a></p>
-
-
-
- ]]></description>
-  <category>tools</category>
-  <guid>https://lawwu.github.io/til/posts/2024-08-13-excalidraw/</guid>
-  <pubDate>Tue, 13 Aug 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
