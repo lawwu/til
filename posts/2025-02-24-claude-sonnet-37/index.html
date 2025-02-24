@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lawrence Wu">
-<meta name="dcterms.date" content="2024-08-28">
+<meta name="dcterms.date" content="2025-02-24">
 
-<title>CogVideoX-5B aka Open source Sora – til</title>
+<title>Claude 3.7 Sonnet – til</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -135,11 +135,9 @@ cookieconsent.run({
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">CogVideoX-5B aka Open source Sora</h1>
+      <h1 class="title">Claude 3.7 Sonnet</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">llm</div>
-                <div class="quarto-category">agent</div>
-                <div class="quarto-category">video</div>
+                <div class="quarto-category">llms</div>
               </div>
                   </div>
   </div>
@@ -157,7 +155,7 @@ cookieconsent.run({
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 28, 2024</p>
+        <p class="date">February 24, 2025</p>
       </div>
     </div>
     
@@ -178,11 +176,17 @@ cookieconsent.run({
 
 
 
-<p>It’s neat how when OpenAI or another model provider creates a new model (e.g.&nbsp;text-to-video like Sora), the open source community gets to work and produces an open source version. This happened with Sora (although the quality is not quite there yet):</p>
-<ul>
-<li>Space: <a href="https://huggingface.co/spaces/THUDM/CogVideoX-5B-Space" class="uri">https://huggingface.co/spaces/THUDM/CogVideoX-5B-Space</a></li>
-<li>Model Card: <a href="https://huggingface.co/THUDM/CogVideoX-5b" class="uri">https://huggingface.co/THUDM/CogVideoX-5b</a></li>
-</ul>
+<p>Anthropic released Claude 3.7 Sonnet with a blog post <a href="https://www.anthropic.com/news/claude-3-7-sonnet">here</a>. Here’s the <a href="https://assets.anthropic.com/m/785e231869ea8b3b/original/claude-3-7-sonnet-system-card.pdf">system card</a>.</p>
+<p>Some highlights: - The reasoning and non-reasoning models are the same, you do have to select which one you want They’ve exposed the thinking tokens (which is different than OpenAI’s o1/o3 models) - I tried one of the examples in the system card to demonstrate the thinking tokens: https://claude.ai/share/919a9387-4cd0-4163-a216-6f5650c28c03 - Anthropic does do a fantastic job on safety testing. They did a controlled trial on bioweapons acquisitions.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./bioweapons.png" class="img-fluid figure-img"></p>
+<figcaption>Bioweapons Research</figcaption>
+</figure>
+</div>
+<p>Some highlights from AI (<a href="https://claude.ai/share/7cef0dbc-fdba-453b-ae7d-87ac073bb62a">using Claude 3.7 Sonnet</a>): - Extended thinking mode - Claude 3.7 Sonnet features a new “extended thinking” capability that allows the model to reason through complex problems step-by-step before giving a final answer, particularly valuable for mathematical problems and multi-step reasoning tasks. - Hybrid reasoning model - Claude 3.7 Sonnet is described as a “hybrid reasoning model” that combines standard thinking with this extended reasoning capability. - Improved refusal rates - The model reduces unnecessary refusals by 45% in standard thinking mode and 31% in extended thinking mode compared to Claude 3.5 Sonnet, providing more helpful responses to ambiguous queries. - Visible reasoning process - Anthropic has decided to make Claude’s reasoning process visible to users, enhancing transparency and allowing users to better understand how the model reaches conclusions. - Safety evaluations - The model underwent comprehensive testing across CBRN (Chemical, Biological, Radiological, Nuclear), cybersecurity, and autonomy risks, with ASL-2 safeguards determined appropriate. - Capabilities improvements - Claude 3.7 Sonnet shows improved performance across multiple domains while maintaining strong bias and safety metrics. - Chain-of-thought faithfulness - Research shows that while reasoning chains improve outputs, they don’t always fully reveal all factors influencing the model’s conclusions. - Knowledge cutoff date - Claude 3.7 Sonnet’s reliable knowledge extends through October 2024.</p>
+<p>They also released Claude Code, an AI Coding agent. More of these are coming out. It does feel like the way software development is done is changing very rapidly.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/AJpK3YTTKZ4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 
 
 
