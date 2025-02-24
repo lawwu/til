@@ -9,6 +9,7 @@ Anthropic released Claude 3.7 Sonnet with a blog post [here](https://www.anthrop
 
 
 Some highlights:
+
 - The reasoning and non-reasoning models are the same, you do have to select which one you want
 They've exposed the thinking tokens (which is different than OpenAI's o1/o3 models)
 - I tried one of the examples in the system card to demonstrate the thinking tokens: https://claude.ai/share/919a9387-4cd0-4163-a216-6f5650c28c03
@@ -18,6 +19,7 @@ They've exposed the thinking tokens (which is different than OpenAI's o1/o3 mode
 
 
 Some highlights from AI ([using Claude 3.7 Sonnet](https://claude.ai/share/7cef0dbc-fdba-453b-ae7d-87ac073bb62a)):
+
 - Extended thinking mode - Claude 3.7 Sonnet features a new "extended thinking" capability that allows the model to reason through complex problems step-by-step before giving a final answer, particularly valuable for mathematical problems and multi-step reasoning tasks.
 - Hybrid reasoning model - Claude 3.7 Sonnet is described as a "hybrid reasoning model" that combines standard thinking with this extended reasoning capability.
 - Improved refusal rates - The model reduces unnecessary refusals by 45% in standard thinking mode and 31% in extended thinking mode compared to Claude 3.5 Sonnet, providing more helpful responses to ambiguous queries.
