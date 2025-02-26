@@ -1,0 +1,32 @@
+---
+title: "The wonders of python-dotenv"
+author: "Lawrence Wu"
+date: "2025-02-26"
+categories: [python]
+---
+
+[python-dotenv](https://github.com/theskumar/python-dotenv) is a ridiculously helpful Python library to programatically load environment variables you have in a `.env` file into your script and Jupyter notebooks. 
+ 
+Install it:
+```bash
+pip install python-dotenv
+```
+
+Put this code block at the top of scripts or notebooks:
+```bash
+from dotenv import load_dotenv
+# find .env automagically by walking up directories until it's found
+dotenv_path = find_dotenv()
+# load up the entries as environment variables
+load_dotenv(dotenv_path)
+ ```
+
+If you want to load .env into your shell environment programmatically, you can run:
+ 
+```bash
+set -a; source .env; set +a
+```
+
+This is helpful when a Streamlit app or FastAPI application needs .env variables.
+
+If you want zsh to do this automatically every time a new shell session is opened, you can use this [plugin](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dotenv).
