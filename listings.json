@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2025-02-26-python-dotenv/index.html",
       "/posts/2025-02-24-claude-sonnet-37/index.html",
       "/posts/2024-10-11-prompt-generation-metaprompt/index.html",
       "/posts/2024-10-02-whisper-v3-turbo/index.html",
@@ -30,8 +31,8 @@
       "/posts/2024-07-12-quarto-slides/index.html",
       "/posts/2024-06-28-azure-prompt/index.html",
       "/posts/2024-06-20-simon-willison-llm-tool/index.html",
-      "/posts/2024-06-20-inspect-eval-framework/index.html",
       "/posts/2024-06-20-bcavlie-rag/index.html",
+      "/posts/2024-06-20-inspect-eval-framework/index.html",
       "/posts/2024-06-19-creating-a-til/index.html"
     ]
   }
