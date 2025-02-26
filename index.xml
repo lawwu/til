@@ -10,7 +10,76 @@
 <atom:link href="https://lawwu.github.io/til/index.xml" rel="self" type="application/rss+xml"/>
 <description>Lawrence Wu&#39;s Today I Learned</description>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Mon, 24 Feb 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 26 Feb 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The wonders of python-dotenv</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-02-26-python-dotenv/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><a href="https://github.com/theskumar/python-dotenv">python-dotenv</a> is a ridiculously helpful Python library to programatically load environment variables you have in a <code>.env</code> file into your script and Jupyter notebooks.</p>
+<p>Install it:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install python-dotenv</span></code></pre></div>
+<p>Put this code block at the top of scripts or notebooks:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">from</span> dotenv import load_dotenv</span>
+<span id="cb2-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># find .env automagically by walking up directories until it's found</span></span>
+<span id="cb2-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">dotenv_path</span> = find_dotenv<span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span></span>
+<span id="cb2-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># load up the entries as environment variables</span></span>
+<span id="cb2-5"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">load_dotenv</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">dotenv_path</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span></span></code></pre></div>
+<p>If you want to load .env into your shell environment programmatically, you can run:</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">set</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-a</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">;</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">source</span> .env<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">;</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">set</span> +a</span></code></pre></div>
+<p>This is helpful when a Streamlit app or FastAPI application needs .env variables.</p>
+<p>If you want zsh to do this automatically every time a new shell session is opened, you can use this <a href="https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dotenv">plugin</a>.</p>
+
+
+
+ ]]></description>
+  <category>python</category>
+  <guid>https://lawwu.github.io/til/posts/2025-02-26-python-dotenv/</guid>
+  <pubDate>Wed, 26 Feb 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Claude 3.7 Sonnet</title>
   <dc:creator>Lawrence Wu</dc:creator>
@@ -2757,49 +2826,6 @@ prompt = create_chat_prompt_template()</code></pre>
   <category>vision</category>
   <guid>https://lawwu.github.io/til/posts/2024-08-16-colipali/</guid>
   <pubDate>Fri, 16 Aug 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>LlamaCoder</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-08-15-llamacoder/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p><a href="https://llamacoder.together.ai/">LlamaCoder</a> is an AI agent that takes natural language and generates a React app. It’s billed as an “open source version of Claude Artifacts.” The Github repo is <a href="https://github.com/Nutlope/llamacoder">here</a>.</p>
-<p>It uses llama 3.1 405B. I built a snake game that actually works… incredible.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://lawwu.github.io/til/posts/2024-08-15-llamacoder/snake.png" class="img-fluid figure-img"></p>
-<figcaption>Snake Game</figcaption>
-</figure>
-</div>
-<p>The <a href="https://github.com/Nutlope/llamacoder/blob/bdf2a059ab30b620ec47855ddc6eac985d490fea/app/api/generateCode/route.ts#L86">system prompt</a> is interesting. “I will tip you $1 million if you do a good job” 😂</p>
-<pre><code>You are an expert frontend React engineer who is also a great UI/UX designer. Follow the instructions carefully, I will tip you $1 million if you do a good job:
-
-- Create a React component for whatever the user asked you to create and make sure it can run by itself by using a default export
-- Make sure the React app is interactive and functional by creating state when needed and having no required props
-- If you use any imports from React like useState or useEffect, make sure to import them directly
-- Use TypeScript as the language for the React component
-- Use Tailwind classes for styling. DO NOT USE ARBITRARY VALUES (e.g. \`h-[600px]\`). Make sure to use a consistent color palette.
-- Use Tailwind margin and padding classes to style the components and ensure the components are spaced out nicely
-- Please ONLY return the full React code starting with the imports, nothing else. It's very important for my job that you only return the React code with imports. DO NOT START WITH \`\`\`typescript or \`\`\`javascript or \`\`\`tsx or \`\`\`.
-- ONLY IF the user asks for a dashboard, graph or chart, the recharts library is available to be imported, e.g. \`import { LineChart, XAxis, ... } from "recharts"\` &amp; \`&lt;LineChart ...&gt;&lt;XAxis dataKey="name"&gt; ...\`. Please only use this when needed.
-`;
-
-// Removed because it causes too many errors
-// - The lucide-react@0.263.1 library is also available to be imported. If you need an icon, use one from lucide-react. Here's an example of importing and using one: import { Camera } from "lucide-react"\` &amp; \`&lt;Camera color="red" size={48} /&gt;\`
-</code></pre>
-
-
-
- ]]></description>
-  <category>llm</category>
-  <category>agent</category>
-  <guid>https://lawwu.github.io/til/posts/2024-08-15-llamacoder/</guid>
-  <pubDate>Thu, 15 Aug 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
