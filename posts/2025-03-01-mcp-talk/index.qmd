@@ -1,0 +1,30 @@
+---
+title: "Summary of Building Agents with Model Context Protocol - Full Workshop with Mahesh Murag of Anthropic"
+author: "Lawrence Wu"
+date: "2025-03-01"
+categories: [mcp]
+---
+
+# Building Agents with Model Context Protocol - Full Workshop with Mahesh Murag of Anthropic
+
+Channel: AI Engineer
+
+Video: https://youtube.com/watch?v=kQmXtrmQ5Zg
+
+## Summary
+
+### [What is MCP?](https://youtube.com/watch?v=kQmXtrmQ5Zg&t=0) (0:00:00)
+
+Mahesh Murag from Anthropic discusses the Model Context Protocol (mCP), emphasizing its role in enhancing AI applications by standardizing how they interact with external systems. He highlights the evolution of AI models and the need for better context integration, which mCP addresses by allowing seamless connections between AI applications and various data sources. The protocol aims to reduce fragmentation in AI development, enabling more powerful and context-rich applications while facilitating collaboration across teams in enterprises. Adoption of mCP has been growing, with a significant number of community-built servers and integrations already in place.
+
+### [Building with MCP](https://youtube.com/watch?v=kQmXtrmQ5Zg&t=579) (0:09:39)
+
+The section discusses the Model Context Protocol (mCP) and its core components, which include tools, resources, and prompts. Tools allow the client application to interact with the server, enabling the model to determine when to invoke them, while resources provide dynamic data that applications can control. Prompts are user-controlled templates for common interactions, facilitating richer engagement with the server. The mCP framework enhances the functionality of applications by providing a standardized way to integrate context and tools, complementing existing agent frameworks rather than replacing them.
+
+### [MCP & Agents](https://youtube.com/watch?v=kQmXtrmQ5Zg&t=1585) (0:26:25)
+
+In this section, Mahesh Murag discusses the Model Context Protocol (MCP) as a foundational framework for building AI agents that effectively manage context and enhance interactivity with various tools and data sources. He highlights the concept of augmented large language models (LLMs) that can dynamically discover and utilize capabilities, allowing for flexible agent designs that can adapt post-initialization. The MCP enables a streamlined agent-building process by abstracting server interactions, empowering developers to focus on core functionalities rather than the underlying infrastructure. Additionally, he emphasizes the importance of composability and sampling in creating intelligent agent systems that can operate efficiently across multiple layers.
+
+### [What's next for MCP?](https://youtube.com/watch?v=kQmXtrmQ5Zg&t=4395) (1:13:15)
+
+In this section, Mahesh Murag discusses the future developments of the Model Context Protocol (MCP), highlighting the introduction of remote servers and offloading capabilities, which will enhance user experience by allowing easier connections without requiring knowledge of MCP. He also mentions the creation of an official MCP registry to improve server discoverability and verification, as well as the potential for agents to become self-evolving by dynamically discovering new tools. Additionally, there are plans for innovations in stateful versus stateless connections, streaming data, and proactive server behaviors to enhance the functionality of MCP.
