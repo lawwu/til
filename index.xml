@@ -10,7 +10,49 @@
 <atom:link href="https://lawwu.github.io/til/index.xml" rel="self" type="application/rss+xml"/>
 <description>Lawrence Wu&#39;s Today I Learned</description>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Wed, 26 Feb 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 01 Mar 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Summary of Building Agents with Model Context Protocol - Full Workshop with Mahesh Murag of Anthropic</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-03-01-mcp-talk/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="building-agents-with-model-context-protocol---full-workshop-with-mahesh-murag-of-anthropic" class="level1">
+<h1>Building Agents with Model Context Protocol - Full Workshop with Mahesh Murag of Anthropic</h1>
+<p>Channel: AI Engineer</p>
+<p>Video: https://youtube.com/watch?v=kQmXtrmQ5Zg</p>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<section id="what-is-mcp-00000" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-mcp-00000"><a href="https://youtube.com/watch?v=kQmXtrmQ5Zg&amp;t=0">What is MCP?</a> (0:00:00)</h3>
+<p>Mahesh Murag from Anthropic discusses the Model Context Protocol (mCP), emphasizing its role in enhancing AI applications by standardizing how they interact with external systems. He highlights the evolution of AI models and the need for better context integration, which mCP addresses by allowing seamless connections between AI applications and various data sources. The protocol aims to reduce fragmentation in AI development, enabling more powerful and context-rich applications while facilitating collaboration across teams in enterprises. Adoption of mCP has been growing, with a significant number of community-built servers and integrations already in place.</p>
+</section>
+<section id="building-with-mcp-00939" class="level3">
+<h3 class="anchored" data-anchor-id="building-with-mcp-00939"><a href="https://youtube.com/watch?v=kQmXtrmQ5Zg&amp;t=579">Building with MCP</a> (0:09:39)</h3>
+<p>The section discusses the Model Context Protocol (mCP) and its core components, which include tools, resources, and prompts. Tools allow the client application to interact with the server, enabling the model to determine when to invoke them, while resources provide dynamic data that applications can control. Prompts are user-controlled templates for common interactions, facilitating richer engagement with the server. The mCP framework enhances the functionality of applications by providing a standardized way to integrate context and tools, complementing existing agent frameworks rather than replacing them.</p>
+</section>
+<section id="mcp-agents-02625" class="level3">
+<h3 class="anchored" data-anchor-id="mcp-agents-02625"><a href="https://youtube.com/watch?v=kQmXtrmQ5Zg&amp;t=1585">MCP &amp; Agents</a> (0:26:25)</h3>
+<p>In this section, Mahesh Murag discusses the Model Context Protocol (MCP) as a foundational framework for building AI agents that effectively manage context and enhance interactivity with various tools and data sources. He highlights the concept of augmented large language models (LLMs) that can dynamically discover and utilize capabilities, allowing for flexible agent designs that can adapt post-initialization. The MCP enables a streamlined agent-building process by abstracting server interactions, empowering developers to focus on core functionalities rather than the underlying infrastructure. Additionally, he emphasizes the importance of composability and sampling in creating intelligent agent systems that can operate efficiently across multiple layers.</p>
+</section>
+<section id="whats-next-for-mcp-11315" class="level3">
+<h3 class="anchored" data-anchor-id="whats-next-for-mcp-11315"><a href="https://youtube.com/watch?v=kQmXtrmQ5Zg&amp;t=4395">What’s next for MCP?</a> (1:13:15)</h3>
+<p>In this section, Mahesh Murag discusses the future developments of the Model Context Protocol (MCP), highlighting the introduction of remote servers and offloading capabilities, which will enhance user experience by allowing easier connections without requiring knowledge of MCP. He also mentions the creation of an official MCP registry to improve server discoverability and verification, as well as the potential for agents to become self-evolving by dynamically discovering new tools. Additionally, there are plans for innovations in stateful versus stateless connections, streaming data, and proactive server behaviors to enhance the functionality of MCP.</p>
+
+
+</section>
+</section>
+</section>
+
+ ]]></description>
+  <category>mcp</category>
+  <guid>https://lawwu.github.io/til/posts/2025-03-01-mcp-talk/</guid>
+  <pubDate>Sat, 01 Mar 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>The wonders of python-dotenv</title>
   <dc:creator>Lawrence Wu</dc:creator>
@@ -2794,38 +2836,6 @@ prompt = create_chat_prompt_template()</code></pre>
   <category>flu</category>
   <guid>https://lawwu.github.io/til/posts/2024-08-23-flu-shot-best-month/</guid>
   <pubDate>Fri, 23 Aug 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>ColiPali: Efficient Document Retrieval with Vision Language Models</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-08-16-colipali/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Learned about ColiPali via <a href="https://x.com/tonywu_71/status/1824194413469503764?s=12">Twitter/X</a>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://lawwu.github.io/til/posts/2024-08-16-colipali/colipali_tweet.png" class="img-fluid figure-img"></p>
-<figcaption>Tony Wu on ColiPali</figcaption>
-</figure>
-</div>
-<ul>
-<li>Blog Post: <a href="https://huggingface.co/blog/manu/colpali" class="uri">https://huggingface.co/blog/manu/colpali</a></li>
-<li>Demo: <a href="https://huggingface.co/spaces/manu/ColPali-demo" class="uri">https://huggingface.co/spaces/manu/ColPali-demo</a></li>
-<li>Model: <a href="https://huggingface.co/vidore/colpali" class="uri">https://huggingface.co/vidore/colpali</a></li>
-<li>Then in September 2024, Ben Clavie released the <a href="https://github.com/AnswerDotAI/byaldi"><code>byaldi</code></a> to make it easier to use ColiPali models. Haven’t used it yet but it sounds like the equivalent of what <a href="https://github.com/AnswerDotAI/RAGatouille">RAGatouille</a> did for <a href="https://github.com/stanford-futuredata/ColBERT">ColBERT</a>.</li>
-</ul>
-
-
-
- ]]></description>
-  <category>llm</category>
-  <category>vision</category>
-  <guid>https://lawwu.github.io/til/posts/2024-08-16-colipali/</guid>
-  <pubDate>Fri, 16 Aug 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
