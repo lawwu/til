@@ -1,0 +1,41 @@
+---
+title: "OpenAI Agents Release"
+author: "Lawrence Wu"
+date: "2025-03-11"
+categories: [python]
+---
+
+We've been expecting OpenAI to release something about agents for awhile now and we finally got that [release today](https://openai.com/index/new-tools-for-building-agents/).
+
+OpenAI enters the arena with a new Responses API and [Agents SDK](https://github.com/openai/openai-agents-python). They're labeling this SDK as the production-level version of their previous framework Swarm.
+ 
+OpenAI's Agent Framework can work with other LLM providers [using the OpenAI Chat Completions format](https://openai.github.io/openai-agents-python/models/) (another plus for proxies like LiteLLM).
+ 
+Three general categories of tools they call out:
+
+- Hosted tools: these run on LLM servers alongside the AI models. OpenAI offers retrieval, web search and computer use as hosted tools.
+- Function calling: these allow you to use any Python function as a tool.
+- Agents as tools: this allows you to use an agent as a tool, allowing Agents to call other agents without handing off to them.
+
+Kind of cool how they are turning Python functions into Agent tools:
+
+- The Agents SDK will setup the tool automatically:
+- The name of the tool will be the name of the Python function (or you can provide a name)
+- Tool description will be taken from the docstring of the function (or you can provide a description)
+- The schema for the function inputs is automatically created from the function's arguments
+- Descriptions for each input are taken from the docstring of the function, unless disabled
+- We use Python's inspect module to extract the function signature, along with griffe to parse docstrings and pydantic for schema creation.
+
+{{ <video https://www.youtube.com/watch?v=hciNKcLwSes&ab_channel=OpenAI > }}
+
+Other notes I took from watching the above release video:
+
+OpenAI has a fine-tuned version of GPT-4o that they use to review search results that are coming back from the Search tool in ChatGPT. It out performs `o3-mini` and `gpt-4.5` on SimpleQA. This model is used in the Search tool they are making available.
+
+![SimpleQA Benchmark](simpleqa_search_preview.png)
+
+Other tools are a File Search tool and Computer Use tool (which it sounded like also has a different fine-tuned CUA model?). Actually yes, there is a computer use model. One of them is `computer-use-preview-2025-02-04` (see [here](https://platform.openai.com/docs/models/computer-use-preview)).
+
+They're also releasing a Responses API. OpenAI released the Chat Completions API in March 2023 with gpt-3.5-turbo. It will be interesting if this Responses API becomes the de-facto standard like Chat Completions has. They will continue to support Chat Completions but Responses API will be a superset of Completions API features.
+
+The Assistants API will eventually be deprecated sometime in 2026.
