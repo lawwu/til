@@ -39,7 +39,7 @@
 <li>Descriptions for each input are taken from the docstring of the function, unless disabled</li>
 <li>We use Python’s inspect module to extract the function signature, along with griffe to parse docstrings and pydantic for schema creation.</li>
 </ul>
-<p>{{ &lt;video https://www.youtube.com/watch?v=hciNKcLwSes&amp;ab_channel=OpenAI &gt; }}</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/hciNKcLwSes" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p>Other notes I took from watching the above release video:</p>
 <p>OpenAI has a fine-tuned version of GPT-4o that they use to review search results that are coming back from the Search tool in ChatGPT. It out performs <code>o3-mini</code> and <code>gpt-4.5</code> on SimpleQA. This model is used in the Search tool they are making available.</p>
 <div class="quarto-figure quarto-figure-center">
