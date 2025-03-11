@@ -10,7 +10,55 @@
 <atom:link href="https://lawwu.github.io/til/index.xml" rel="self" type="application/rss+xml"/>
 <description>Lawrence Wu&#39;s Today I Learned</description>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Sat, 01 Mar 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 11 Mar 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>OpenAI Agents Release</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-03-11-openai-agents/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>We’ve been expecting OpenAI to release something about agents for awhile now and we finally got that <a href="https://openai.com/index/new-tools-for-building-agents/">release today</a>.</p>
+<p>OpenAI enters the arena with a new Responses API and <a href="https://github.com/openai/openai-agents-python">Agents SDK</a>. They’re labeling this SDK as the production-level version of their previous framework Swarm.</p>
+<p>OpenAI’s Agent Framework can work with other LLM providers <a href="https://openai.github.io/openai-agents-python/models/">using the OpenAI Chat Completions format</a> (another plus for proxies like LiteLLM).</p>
+<p>Three general categories of tools they call out:</p>
+<ul>
+<li>Hosted tools: these run on LLM servers alongside the AI models. OpenAI offers retrieval, web search and computer use as hosted tools.</li>
+<li>Function calling: these allow you to use any Python function as a tool.</li>
+<li>Agents as tools: this allows you to use an agent as a tool, allowing Agents to call other agents without handing off to them.</li>
+</ul>
+<p>Kind of cool how they are turning Python functions into Agent tools:</p>
+<ul>
+<li>The Agents SDK will setup the tool automatically:</li>
+<li>The name of the tool will be the name of the Python function (or you can provide a name)</li>
+<li>Tool description will be taken from the docstring of the function (or you can provide a description)</li>
+<li>The schema for the function inputs is automatically created from the function’s arguments</li>
+<li>Descriptions for each input are taken from the docstring of the function, unless disabled</li>
+<li>We use Python’s inspect module to extract the function signature, along with griffe to parse docstrings and pydantic for schema creation.</li>
+</ul>
+<p>{{ &lt;video https://www.youtube.com/watch?v=hciNKcLwSes&amp;ab_channel=OpenAI &gt; }}</p>
+<p>Other notes I took from watching the above release video:</p>
+<p>OpenAI has a fine-tuned version of GPT-4o that they use to review search results that are coming back from the Search tool in ChatGPT. It out performs <code>o3-mini</code> and <code>gpt-4.5</code> on SimpleQA. This model is used in the Search tool they are making available.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://lawwu.github.io/til/posts/2025-03-11-openai-agents/simpleqa_search_preview.png" class="img-fluid figure-img"></p>
+<figcaption>SimpleQA Benchmark</figcaption>
+</figure>
+</div>
+<p>Other tools are a File Search tool and Computer Use tool (which it sounded like also has a different fine-tuned CUA model?). Actually yes, there is a computer use model. One of them is <code>computer-use-preview-2025-02-04</code> (see <a href="https://platform.openai.com/docs/models/computer-use-preview">here</a>).</p>
+<p>They’re also releasing a Responses API. OpenAI released the Chat Completions API in March 2023 with gpt-3.5-turbo. It will be interesting if this Responses API becomes the de-facto standard like Chat Completions has. They will continue to support Chat Completions but Responses API will be a superset of Completions API features.</p>
+<p>The Assistants API will eventually be deprecated sometime in 2026.</p>
+
+
+
+ ]]></description>
+  <category>python</category>
+  <guid>https://lawwu.github.io/til/posts/2025-03-11-openai-agents/</guid>
+  <pubDate>Tue, 11 Mar 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Summary of Building Agents with Model Context Protocol - Full Workshop with Mahesh Murag of Anthropic</title>
   <dc:creator>Lawrence Wu</dc:creator>
@@ -2809,33 +2857,6 @@ prompt = create_chat_prompt_template()</code></pre>
   <category>langgraph</category>
   <guid>https://lawwu.github.io/til/posts/2024-08-26-webvoyager/</guid>
   <pubDate>Mon, 26 Aug 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Best Month to Get a Flu Shot</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-08-23-flu-shot-best-month/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>The best month to get a flu shot is October. This is based on a natural experiment of 800,000 kids across 7 flu seasons in America.</p>
-<p><a href="https://www.wsj.com/health/yes-there-is-a-best-month-to-get-your-flu-shot-03bf2e00?mod=hp_lista_pos2">Source: WSJ</a>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://lawwu.github.io/til/posts/2024-08-23-flu-shot-best-month/best_time_flu_shot.png" class="img-fluid figure-img"></p>
-<figcaption>Time to get flu shots in October</figcaption>
-</figure>
-</div>
-
-
-
- ]]></description>
-  <category>data</category>
-  <category>flu</category>
-  <guid>https://lawwu.github.io/til/posts/2024-08-23-flu-shot-best-month/</guid>
-  <pubDate>Fri, 23 Aug 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
