@@ -26,7 +26,7 @@ Kind of cool how they are turning Python functions into Agent tools:
 - Descriptions for each input are taken from the docstring of the function, unless disabled
 - We use Python's inspect module to extract the function signature, along with griffe to parse docstrings and pydantic for schema creation.
 
-{{ <video https://www.youtube.com/watch?v=hciNKcLwSes&ab_channel=OpenAI > }}
+{{< video https://www.youtube.com/watch?v=hciNKcLwSes&ab_channel=OpenAI >}}
 
 Other notes I took from watching the above release video:
 
