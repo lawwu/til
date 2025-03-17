@@ -1,0 +1,19 @@
+---
+title: "Claude 3.7 Sonnet via Google's VertexAI"
+author: "Lawrence Wu"
+date: "2025-03-11"
+categories: [python]
+---
+
+Google and Vertex have an interesting relationship. I always wondered why Google was hosting Anthropic models in it's VertexAI Model Garden. But there was [news this last week that Google owns ~14% of Anthropic](https://techcrunch.com/2025/03/11/google-has-given-anthropic-more-funding-than-previously-known-show-new-filings/).
+
+I learned you can call Claude via VertexAI. This allows you to use tools that are built on Claude like Cline and Claude Code with Vertex.
+
+To use Claude Code with VertexAI, if you already have your application-default credentials setup, you can just [set a few environment variables](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview#connect-to-google-vertex-ai).
+
+```bash
+CLAUDE_CODE_USE_VERTEX=1
+CLOUD_ML_REGION=us-east5
+ANTHROPIC_VERTEX_PROJECT_ID=your-project-id
+
+```

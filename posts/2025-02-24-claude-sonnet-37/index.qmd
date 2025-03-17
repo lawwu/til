@@ -31,4 +31,4 @@ Some highlights from AI ([using Claude 3.7 Sonnet](https://claude.ai/share/7cef0
 
 They also released Claude Code, an AI Coding agent. More of these are coming out. It does feel like the way software development is done is changing very rapidly.
 
-{{< video https://www.youtube.com/watch?v=AJpK3YTTKZ4&ab_channel=Anthropic>}}
+{{< video https://www.youtube.com/watch?v=AJpK3YTTKZ4&ab_channel=Anthropic >}}
