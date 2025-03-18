@@ -1,5 +1,7 @@
 project:
   type: website
+  resources:
+    - js/
 
 website:
   title: "til"
@@ -18,10 +20,28 @@ format:
     include-in-header:
       - text: |
           <script>
-            // Use relative path that works in both local and production
-            document.write('<script src="' + 
-                          (window.location.hostname === 'localhost' ? '/' : '/til/') + 
-                          'github-stars.js"><\/script>');
+            // Log script loading attempt
+            console.log('Attempting to load GitHub stars script');
+            
+            // Determine the correct path for the script
+            let baseUrl = '';
+            if (window.location.hostname === 'localhost') {
+              baseUrl = '/';
+            } else {
+              baseUrl = '/til/';
+            }
+            
+            // Create script tag
+            const scriptTag = document.createElement('script');
+            scriptTag.src = baseUrl + 'js/github-stars.js';
+            scriptTag.async = false;
+            scriptTag.defer = true;
+            scriptTag.onload = () => console.log('GitHub stars script loaded successfully');
+            scriptTag.onerror = (err) => console.error('Error loading GitHub stars script:', err);
+            
+            // Append to document head
+            document.head.appendChild(scriptTag);
+            console.log('Script tag created with src:', scriptTag.src);
           </script>
 
 execute:
