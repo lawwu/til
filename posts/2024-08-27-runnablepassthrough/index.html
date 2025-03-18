@@ -97,6 +97,12 @@ cookieconsent.run({
 });
 </script> 
   
+<script>
+  // Use relative path that works in both local and production
+  document.write('<script src="' + 
+                (window.location.hostname === 'localhost' ? '/' : '/til/') + 
+                'github-stars.js"><\/script>');
+</script>
 
 
 <link rel="stylesheet" href="../../styles.css">

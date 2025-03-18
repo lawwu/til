@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lawrence Wu">
-<meta name="dcterms.date" content="2025-02-26">
+<meta name="dcterms.date" content="2025-03-18">
 
-<title>The wonders of python-dotenv – til</title>
+<title>uv and Python projects – til</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -175,7 +141,7 @@ cookieconsent.run({
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">The wonders of python-dotenv</h1>
+      <h1 class="title">uv and Python projects</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">python</div>
               </div>
@@ -195,7 +161,7 @@ cookieconsent.run({
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 26, 2025</p>
+        <p class="date">March 18, 2025</p>
       </div>
     </div>
     
@@ -216,19 +182,15 @@ cookieconsent.run({
 
 
 
-<p><a href="https://github.com/theskumar/python-dotenv">python-dotenv</a> is a ridiculously helpful Python library to programatically load environment variables you have in a <code>.env</code> file into your script and Jupyter notebooks.</p>
-<p>Install it:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install python-dotenv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Put this code block at the top of scripts or notebooks:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">from</span> dotenv import load_dotenv</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># find .env automagically by walking up directories until it's found</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">dotenv_path</span> = find_dotenv<span class="er">(</span><span class="kw">)</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># load up the entries as environment variables</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">load_dotenv</span><span class="er">(</span><span class="ex">dotenv_path</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If you want to load .env into your shell environment programmatically, you can run:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-a</span><span class="kw">;</span> <span class="bu">source</span> .env<span class="kw">;</span> <span class="bu">set</span> +a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This is helpful when a Streamlit app or FastAPI application needs .env variables.</p>
-<p>If you want zsh to do this automatically every time a new shell session is opened, you can use this <a href="https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dotenv">plugin</a>.</p>
+<p>I learned recently you can use uv to install Python. Likely will use uv instead of <code>pyenv</code> to install and manage Python versions going forward.</p>
+<p>There also seems to be a tipping point where it is moving from the tool you would use to install requirements with <code>uv pip install -r requirements.txt</code> to the all-in-one tool to install Python, manage dependencies and setup your Python project too.</p>
+<p>Some project templates that look interesting:</p>
+<ul>
+<li><a href="https://github.com/jlevy/simple-modern-uv">simple-modern-uv</a></li>
+<li><a href="https://github.com/fpgmaas/cookiecutter-uv">cookiecutter-uv</a></li>
+<li><a href="https://github.com/pawamoy/copier-uv">copier-uv</a></li>
+</ul>
+<p>I also learned about <a href="https://github.com/copier-org/copier">copier</a> which is a format templates can follow which allows you to <a href="https://github.com/jlevy/simple-modern-uv#updating-your-project-template">pull future changes to the template</a> back into your project.</p>
 
 
 

@@ -10,7 +10,34 @@
 <atom:link href="https://lawwu.github.io/til/index.xml" rel="self" type="application/rss+xml"/>
 <description>Lawrence Wu&#39;s Today I Learned</description>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Mon, 17 Mar 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 18 Mar 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>uv and Python projects</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I learned recently you can use uv to install Python. Likely will use uv instead of <code>pyenv</code> to install and manage Python versions going forward.</p>
+<p>There also seems to be a tipping point where it is moving from the tool you would use to install requirements with <code>uv pip install -r requirements.txt</code> to the all-in-one tool to install Python, manage dependencies and setup your Python project too.</p>
+<p>Some project templates that look interesting:</p>
+<ul>
+<li><a href="https://github.com/jlevy/simple-modern-uv">simple-modern-uv</a></li>
+<li><a href="https://github.com/fpgmaas/cookiecutter-uv">cookiecutter-uv</a></li>
+<li><a href="https://github.com/pawamoy/copier-uv">copier-uv</a></li>
+</ul>
+<p>I also learned about <a href="https://github.com/copier-org/copier">copier</a> which is a format templates can follow which allows you to <a href="https://github.com/jlevy/simple-modern-uv#updating-your-project-template">pull future changes to the template</a> back into your project.</p>
+
+
+
+ ]]></description>
+  <category>python</category>
+  <guid>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</guid>
+  <pubDate>Tue, 18 Mar 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>src layout vs flat layout in Python projects</title>
   <dc:creator>Lawrence Wu</dc:creator>
@@ -71,7 +98,7 @@
  ]]></description>
   <category>python</category>
   <guid>https://lawwu.github.io/til/posts/2025-03-18-flat-vs-src-layouts/</guid>
-  <pubDate>Mon, 17 Mar 2025 00:00:00 GMT</pubDate>
+  <pubDate>Tue, 18 Mar 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Claude 3.7 Sonnet via Google’s VertexAI</title>
@@ -2786,31 +2813,6 @@ font-style: inherit;">-d</span></span></code></pre></div>
   <category>python</category>
   <guid>https://lawwu.github.io/til/posts/2024-08-29-greattables/</guid>
   <pubDate>Thu, 29 Aug 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>CogVideoX-5B aka Open source Sora</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-08-28-opensource-sora/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>It’s neat how when OpenAI or another model provider creates a new model (e.g.&nbsp;text-to-video like Sora), the open source community gets to work and produces an open source version. This happened with Sora (although the quality is not quite there yet):</p>
-<ul>
-<li>Space: <a href="https://huggingface.co/spaces/THUDM/CogVideoX-5B-Space" class="uri">https://huggingface.co/spaces/THUDM/CogVideoX-5B-Space</a></li>
-<li>Model Card: <a href="https://huggingface.co/THUDM/CogVideoX-5b" class="uri">https://huggingface.co/THUDM/CogVideoX-5b</a></li>
-</ul>
-
-
-
- ]]></description>
-  <category>llm</category>
-  <category>agent</category>
-  <category>video</category>
-  <guid>https://lawwu.github.io/til/posts/2024-08-28-opensource-sora/</guid>
-  <pubDate>Wed, 28 Aug 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

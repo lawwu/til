@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lawrence Wu">
-<meta name="dcterms.date" content="2025-03-17">
+<meta name="dcterms.date" content="2025-03-18">
 
 <title>src layout vs flat layout in Python projects – til</title>
 <style>
@@ -97,6 +97,12 @@ cookieconsent.run({
 });
 </script> 
   
+<script>
+  // Use relative path that works in both local and production
+  document.write('<script src="' + 
+                (window.location.hostname === 'localhost' ? '/' : '/til/') + 
+                'github-stars.js"><\/script>');
+</script>
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -155,7 +161,7 @@ cookieconsent.run({
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">March 17, 2025</p>
+        <p class="date">March 18, 2025</p>
       </div>
     </div>
     
