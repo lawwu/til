@@ -2,7 +2,7 @@
 title: "How to configure Apple Focus to help minimize distractions"
 author: "Lawrence Wu"
 date: "2024-09-19"
-categories: [apple, tool]
+categories: [apple, tools]
 ---
 
 Focus modes on Apple devices (iOS and MacOS) are useful. You can configure these to allow notifications from certain people and/or apps when the
