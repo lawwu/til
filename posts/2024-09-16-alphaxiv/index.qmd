@@ -2,7 +2,7 @@
 title: "alphaXiv"
 author: "Lawrence Wu"
 date: "2024-09-16"
-categories: [tool]
+categories: [tools]
 ---
 
 This is a neat project: <https://www.alphaxiv.org/>
