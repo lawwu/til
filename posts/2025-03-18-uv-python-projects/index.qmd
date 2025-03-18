@@ -1,0 +1,19 @@
+---
+title: "uv and Python projects"
+author: "Lawrence Wu"
+date: "2025-03-18"
+categories: [python]
+---
+
+I learned recently you can use uv to install Python. Likely will use uv instead of `pyenv` to install and manage Python versions going forward.
+
+There also seems to be a tipping point where it is moving from the tool you would use to install requirements with `uv pip install -r requirements.txt` to the all-in-one tool to install Python, manage dependencies and setup your Python project too.
+
+Some project templates that look interesting:
+
+- [simple-modern-uv](https://github.com/jlevy/simple-modern-uv)
+- [cookiecutter-uv](https://github.com/fpgmaas/cookiecutter-uv)
+- [copier-uv](https://github.com/pawamoy/copier-uv)
+
+
+I also learned about [copier](https://github.com/copier-org/copier) which is a format templates can follow which allows you to [pull future changes to the template](https://github.com/jlevy/simple-modern-uv#updating-your-project-template) back into your project.
