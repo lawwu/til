@@ -335,7 +335,7 @@ font-style: inherit;">set</span> +a</span></code></pre></div>
 
 
  ]]></description>
-  <category>llms</category>
+  <category>llm</category>
   <guid>https://lawwu.github.io/til/posts/2025-02-24-claude-sonnet-37/</guid>
   <pubDate>Mon, 24 Feb 2025 00:00:00 GMT</pubDate>
 </item>
@@ -2326,7 +2326,7 @@ font-style: inherit;">0</span>].message.content)</span></code></pre></div>
 
  ]]></description>
   <category>prompt</category>
-  <category>llms</category>
+  <category>llm</category>
   <category>meta</category>
   <guid>https://lawwu.github.io/til/posts/2024-10-11-prompt-generation-metaprompt/</guid>
   <pubDate>Fri, 11 Oct 2024 00:00:00 GMT</pubDate>
@@ -2549,7 +2549,7 @@ font-style: inherit;">-q</span> 4</span></code></pre></div>
 
  ]]></description>
   <category>apple</category>
-  <category>tool</category>
+  <category>tools</category>
   <guid>https://lawwu.github.io/til/posts/2024-09-19-apple-focus/</guid>
   <pubDate>Thu, 19 Sep 2024 00:00:00 GMT</pubDate>
 </item>
@@ -2596,7 +2596,7 @@ font-style: inherit;">-q</span> 4</span></code></pre></div>
 
 
  ]]></description>
-  <category>tool</category>
+  <category>tools</category>
   <guid>https://lawwu.github.io/til/posts/2024-09-16-alphaxiv/</guid>
   <pubDate>Mon, 16 Sep 2024 00:00:00 GMT</pubDate>
 </item>
