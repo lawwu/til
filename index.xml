@@ -48,7 +48,7 @@
 
 
 
-<p>I haven’t seen these terms “src layout” and “flat layout” before when referring to Python project conventions that put source code in either a top level folder that is the package name or nesting it under a <code>src/</code> folder. This <a href="https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/">article</a> provides a lot of detail and actually some reasons why a <code>src/</code> layout is probably better.</p>
+<p>I haven’t seen these terms “src layout” and “flat layout” before when referring to Python project conventions that put source code in either a top level folder that is the package name or nesting it under a <code>src/</code> folder. This <a href="https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/">article</a> provides a lot of detail and actually some reasons why a <code>src/</code> layout is probably better. Also reading this <a href="https://packaging.python.org/en/latest/overview/">Overview of Python Packaging</a> was very informative too.</p>
 <p>Quoting the article:</p>
 <p>The “flat layout” refers to organising a project’s files in a folder or repository, such that the various configuration files and import packages are all in the top-level directory.</p>
 <pre><code>.
