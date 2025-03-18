@@ -4,7 +4,9 @@ on:
     branches: main
 
 name: Quarto Publish
-
+env:
+  UV_SYSTEM_PYTHON: 1
+  
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
@@ -13,6 +15,22 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+            enable-cache: true
+          
+      - name: "Set up Python"
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: ".python-version"
+
+      - name: Install dependencies
+        run: |
+          uv pip install jupyter
+          # If you have a requirements.txt file, uncomment the following line
+          # uv pip install -r requirements.txt
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
