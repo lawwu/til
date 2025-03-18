@@ -15,6 +15,14 @@ format:
   html:
     theme: cosmo
     css: styles.css
+    include-in-header:
+      - text: |
+          <script>
+            // Use relative path that works in both local and production
+            document.write('<script src="' + 
+                          (window.location.hostname === 'localhost' ? '/' : '/til/') + 
+                          'github-stars.js"><\/script>');
+          </script>
 
 execute:
   freeze: auto
