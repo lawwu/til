@@ -2,7 +2,7 @@
 title: "Claude 3.7 Sonnet"
 author: "Lawrence Wu"
 date: "2025-02-24"
-categories: [llms]
+categories: [llm]
 ---
 
 Anthropic released Claude 3.7 Sonnet with a blog post [here](https://www.anthropic.com/news/claude-3-7-sonnet). Here's the [system card](https://assets.anthropic.com/m/785e231869ea8b3b/original/claude-3-7-sonnet-system-card.pdf).

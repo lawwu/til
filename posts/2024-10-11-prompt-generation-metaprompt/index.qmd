@@ -2,7 +2,7 @@
 title: "Prompt Generation & Meta-Prompting"
 author: "Lawrence Wu"
 date: "2024-10-11"
-categories: [prompt, llms, meta]
+categories: [prompt, llm, meta]
 ---
 
 OpenAI added a system prompt generate button that lets you generate prompts, functions and schemas from just describing the task.
