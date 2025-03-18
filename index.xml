@@ -10,7 +10,105 @@
 <atom:link href="https://lawwu.github.io/til/index.xml" rel="self" type="application/rss+xml"/>
 <description>Lawrence Wu&#39;s Today I Learned</description>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Tue, 11 Mar 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 17 Mar 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>src layout vs flat layout in Python projects</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-03-18-flat-vs-src-layouts/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I haven’t seen these terms “src layout” and “flat layout” before when referring to Python project conventions that put source code in either a top level folder that is the package name or nesting it under a <code>src/</code> folder. This <a href="https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/">article</a> provides a lot of detail and actually some reasons why a <code>src/</code> layout is probably better.</p>
+<p>Quoting the article:</p>
+<p>The “flat layout” refers to organising a project’s files in a folder or repository, such that the various configuration files and import packages are all in the top-level directory.</p>
+<pre><code>.
+├── README.md
+├── noxfile.py
+├── pyproject.toml
+├── setup.py
+├── awesome_package/
+│   ├── __init__.py
+│   └── module.py
+└── tools/
+    ├── generate_awesomeness.py
+    └── decrease_world_suck.py</code></pre>
+<p>The “src layout” deviates from the flat layout by moving the code that is intended to be importable (i.e.&nbsp;import awesome_package, also known as import packages) into a subdirectory. This subdirectory is typically named src/, hence “src layout”.</p>
+<pre><code>.
+├── README.md
+├── noxfile.py
+├── pyproject.toml
+├── setup.py
+├── src/
+│    └── awesome_package/
+│       ├── __init__.py
+│       └── module.py
+└── tools/
+    ├── generate_awesomeness.py
+    └── decrease_world_suck.py</code></pre>
+<p>Here’s a breakdown of the important behaviour differences between the src layout and the flat layout:</p>
+<ul>
+<li>The src layout requires installation of the project to be able to run its code, and the flat layout does not.
+<ul>
+<li>This means that the src layout involves an additional step in the development workflow of a project (typically, an <a href="https://setuptools.pypa.io/en/latest/userguide/development_mode.html">editable installation</a> is used for development and a regular installation is used for testing).</li>
+</ul></li>
+<li>The src layout helps prevent accidental usage of the in-development copy of the code.
+<ul>
+<li>This is relevant since the Python interpreter includes the current working directory as the first item on the import path. This means that if an import package exists in the current working directory with the same name as an installed import package, the variant from the current working directory will be used. This can lead to subtle misconfiguration of the project’s packaging tooling, which could result in files not being included in a distribution.</li>
+<li>The src layout helps avoid this by keeping import packages in a directory separate from the root directory of the project, ensuring that the installed copy is used.</li>
+</ul></li>
+<li>The src layout helps enforce that an editable installation is only able to import files that were meant to be importable.
+<ul>
+<li>This is especially relevant when the <a href="https://setuptools.pypa.io/en/latest/userguide/development_mode.html">editable installation</a> is implemented using a <a href="https://docs.python.org/3/library/site.html#index-2">path configuration</a> file that adds the directory to the import path.</li>
+<li>The flat layout would add the other project files (eg: README.md, tox.ini) and packaging/tooling configuration files (eg: setup.py, noxfile.py) on the import path. This would make certain imports work in editable installations but not regular installations.</li>
+</ul></li>
+</ul>
+
+
+
+ ]]></description>
+  <category>python</category>
+  <guid>https://lawwu.github.io/til/posts/2025-03-18-flat-vs-src-layouts/</guid>
+  <pubDate>Mon, 17 Mar 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Claude 3.7 Sonnet via Google’s VertexAI</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-03-17-claude-via-vertex/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Google and Vertex have an interesting relationship. I always wondered why Google was hosting Anthropic models in it’s VertexAI Model Garden. But there was <a href="https://techcrunch.com/2025/03/11/google-has-given-anthropic-more-funding-than-previously-known-show-new-filings/">news this last week that Google owns ~14% of Anthropic</a>.</p>
+<p>I learned you can call Claude via VertexAI. This allows you to use tools that are built on Claude like Cline and Claude Code with Vertex.</p>
+<p>To use Claude Code with VertexAI, if you already have your application-default credentials setup, you can just <a href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview#connect-to-google-vertex-ai">set a few environment variables</a>.</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">CLAUDE_CODE_USE_VERTEX</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>1</span>
+<span id="cb1-2"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">CLOUD_ML_REGION</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>us-east5</span>
+<span id="cb1-3"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">ANTHROPIC_VERTEX_PROJECT_ID</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>your-project-id</span></code></pre></div>
+
+
+
+ ]]></description>
+  <category>llm</category>
+  <guid>https://lawwu.github.io/til/posts/2025-03-17-claude-via-vertex/</guid>
+  <pubDate>Mon, 17 Mar 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>OpenAI Agents Release</title>
   <dc:creator>Lawrence Wu</dc:creator>
@@ -57,42 +155,6 @@
  ]]></description>
   <category>python</category>
   <guid>https://lawwu.github.io/til/posts/2025-03-11-openai-agents/</guid>
-  <pubDate>Tue, 11 Mar 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Claude 3.7 Sonnet via Google’s VertexAI</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2025-03-17-claude-via-vertex/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Google and Vertex have an interesting relationship. I always wondered why Google was hosting Anthropic models in it’s VertexAI Model Garden. But there was <a href="https://techcrunch.com/2025/03/11/google-has-given-anthropic-more-funding-than-previously-known-show-new-filings/">news this last week that Google owns ~14% of Anthropic</a>.</p>
-<p>I learned you can call Claude via VertexAI. This allows you to use tools that are built on Claude like Cline and Claude Code with Vertex.</p>
-<p>To use Claude Code with VertexAI, if you already have your application-default credentials setup, you can just <a href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview#connect-to-google-vertex-ai">set a few environment variables</a>.</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">CLAUDE_CODE_USE_VERTEX</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>1</span>
-<span id="cb1-2"><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">CLOUD_ML_REGION</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>us-east5</span>
-<span id="cb1-3"><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">ANTHROPIC_VERTEX_PROJECT_ID</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>your-project-id</span></code></pre></div>
-
-
-
- ]]></description>
-  <category>python</category>
-  <guid>https://lawwu.github.io/til/posts/2025-03-17-claude-via-vertex/</guid>
   <pubDate>Tue, 11 Mar 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
@@ -2749,27 +2811,6 @@ font-style: inherit;">-d</span></span></code></pre></div>
   <category>video</category>
   <guid>https://lawwu.github.io/til/posts/2024-08-28-opensource-sora/</guid>
   <pubDate>Wed, 28 Aug 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>RunnablePassthrough.assign</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-08-27-runnablepassthrough/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>I’m learning more about LangGraph and I didn’t know what <code>RunnablePassthrough.assign</code> was doing (I’ve seen this in some of the LangGraph tutorials). This page explains it really well: <a href="https://python.langchain.com/v0.1/docs/expression_language/primitives/assign/" class="uri">https://python.langchain.com/v0.1/docs/expression_language/primitives/assign/</a></p>
-
-
-
- ]]></description>
-  <category>llm</category>
-  <category>agent</category>
-  <category>langgraph</category>
-  <guid>https://lawwu.github.io/til/posts/2024-08-27-runnablepassthrough/</guid>
-  <pubDate>Tue, 27 Aug 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
