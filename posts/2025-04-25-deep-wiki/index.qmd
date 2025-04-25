@@ -23,10 +23,11 @@ Some interesting points he makes in his thread:
 You can also do Q&A on each project after clicking into it. I looked at a handful of examples and can see how valuable this is.
 
 Some ones I briefly looked at:
+
 - https://deepwiki.com/pandas-dev/pandas
 - https://deepwiki.com/langchain-ai/langgraph
 - https://deepwiki.com/BerriAI/litellm
- - https://deepwiki.com/modelcontextprotocol/modelcontextprotocol
+- https://deepwiki.com/modelcontextprotocol/modelcontextprotocol
 
 The generated diagrams are nice:
 ![MCP Diagram](./deepwiki_mcp_diagram.png)
