@@ -38,10 +38,10 @@
 <p>You can also do Q&amp;A on each project after clicking into it. I looked at a handful of examples and can see how valuable this is.</p>
 <p>Some ones I briefly looked at:</p>
 <ul>
-<li>https://deepwiki.com/pandas-dev/pandas</li>
-<li>https://deepwiki.com/langchain-ai/langgraph</li>
-<li>https://deepwiki.com/BerriAI/litellm</li>
-<li>https://deepwiki.com/modelcontextprotocol/modelcontextprotocol</li>
+<li><a href="https://deepwiki.com/pandas-dev/pandas" class="uri">https://deepwiki.com/pandas-dev/pandas</a></li>
+<li><a href="https://deepwiki.com/langchain-ai/langgraph" class="uri">https://deepwiki.com/langchain-ai/langgraph</a></li>
+<li><a href="https://deepwiki.com/BerriAI/litellm" class="uri">https://deepwiki.com/BerriAI/litellm</a></li>
+<li><a href="https://deepwiki.com/modelcontextprotocol/modelcontextprotocol" class="uri">https://deepwiki.com/modelcontextprotocol/modelcontextprotocol</a></li>
 </ul>
 <p>The generated diagrams are nice: <img src="https://lawwu.github.io/til/posts/2025-04-25-deep-wiki/deepwiki_mcp_diagram.png" class="img-fluid" alt="MCP Diagram"></p>
 <p>A lot of MCP servers are already in the top 30k repos: <img src="https://lawwu.github.io/til/posts/2025-04-25-deep-wiki/deepwiki_mcp_repos.png" class="img-fluid" alt="MCP Repos"></p>
