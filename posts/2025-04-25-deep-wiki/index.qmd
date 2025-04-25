@@ -6,6 +6,12 @@ categories: [LLM]
 ---
 
 From this [post](https://x.com/cognition_labs/status/1915816544480989288?s=46&t=Ze-VKnGNxPI5bjU_St2Wbg), I learned that Cognition, the company behind Devin created [DeepWiki](https://deepwiki.com/). They're calling it a "Deep Research for Github." They created explainer-wiki style web pages for the top 30,000 most popular Github repos.
+
+From  Silas Alberti, he [said](https://x.com/silasalberti/status/1915821553465626791):
+
+- 30k repos already indexed
+- processed 4 billion+ lines of code
+- the indexing alone cost $300k+ in compute spend
  
 You can also do Q&A on each project after clicking into it. I looked at a handful of examples and can see how valuable this is.
 
