@@ -1,0 +1,24 @@
+---
+title: "Deep Wiki"
+author: "Lawrence Wu"
+date: "2025-04-25"
+categories: [LLM]
+---
+
+From this [post](https://x.com/cognition_labs/status/1915816544480989288?s=46&t=Ze-VKnGNxPI5bjU_St2Wbg), I learned that Cognition, the company behind Devin created [DeepWiki](https://deepwiki.com/). They're calling it a "Deep Research for Github." They created explainer-wiki style web pages for the top 30,000 most popular Github repos.
+ 
+You can also do Q&A on each project after clicking into it. I looked at a handful of examples and can see how valuable this is.
+
+Some ones I briefly looked at:
+- https://deepwiki.com/pandas-dev/pandas
+- https://deepwiki.com/langchain-ai/langgraph
+- https://deepwiki.com/BerriAI/litellm
+ - https://deepwiki.com/modelcontextprotocol/modelcontextprotocol
+
+The generated diagrams are nice:
+![MCP Diagram](./deepwiki_mcp_diagram.png)
+
+A lot of MCP servers are already in the top 30k repos:
+![MCP Repos](./deepwiki_mcp_repos.png)
+
+ 
