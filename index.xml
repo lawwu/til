@@ -22,6 +22,19 @@
 
 
 <p>From this <a href="https://x.com/cognition_labs/status/1915816544480989288?s=46&amp;t=Ze-VKnGNxPI5bjU_St2Wbg">post</a>, I learned that Cognition, the company behind Devin created <a href="https://deepwiki.com/">DeepWiki</a>. They’re calling it a “Deep Research for Github.” They created explainer-wiki style web pages for the top 30,000 most popular Github repos.</p>
+<p>From Silas Alberti, he <a href="https://x.com/silasalberti/status/1915821553465626791">said</a>:</p>
+<ul>
+<li>30k repos already indexed</li>
+<li>processed 4 billion+ lines of code</li>
+<li>the indexing alone cost $300k+ in compute</li>
+</ul>
+<p>Some interesting points he makes in his thread:</p>
+<ul>
+<li>indexing a single repo costs $12 on average</li>
+<li>models are very good at understanding code locally. the hard part is understanding the global structure of the codebase.</li>
+<li>DeepWiki breaks down a codebase into a hierarchy of high-level systems and then generates a wiki page for every system</li>
+<li>one interesting signal that we’re able to leverage is the commit history. who tends to touch which files together? you can represent this as a graph.</li>
+</ul>
 <p>You can also do Q&amp;A on each project after clicking into it. I looked at a handful of examples and can see how valuable this is.</p>
 <p>Some ones I briefly looked at: - https://deepwiki.com/pandas-dev/pandas - https://deepwiki.com/langchain-ai/langgraph - https://deepwiki.com/BerriAI/litellm - https://deepwiki.com/modelcontextprotocol/modelcontextprotocol</p>
 <p>The generated diagrams are nice: <img src="https://lawwu.github.io/til/posts/2025-04-25-deep-wiki/deepwiki_mcp_diagram.png" class="img-fluid" alt="MCP Diagram"></p>
