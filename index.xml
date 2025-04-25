@@ -9,8 +9,31 @@
 <link>https://lawwu.github.io/til/</link>
 <atom:link href="https://lawwu.github.io/til/index.xml" rel="self" type="application/rss+xml"/>
 <description>Lawrence Wu&#39;s Today I Learned</description>
-<generator>quarto-1.6.42</generator>
-<lastBuildDate>Tue, 18 Mar 2025 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.6.43</generator>
+<lastBuildDate>Fri, 25 Apr 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Deep Wiki</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-04-25-deep-wiki/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>From this <a href="https://x.com/cognition_labs/status/1915816544480989288?s=46&amp;t=Ze-VKnGNxPI5bjU_St2Wbg">post</a>, I learned that Cognition, the company behind Devin created <a href="https://deepwiki.com/">DeepWiki</a>. They’re calling it a “Deep Research for Github.” They created explainer-wiki style web pages for the top 30,000 most popular Github repos.</p>
+<p>You can also do Q&amp;A on each project after clicking into it. I looked at a handful of examples and can see how valuable this is.</p>
+<p>Some ones I briefly looked at: - https://deepwiki.com/pandas-dev/pandas - https://deepwiki.com/langchain-ai/langgraph - https://deepwiki.com/BerriAI/litellm - https://deepwiki.com/modelcontextprotocol/modelcontextprotocol</p>
+<p>The generated diagrams are nice: <img src="https://lawwu.github.io/til/posts/2025-04-25-deep-wiki/deepwiki_mcp_diagram.png" class="img-fluid" alt="MCP Diagram"></p>
+<p>A lot of MCP servers are already in the top 30k repos: <img src="https://lawwu.github.io/til/posts/2025-04-25-deep-wiki/deepwiki_mcp_repos.png" class="img-fluid" alt="MCP Repos"></p>
+
+
+
+ ]]></description>
+  <category>LLM</category>
+  <guid>https://lawwu.github.io/til/posts/2025-04-25-deep-wiki/</guid>
+  <pubDate>Fri, 25 Apr 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>uv and Python projects</title>
   <dc:creator>Lawrence Wu</dc:creator>
@@ -2794,25 +2817,6 @@ font-style: inherit;">-d</span></span></code></pre></div>
   <category>utility</category>
   <guid>https://lawwu.github.io/til/posts/2024-08-30-caffiene-replacement/</guid>
   <pubDate>Fri, 30 Aug 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>great-tables Python package</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-08-29-greattables/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Repo from posit to create beautiful tables in Python: <a href="https://github.com/posit-dev/great-tables" class="uri">https://github.com/posit-dev/great-tables</a>. Basically the Python version of R’s <a href="https://github.com/rstudio/gt" class="uri">https://github.com/rstudio/gt</a>. I love how posit is now contributing to the Python open source ecosystem.</p>
-
-
-
- ]]></description>
-  <category>python</category>
-  <guid>https://lawwu.github.io/til/posts/2024-08-29-greattables/</guid>
-  <pubDate>Thu, 29 Aug 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
