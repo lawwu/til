@@ -11,8 +11,15 @@ From  Silas Alberti, he [said](https://x.com/silasalberti/status/191582155346562
 
 - 30k repos already indexed
 - processed 4 billion+ lines of code
-- the indexing alone cost $300k+ in compute spend
- 
+- the indexing alone cost $300k+ in compute 
+
+Some interesting points he makes in his thread:
+
+- indexing a single repo costs $12 on average
+- models are very good at understanding code locally. the hard part is understanding the global structure of the codebase. 
+- DeepWiki breaks down a codebase into a hierarchy of high-level systems and then generates a wiki page for every system
+- one interesting signal that we're able to leverage is the commit history. who tends to touch which files together? you can represent this as a graph.
+
 You can also do Q&A on each project after clicking into it. I looked at a handful of examples and can see how valuable this is.
 
 Some ones I briefly looked at:
