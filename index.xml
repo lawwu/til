@@ -9,7 +9,7 @@
 <link>https://lawwu.github.io/til/</link>
 <atom:link href="https://lawwu.github.io/til/index.xml" rel="self" type="application/rss+xml"/>
 <description>Lawrence Wu&#39;s Today I Learned</description>
-<generator>quarto-1.6.43</generator>
+<generator>quarto-1.7.29</generator>
 <lastBuildDate>Fri, 25 Apr 2025 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Deep Wiki</title>
@@ -51,6 +51,1475 @@
  ]]></description>
   <category>LLM</category>
   <guid>https://lawwu.github.io/til/posts/2025-04-25-deep-wiki/</guid>
+  <pubDate>Fri, 25 Apr 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Qwen 3’s Chat Prompt Template</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-05-02-qwen3-chat-prompt-template/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I didn’t realize how complicated Chat Templates have become now. This <a href="https://huggingface.co/blog/qwen-3-chat-template-deep-dive">Huggingface blogpost</a> goes through Qwen 3’s prompt template.</p>
+<p>The chat template defines ” how conversations between users and models are structured and formatted. The template acts as a translator, converting a human-readable conversation:”</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1">  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span></span>
+<span id="cb1-2">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">role</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"user"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">content</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Hi there!"</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb1-3">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">role</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"assistant"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">content</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Hi there, how can I help you today?"</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb1-4">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">role</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"user"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">content</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"I'm looking for a new pair of shoes."</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb1-5">  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span></code></pre></div>
+<p>is converted into a model friendly format by the chat template:</p>
+<pre><code>&lt;|im_start|&gt;user
+Hi there!&lt;|im_end|&gt;
+&lt;|im_start|&gt;assistant
+Hi there, how can I help you today?&lt;|im_end|&gt;
+&lt;|im_start|&gt;user
+I'm looking for a new pair of shoes.&lt;|im_end|&gt;
+&lt;|im_start|&gt;assistant
+&lt;think&gt;
+
+&lt;/think&gt;</code></pre>
+<p>For example, Qwen-3’s chat template has this feature:</p>
+<ul>
+<li>turning off reasoning with the <code>enable_thinking</code> flag. If this is set to false, the template inserts an empty <code>&lt;think&gt;&lt;/think&gt;</code> pair.</li>
+</ul>
+<pre><code>{# Qwen-3 #}
+{%- if enable_thinking is defined and enable_thinking is false %}
+    {{- '&lt;think&gt;\n\n&lt;/think&gt;\n\n' }}
+{%- endif %}</code></pre>
+<p>The templates are all available on Huggingface for open source models, e.g.&nbsp;<a href="https://huggingface.co/Qwen/Qwen3-235B-A22B?chat_template=default">Qwen3</a>:</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">if</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">tools</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-2">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'&lt;|im_start|&gt;system\n'</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-3">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">if</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">messages[0].role</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">==</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'system'</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-4">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">messages[0].content</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'\n\n'</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-5">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-6">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"# Tools</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n\n</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">You may call one or more functions to assist with the user query.</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n\n</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">You are provided with function signatures within &lt;tools&gt;&lt;/tools&gt; XML tags:</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;tools&gt;"</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-7">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">for</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">tool</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">in</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">tools</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-8">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-9">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">tool</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">|</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">tojson</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-10">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endfor</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-11">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;/tools&gt;</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n\n</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">For each function call, return a json object with function name and arguments within &lt;tool_call&gt;&lt;/tool_call&gt; XML tags:</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;tool_call&gt;</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\"</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">name</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\"</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">: &lt;function-name&gt;, </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\"</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">arguments</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\"</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">: &lt;args-json-object&gt;}</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;/tool_call&gt;&lt;|im_end|&gt;</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-12"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">else</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-13">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">if</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">messages[0].role</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">==</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'system'</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-14">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'&lt;|im_start|&gt;system\n'</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">messages[0].content</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'&lt;|im_end|&gt;\n'</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-15">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-16"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-17"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">set</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">ns</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">=</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">namespace(multi_step_tool=true</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">last_query_index=messages|length</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1)</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-18"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">for</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">in</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">messages[</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">-1</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">]</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-19">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">set</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">index</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">=</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(messages|length</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1)</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">loop.index0</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-20">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">if</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">ns.multi_step_tool</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">and</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.role</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">==</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"user"</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">and</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">not(message.content.startswith('&lt;tool_response&gt;')</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">and</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.content.endswith('&lt;/tool_response&gt;'))</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-21">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">set</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">ns.multi_step_tool</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">=</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">false</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-22">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">set</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">ns.last_query_index</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">=</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">index</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-23">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-24"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endfor</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-25"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">for</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">in</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">messages</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-26">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">if</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(message.role</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">==</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"user"</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">)</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">or</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(message.role</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">==</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"system"</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">and</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">not</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">loop.first)</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-27">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'&lt;|im_start|&gt;'</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.role</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'\n'</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.content</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'&lt;|im_end|&gt;'</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'\n'</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-28">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">elif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.role</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">==</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"assistant"</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-29">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">set</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">content</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">=</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.content</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-30">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">set</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">reasoning_content</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">=</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">''</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-31">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">if</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.reasoning_content</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">is</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">defined</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">and</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.reasoning_content</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">is</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">not</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">none</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-32">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">set</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">reasoning_content</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">=</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.reasoning_content</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-33">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">else</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-34">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">if</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'&lt;/think&gt;'</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">in</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.content</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-35">                <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">set</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">content</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">=</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.content.split('&lt;/think&gt;')[-1].lstrip('\n')</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-36">                <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">set</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">reasoning_content</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">=</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.content.split('&lt;/think&gt;')[0].rstrip('\n').split('&lt;think&gt;')[-1].lstrip('\n')</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-37">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-38">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-39">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">if</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">loop.index0</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">ns.last_query_index</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-40">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">if</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">loop.last</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">or</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(not</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">loop.last</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">and</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">reasoning_content)</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-41">                <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'&lt;|im_start|&gt;'</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.role</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'\n&lt;think&gt;\n'</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">reasoning_content.strip('\n')</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'\n&lt;/think&gt;\n\n'</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">content.lstrip('\n')</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-42">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">else</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-43">                <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'&lt;|im_start|&gt;'</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.role</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'\n'</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">content</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-44">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-45">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">else</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-46">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'&lt;|im_start|&gt;'</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.role</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'\n'</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">content</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-47">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-48">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">if</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.tool_calls</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-49">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">for</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">tool_call</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">in</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.tool_calls</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-50">                <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">if</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(loop.first</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">and</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">content)</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">or</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(not</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">loop.first)</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-51">                    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'\n'</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-52">                <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-53">                <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">if</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">tool_call.function</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-54">                    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">set</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">tool_call</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">=</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">tool_call.function</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-55">                <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-56">                <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'&lt;tool_call&gt;\n{</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"name"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"' }}</span></span>
+<span id="cb4-57"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                {{- tool_call.name }}</span></span>
+<span id="cb4-58"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">                {{- '"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"arguments"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-59">                <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">if</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">tool_call.arguments</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">is</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">string</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-60">                    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">tool_call.arguments</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-61">                <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">else</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-62">                    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">tool_call.arguments</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">|</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">tojson</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-63">                <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-64">                <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\n&lt;/tool_call&gt;'</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}}</span></span>
+<span id="cb4-65">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endfor</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-66">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-67">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'&lt;|im_end|&gt;\n'</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-68">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">elif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.role</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">==</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"tool"</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-69">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">if</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">loop.first</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">or</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(messages[loop.index0</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1].role</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">!=</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"tool"</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">)</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-70">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'&lt;|im_start|&gt;user'</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-71">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-72">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'\n&lt;tool_response&gt;\n'</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-73">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">message.content</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-74">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'\n&lt;/tool_response&gt;'</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-75">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">if</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">loop.last</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">or</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(messages[loop.index0</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1].role</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">!=</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"tool"</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">)</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-76">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'&lt;|im_end|&gt;\n'</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-77">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-78">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-79"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endfor</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-80"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">if</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">add_generation_prompt</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-81">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'&lt;|im_start|&gt;assistant\n'</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-82">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">if</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">enable_thinking</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">is</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">defined</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">and</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">enable_thinking</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">is</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">false</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-83">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">{-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">'&lt;think&gt;\n\n&lt;/think&gt;\n\n'</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-84">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb4-85"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%-</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">endif</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">%</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div>
+
+
+
+ ]]></description>
+  <category>LLM</category>
+  <guid>https://lawwu.github.io/til/posts/2025-05-02-qwen3-chat-prompt-template/</guid>
   <pubDate>Fri, 25 Apr 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
@@ -2809,33 +4278,6 @@ events.</code></pre>
   <category>learning</category>
   <guid>https://lawwu.github.io/til/posts/2024-09-11-learn-to-rank/</guid>
   <pubDate>Wed, 11 Sep 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Amphetamine/Caffeine Replacement</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-08-30-caffiene-replacement/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Mac OSX Applications like Caffeine and now Amphetamine are simple apps that cause them not to go to sleep.</p>
-<p>You can also use a simple terminal command:</p>
-<p>Open a terminal and type:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">caffeinate</span> <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">-d</span></span></code></pre></div>
-<p>h/t <a href="https://www.reddit.com/r/macapps/comments/tgxtnu/is_amphetamine_still_the_best_app_to_prevent_sleep/">Reddit</a></p>
-
-
-
- ]]></description>
-  <category>utility</category>
-  <guid>https://lawwu.github.io/til/posts/2024-08-30-caffiene-replacement/</guid>
-  <pubDate>Fri, 30 Aug 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
