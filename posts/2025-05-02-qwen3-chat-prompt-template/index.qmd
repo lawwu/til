@@ -1,13 +1,13 @@
 ---
-title: "Qwen 3's Chat Prompt Template"
+title: "Qwen-3's Chat Template"
 author: "Lawrence Wu"
-date: "2025-04-25"
+date: "2025-05-02"
 categories: [LLM]
 ---
 
 I didn't realize how complicated Chat Templates have become now. This [Huggingface blogpost](https://huggingface.co/blog/qwen-3-chat-template-deep-dive) goes through Qwen 3's prompt template. 
 
-The chat template defines " how conversations between users and models are structured and formatted. The template acts as a translator, converting a human-readable conversation:"
+The chat template defines "how conversations between users and models are structured and formatted. The template acts as a translator, converting a human-readable conversation:"
 
 For example:
 ```json
