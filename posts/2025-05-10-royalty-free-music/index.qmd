@@ -1,0 +1,20 @@
+---
+title: "Royalty Free Music"
+author: "Lawrence Wu"
+date: "2025-05-10"
+categories: [Music]
+---
+
+YouTube really is such an amazing resource. I make home videos and sometimes need background music. This playlist called [Upbeat No Copyright Music](https://www.youtube.com/playlist?list=PL7pkSK1xbGD6g2_BSXgScugMC1CJkkdBW) has provided some great background music for some of my videos.
+
+You can use [yt-dlp](https://github.com/yt-dlp/yt-dlp) to download the playlist:
+
+```bash
+yt-dlp https://www.youtube.com/playlist?list=PL7pkSK1xbGD6g2_BSXgScugMC1CJkkdBW
+```
+
+But this will download the videos which are unnecessary. To download only mp3s, you can use this command:
+
+```bash
+yt-dlp -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 -o "%(playlist_index)s - %(title)s.%(ext)s" https://www.youtube.com/playlist?list=PL7pkSK1xbGD6g2_BSXgScugMC1CJkkdBW
+```
