@@ -9,8 +9,51 @@
 <link>https://lawwu.github.io/til/</link>
 <atom:link href="https://lawwu.github.io/til/index.xml" rel="self" type="application/rss+xml"/>
 <description>Lawrence Wu&#39;s Today I Learned</description>
-<generator>quarto-1.7.29</generator>
-<lastBuildDate>Fri, 02 May 2025 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.7.30</generator>
+<lastBuildDate>Sat, 10 May 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Royalty Free Music</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-05-10-royalty-free-music/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>YouTube really is such an amazing resource. I make home videos and sometimes need background music. This playlist called <a href="https://www.youtube.com/playlist?list=PL7pkSK1xbGD6g2_BSXgScugMC1CJkkdBW">Upbeat No Copyright Music</a> has provided some great background music for some of my videos.</p>
+<p>You can use <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> to download the playlist:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">yt-dlp</span> https://www.youtube.com/playlist<span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">?</span>list=PL7pkSK1xbGD6g2_BSXgScugMC1CJkkdBW</span></code></pre></div>
+<p>But this will download the videos which are unnecessary. To download only mp3s, you can use this command:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">yt-dlp</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-f</span> bestaudio <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--extract-audio</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--audio-format</span> mp3 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--audio-quality</span> 0 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-o</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%(playlist_index)s - %(title)s.%(ext)s"</span> https://www.youtube.com/playlist<span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">?</span>list=PL7pkSK1xbGD6g2_BSXgScugMC1CJkkdBW</span></code></pre></div>
+
+
+
+ ]]></description>
+  <category>Music</category>
+  <guid>https://lawwu.github.io/til/posts/2025-05-10-royalty-free-music/</guid>
+  <pubDate>Sat, 10 May 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Qwen-3’s Chat Template</title>
   <dc:creator>Lawrence Wu</dc:creator>
@@ -1523,33 +1566,6 @@ font-style: inherit;">}</span></span></code></pre></div>
   <pubDate>Fri, 25 Apr 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>uv and Python projects</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>I learned recently you can use uv to install Python. Likely will use uv instead of <code>pyenv</code> to install and manage Python versions going forward.</p>
-<p>There also seems to be a tipping point where it is moving from the tool you would use to install requirements with <code>uv pip install -r requirements.txt</code> to the all-in-one tool to install Python, manage dependencies and setup your Python project too.</p>
-<p>Some project templates that look interesting:</p>
-<ul>
-<li><a href="https://github.com/jlevy/simple-modern-uv">simple-modern-uv</a></li>
-<li><a href="https://github.com/fpgmaas/cookiecutter-uv">cookiecutter-uv</a></li>
-<li><a href="https://github.com/pawamoy/copier-uv">copier-uv</a></li>
-</ul>
-<p>I also learned about <a href="https://github.com/copier-org/copier">copier</a> which is a format templates can follow which allows you to <a href="https://github.com/jlevy/simple-modern-uv#updating-your-project-template">pull future changes to the template</a> back into your project.</p>
-
-
-
- ]]></description>
-  <category>python</category>
-  <guid>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</guid>
-  <pubDate>Tue, 18 Mar 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
   <title>src layout vs flat layout in Python projects</title>
   <dc:creator>Lawrence Wu</dc:creator>
   <link>https://lawwu.github.io/til/posts/2025-03-18-flat-vs-src-layouts/</link>
@@ -1609,6 +1625,33 @@ font-style: inherit;">}</span></span></code></pre></div>
  ]]></description>
   <category>python</category>
   <guid>https://lawwu.github.io/til/posts/2025-03-18-flat-vs-src-layouts/</guid>
+  <pubDate>Tue, 18 Mar 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>uv and Python projects</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I learned recently you can use uv to install Python. Likely will use uv instead of <code>pyenv</code> to install and manage Python versions going forward.</p>
+<p>There also seems to be a tipping point where it is moving from the tool you would use to install requirements with <code>uv pip install -r requirements.txt</code> to the all-in-one tool to install Python, manage dependencies and setup your Python project too.</p>
+<p>Some project templates that look interesting:</p>
+<ul>
+<li><a href="https://github.com/jlevy/simple-modern-uv">simple-modern-uv</a></li>
+<li><a href="https://github.com/fpgmaas/cookiecutter-uv">cookiecutter-uv</a></li>
+<li><a href="https://github.com/pawamoy/copier-uv">copier-uv</a></li>
+</ul>
+<p>I also learned about <a href="https://github.com/copier-org/copier">copier</a> which is a format templates can follow which allows you to <a href="https://github.com/jlevy/simple-modern-uv#updating-your-project-template">pull future changes to the template</a> back into your project.</p>
+
+
+
+ ]]></description>
+  <category>python</category>
+  <guid>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</guid>
   <pubDate>Tue, 18 Mar 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
@@ -4258,26 +4301,6 @@ events.</code></pre>
   <category>reasoning</category>
   <guid>https://lawwu.github.io/til/posts/2024-09-12-o1-preview/</guid>
   <pubDate>Thu, 12 Sep 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Learn-to-Rank and Learning with ChatGPT</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-09-11-learn-to-rank/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>I recently learned about algorithms called Learn-to-Rank (LTR) from a talk that Doug Turnbell gave (he works at Reddit). I actually didn’t know they existed. “LTR models are specifically designed for ranking tasks, optimizing metrics like NDCG or MAP, which are more aligned with ranking quality.” Also learned that xgboost has an implementation of LTR here: <a href="https://xgboost.readthedocs.io/en/stable/tutorials/learning_to_rank.html" class="uri">https://xgboost.readthedocs.io/en/stable/tutorials/learning_to_rank.html</a>.</p>
-<p>I then had a <a href="https://chatgpt.com/share/c973b294-64a9-42d3-892e-3bced47891c6">conversation with ChatGPT</a> on how this could be applied to Candidate Match. (Side note: I find LLMs to be fantastic for this type of thinking/research, I copy pasted the xgboost LTR documentation into the prompt for context).</p>
-
-
-
- ]]></description>
-  <category>learning</category>
-  <guid>https://lawwu.github.io/til/posts/2024-09-11-learn-to-rank/</guid>
-  <pubDate>Wed, 11 Sep 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
