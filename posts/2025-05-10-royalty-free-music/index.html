@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lawrence Wu">
-<meta name="dcterms.date" content="2024-09-26">
+<meta name="dcterms.date" content="2025-05-10">
 
-<title>Turn on Rich Jupyter diff’s in Github – til</title>
+<title>Royalty Free Music – til</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -160,10 +195,9 @@ cookieconsent.run({
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Turn on Rich Jupyter diff’s in Github</h1>
+      <h1 class="title">Royalty Free Music</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">github</div>
-                <div class="quarto-category">jupyter</div>
+                <div class="quarto-category">Music</div>
               </div>
                   </div>
   </div>
@@ -181,7 +215,7 @@ cookieconsent.run({
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 26, 2024</p>
+        <p class="date">May 10, 2025</p>
       </div>
     </div>
     
@@ -202,15 +236,11 @@ cookieconsent.run({
 
 
 
-<p>Github.com has different features hidden behind a “Feature Preview” menu. You can get there by clicking your profile and go to “Feature Preview.”</p>
-<p>One of the options is to turn on Rich Jupyter Diff’s in Github:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="jupyter_diffs.png" class="img-fluid figure-img"></p>
-<figcaption>Rich Jupyter Diffs in Github, nice</figcaption>
-</figure>
-</div>
-<p>This follows a trend of large companies (Microsoft who owns Githbub) using open source tooling (the diff software likely is just using <a href="https://github.com/jupyter/nbdime">nbdime</a>), making it free and making paid services like <a href="https://www.reviewnb.com/#pricing">ReviewNB</a> obsolete.</p>
+<p>YouTube really is such an amazing resource. I make home videos and sometimes need background music. This playlist called <a href="https://www.youtube.com/playlist?list=PL7pkSK1xbGD6g2_BSXgScugMC1CJkkdBW">Upbeat No Copyright Music</a> has provided some great background music for some of my videos.</p>
+<p>You can use <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> to download the playlist:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">yt-dlp</span> https://www.youtube.com/playlist<span class="pp">?</span>list=PL7pkSK1xbGD6g2_BSXgScugMC1CJkkdBW</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>But this will download the videos which are unnecessary. To download only mp3s, you can use this command:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">yt-dlp</span> <span class="at">-f</span> bestaudio <span class="at">--extract-audio</span> <span class="at">--audio-format</span> mp3 <span class="at">--audio-quality</span> 0 <span class="at">-o</span> <span class="st">"%(playlist_index)s - %(title)s.%(ext)s"</span> https://www.youtube.com/playlist<span class="pp">?</span>list=PL7pkSK1xbGD6g2_BSXgScugMC1CJkkdBW</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 
