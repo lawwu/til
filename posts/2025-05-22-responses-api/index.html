@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lawrence Wu">
-<meta name="dcterms.date" content="2024-09-27">
+<meta name="dcterms.date" content="2025-05-21">
 
-<title>Github Copilot Workspace – til</title>
+<title>OpenAI’s Responses API – til</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -160,10 +160,10 @@ cookieconsent.run({
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Github Copilot Workspace</h1>
+      <h1 class="title">OpenAI’s Responses API</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">github</div>
-                <div class="quarto-category">agent</div>
+                <div class="quarto-category">LLMs</div>
+                <div class="quarto-category">APIs</div>
               </div>
                   </div>
   </div>
@@ -181,7 +181,7 @@ cookieconsent.run({
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 27, 2024</p>
+        <p class="date">May 21, 2025</p>
       </div>
     </div>
     
@@ -192,17 +192,8 @@ cookieconsent.run({
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#create-an-issue" id="toc-create-an-issue" class="nav-link active" data-scroll-target="#create-an-issue">1. Create an Issue</a></li>
-  <li><a href="#agent-will-create-a-spec" id="toc-agent-will-create-a-spec" class="nav-link" data-scroll-target="#agent-will-create-a-spec">2. Agent will create a spec</a></li>
-  <li><a href="#agent-will-create-a-plan" id="toc-agent-will-create-a-plan" class="nav-link" data-scroll-target="#agent-will-create-a-plan">3. Agent will create a plan</a></li>
-  <li><a href="#agent-will-create-commits" id="toc-agent-will-create-commits" class="nav-link" data-scroll-target="#agent-will-create-commits">4. Agent will create commits</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -211,49 +202,17 @@ cookieconsent.run({
 
 
 
-<p>I was granted access to Github Copilot Workspace. It’s Github’s AI Coding Assistant built into Github.com where you can go from Github Issue to a Pull Request. I tried it, it’s pretty cool. The PR the service generated in my <a href="https://github.com/lawwu/transcripts">transcripts</a> repo is <a href="https://github.com/lawwu/transcripts/pull/3">here</a>. The workspace is viewable <a href="https://copilot-workspace.githubnext.com/lawwu/transcripts/issues/2?shareId=685875ce-8d8a-4c54-9376-f58bd34f89fe">here</a>.</p>
-<p>The workflow is:</p>
-<section id="create-an-issue" class="level2">
-<h2 class="anchored" data-anchor-id="create-an-issue">1. Create an Issue</h2>
+<p>OpenAI’s Responses API is becoming an Agent API from Steven Heidel’s <a href="https://x.com/stevenheidel/status/1925209983073046616">tweet</a>:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="0_issue.png" class="img-fluid figure-img"></p>
-<figcaption>Create an Issue</figcaption>
+<p><img src="responses_api_tweet.png" class="img-fluid figure-img"></p>
+<figcaption>Responses API Tweet</figcaption>
 </figure>
 </div>
-</section>
-<section id="agent-will-create-a-spec" class="level2">
-<h2 class="anchored" data-anchor-id="agent-will-create-a-spec">2. Agent will create a spec</h2>
-<p>That you can edit</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="1_spec.png" class="img-fluid figure-img"></p>
-<figcaption>Agent will create a specification</figcaption>
-</figure>
-</div>
-</section>
-<section id="agent-will-create-a-plan" class="level2">
-<h2 class="anchored" data-anchor-id="agent-will-create-a-plan">3. Agent will create a plan</h2>
-<p>The agent creates a plans of what files will be edited according to your spec.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="2_plan.png" class="img-fluid figure-img"></p>
-<figcaption>Agent will create a plan</figcaption>
-</figure>
-</div>
-</section>
-<section id="agent-will-create-commits" class="level2">
-<h2 class="anchored" data-anchor-id="agent-will-create-commits">4. Agent will create commits</h2>
-<p>The agent then creates commits and a pull request! There’s also a chat interface to make revisions which is cool.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="3_commits_with_revise.png" class="img-fluid figure-img"></p>
-<figcaption>Agent will create a PR</figcaption>
-</figure>
-</div>
+<p>Pretty interesting how OpenAI is moving up the stack where with an API call you can basically configure a tool calling <a href="https://arxiv.org/abs/2210.03629">ReAct agent</a>. Over the last year, agent framework SDKs like LangGraph provide utilities to <a href="https://python.langchain.com/api_reference/langchain/agents/langchain.agents.react.agent.create_react_agent.html">create react agents</a>. Now with the Responses API, you can create this tool calling agent that can call remote MCP servers, code interpreter, RAG, image generation and we search tools natively.</p>
+<p>Docs: https://openai.com/index/new-tools-and-features-in-the-responses-api/</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
