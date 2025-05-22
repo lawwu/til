@@ -9,8 +9,36 @@
 <link>https://lawwu.github.io/til/</link>
 <atom:link href="https://lawwu.github.io/til/index.xml" rel="self" type="application/rss+xml"/>
 <description>Lawrence Wu&#39;s Today I Learned</description>
-<generator>quarto-1.7.30</generator>
-<lastBuildDate>Sat, 10 May 2025 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.7.31</generator>
+<lastBuildDate>Wed, 21 May 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>OpenAI’s Responses API</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-05-22-responses-api/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>OpenAI’s Responses API is becoming an Agent API from Steven Heidel’s <a href="https://x.com/stevenheidel/status/1925209983073046616">tweet</a>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://lawwu.github.io/til/posts/2025-05-22-responses-api/responses_api_tweet.png" class="img-fluid figure-img"></p>
+<figcaption>Responses API Tweet</figcaption>
+</figure>
+</div>
+<p>Pretty interesting how OpenAI is moving up the stack where with an API call you can basically configure a tool calling <a href="https://arxiv.org/abs/2210.03629">ReAct agent</a>. Over the last year, agent framework SDKs like LangGraph provide utilities to <a href="https://python.langchain.com/api_reference/langchain/agents/langchain.agents.react.agent.create_react_agent.html">create react agents</a>. Now with the Responses API, you can create this tool calling agent that can call remote MCP servers, code interpreter, RAG, image generation and we search tools natively.</p>
+<p>Docs: https://openai.com/index/new-tools-and-features-in-the-responses-api/</p>
+
+
+
+ ]]></description>
+  <category>LLMs</category>
+  <category>APIs</category>
+  <guid>https://lawwu.github.io/til/posts/2025-05-22-responses-api/</guid>
+  <pubDate>Wed, 21 May 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Royalty Free Music</title>
   <dc:creator>Lawrence Wu</dc:creator>
@@ -1566,6 +1594,33 @@ font-style: inherit;">}</span></span></code></pre></div>
   <pubDate>Fri, 25 Apr 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>uv and Python projects</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I learned recently you can use uv to install Python. Likely will use uv instead of <code>pyenv</code> to install and manage Python versions going forward.</p>
+<p>There also seems to be a tipping point where it is moving from the tool you would use to install requirements with <code>uv pip install -r requirements.txt</code> to the all-in-one tool to install Python, manage dependencies and setup your Python project too.</p>
+<p>Some project templates that look interesting:</p>
+<ul>
+<li><a href="https://github.com/jlevy/simple-modern-uv">simple-modern-uv</a></li>
+<li><a href="https://github.com/fpgmaas/cookiecutter-uv">cookiecutter-uv</a></li>
+<li><a href="https://github.com/pawamoy/copier-uv">copier-uv</a></li>
+</ul>
+<p>I also learned about <a href="https://github.com/copier-org/copier">copier</a> which is a format templates can follow which allows you to <a href="https://github.com/jlevy/simple-modern-uv#updating-your-project-template">pull future changes to the template</a> back into your project.</p>
+
+
+
+ ]]></description>
+  <category>python</category>
+  <guid>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</guid>
+  <pubDate>Tue, 18 Mar 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
   <title>src layout vs flat layout in Python projects</title>
   <dc:creator>Lawrence Wu</dc:creator>
   <link>https://lawwu.github.io/til/posts/2025-03-18-flat-vs-src-layouts/</link>
@@ -1625,33 +1680,6 @@ font-style: inherit;">}</span></span></code></pre></div>
  ]]></description>
   <category>python</category>
   <guid>https://lawwu.github.io/til/posts/2025-03-18-flat-vs-src-layouts/</guid>
-  <pubDate>Tue, 18 Mar 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>uv and Python projects</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>I learned recently you can use uv to install Python. Likely will use uv instead of <code>pyenv</code> to install and manage Python versions going forward.</p>
-<p>There also seems to be a tipping point where it is moving from the tool you would use to install requirements with <code>uv pip install -r requirements.txt</code> to the all-in-one tool to install Python, manage dependencies and setup your Python project too.</p>
-<p>Some project templates that look interesting:</p>
-<ul>
-<li><a href="https://github.com/jlevy/simple-modern-uv">simple-modern-uv</a></li>
-<li><a href="https://github.com/fpgmaas/cookiecutter-uv">cookiecutter-uv</a></li>
-<li><a href="https://github.com/pawamoy/copier-uv">copier-uv</a></li>
-</ul>
-<p>I also learned about <a href="https://github.com/copier-org/copier">copier</a> which is a format templates can follow which allows you to <a href="https://github.com/jlevy/simple-modern-uv#updating-your-project-template">pull future changes to the template</a> back into your project.</p>
-
-
-
- ]]></description>
-  <category>python</category>
-  <guid>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</guid>
   <pubDate>Tue, 18 Mar 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
@@ -3886,38 +3914,6 @@ font-style: inherit;">0</span>].message.content)</span></code></pre></div>
   <pubDate>Fri, 11 Oct 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Whisper large-v3-turbo</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-10-02-whisper-v3-turbo/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>OpenAI released a new version of their Whisper model caled <code>large-v3-turbo</code>. There is already <code>ggml</code> versions available <a href="https://huggingface.co/ggerganov/whisper.cpp/tree/main">here</a>.</p>
-<ul>
-<li><code>ggml-large-v3-turbo.bin</code></li>
-<li><code>ggml-large-v3-turbo-q5_0.bin</code></li>
-</ul>
-<p>HuggingFace has a model card <a href="https://huggingface.co/openai/whisper-large-v3-turbo">here</a>. There’s a Github discussion <a href="https://github.com/openai/whisper/discussions/2363">here</a> talking about the model. It’s basically a distilled version of <code>large-v3</code>:</p>
-<pre><code>We’re releasing a new Whisper model named large-v3-turbo, or turbo for short. It is an optimized version of Whisper large-v3 and has only 4 decoder layers—just like the tiny model—down from the 32 in the large series.
-
-This work is inspired by Distil-Whisper, where the authors observed that using a smaller decoder can greatly improve transcription speed while causing minimal degradation in accuracy. Unlike Distil-Whisper, which used distillation to train a smaller model, Whisper turbo was fine-tuned for two more epochs over the same amount of multilingual transcription data used for training large-v3, i.e. excluding translation data, on which we don’t expect turbo to perform well.
-
-Across languages, the turbo model performs similarly to large-v2, though it shows larger degradation on some languages like Thai and Cantonese. Whisper turbo performs better on FLEURS, which consists of cleaner recordings than Common Voice. The figure below shows the turbo model’s performance on the subset of languages in the Common Voice 15 and FLEURS datasets where large-v3 scored a 20% error rate or lower.</code></pre>
-<p>I started using this model in my <a href="https://github.com/lawwu/transcripts/commit/4385305b1bf928e46d9f323cd1d4295dd231add8">transcripts repo</a>.</p>
-
-
-
- ]]></description>
-  <category>whisper</category>
-  <category>llm</category>
-  <category>asr</category>
-  <guid>https://lawwu.github.io/til/posts/2024-10-02-whisper-v3-turbo/</guid>
-  <pubDate>Wed, 02 Oct 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
   <title>Juan Carlos Izpisua Belmonte &amp; Yamanaka Factors</title>
   <dc:creator>Lawrence Wu</dc:creator>
   <link>https://lawwu.github.io/til/posts/2024-10-03-yamanaka-factors/</link>
@@ -3947,6 +3943,38 @@ Across languages, the turbo model performs similarly to large-v2, though it show
   <category>aging</category>
   <category>exercise</category>
   <guid>https://lawwu.github.io/til/posts/2024-10-03-yamanaka-factors/</guid>
+  <pubDate>Wed, 02 Oct 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Whisper large-v3-turbo</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-10-02-whisper-v3-turbo/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>OpenAI released a new version of their Whisper model caled <code>large-v3-turbo</code>. There is already <code>ggml</code> versions available <a href="https://huggingface.co/ggerganov/whisper.cpp/tree/main">here</a>.</p>
+<ul>
+<li><code>ggml-large-v3-turbo.bin</code></li>
+<li><code>ggml-large-v3-turbo-q5_0.bin</code></li>
+</ul>
+<p>HuggingFace has a model card <a href="https://huggingface.co/openai/whisper-large-v3-turbo">here</a>. There’s a Github discussion <a href="https://github.com/openai/whisper/discussions/2363">here</a> talking about the model. It’s basically a distilled version of <code>large-v3</code>:</p>
+<pre><code>We’re releasing a new Whisper model named large-v3-turbo, or turbo for short. It is an optimized version of Whisper large-v3 and has only 4 decoder layers—just like the tiny model—down from the 32 in the large series.
+
+This work is inspired by Distil-Whisper, where the authors observed that using a smaller decoder can greatly improve transcription speed while causing minimal degradation in accuracy. Unlike Distil-Whisper, which used distillation to train a smaller model, Whisper turbo was fine-tuned for two more epochs over the same amount of multilingual transcription data used for training large-v3, i.e. excluding translation data, on which we don’t expect turbo to perform well.
+
+Across languages, the turbo model performs similarly to large-v2, though it shows larger degradation on some languages like Thai and Cantonese. Whisper turbo performs better on FLEURS, which consists of cleaner recordings than Common Voice. The figure below shows the turbo model’s performance on the subset of languages in the Common Voice 15 and FLEURS datasets where large-v3 scored a 20% error rate or lower.</code></pre>
+<p>I started using this model in my <a href="https://github.com/lawwu/transcripts/commit/4385305b1bf928e46d9f323cd1d4295dd231add8">transcripts repo</a>.</p>
+
+
+
+ ]]></description>
+  <category>whisper</category>
+  <category>llm</category>
+  <category>asr</category>
+  <guid>https://lawwu.github.io/til/posts/2024-10-02-whisper-v3-turbo/</guid>
   <pubDate>Wed, 02 Oct 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
@@ -4153,154 +4181,6 @@ font-style: inherit;">-q</span> 4</span></code></pre></div>
   <category>tools</category>
   <guid>https://lawwu.github.io/til/posts/2024-09-16-alphaxiv/</guid>
   <pubDate>Mon, 16 Sep 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>OpenAI Releases o1-preview</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-09-12-o1-preview/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<ul>
-<li>Model Card: <a href="https://cdn.openai.com/o1-system-card.pdf" class="uri">https://cdn.openai.com/o1-system-card.pdf</a></li>
-<li>Simon Willison’s notes: <a href="https://simonwillison.net/2024/Sep/12/openai-o1/" class="uri">https://simonwillison.net/2024/Sep/12/openai-o1/</a></li>
-</ul>
-<section id="summary" class="level1">
-<h1>Summary</h1>
-<p>This model was trained on chain-of-thought chains. These were not human annotations but were LLM-generated. The CoT chains ultimately used for training were the ones which led to correct answers in questions. New ideas being coined: reasoning tokens, and inference or “test-time compute”.</p>
-</section>
-<section id="model-description" class="level1">
-<h1>Model Description</h1>
-<p>The o1 large language model family is trained with reinforcement learning to perform complex reasoning. o1 thinks before it answers—it can produce a long chain of thought before responding to the user. OpenAI o1-preview is the early version of this model, while OpenAI o1-mini is a faster version of this model that is particularly effective at coding. Through training, the models learn to refine their thinking process, try different strategies, and recognize their mistakes. Reasoning allows o1 models to follow specific guidelines and model policies we’ve set, ensuring they act in line with our safety expectations. This means they are better at providing helpful answers and resisting attempts to bypass safety rules, to avoid producing unsafe or inappropriate content. o1-preview is state-of-the-art (SOTA) on various evaluations spanning coding, math, and known jailbreaks benchmarks [1, 2, 3, 4].</p>
-</section>
-<section id="my-usage" class="level1">
-<h1>My Usage</h1>
-<p>A new output is “The model thinks for N seconds”</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://lawwu.github.io/til/posts/2024-09-12-o1-preview/o1_preview.png" class="img-fluid figure-img"></p>
-<figcaption>o1-preview thinking</figcaption>
-</figure>
-</div>
-<p>If you un-hide the menu, you can see the steps it went through. Many times the model is checking if the output meets OpenAI’s content policies. It feels like I am interacting with an agent now where the agent is:</p>
-<ul>
-<li>Evaluating how difficult the problem is</li>
-<li>Planning out the steps - this part is really amazing and the real new aspect of these models</li>
-<li>Providing the answer</li>
-<li>Checking the answer</li>
-</ul>
-<pre><code>CHUNK:
-Crafting an interactive model
-I’m crafting an HTML and JavaScript model to visualize self-attention in a Transformer model, focusing on hovering and clicking functionalities, token
-alignment, and LaTeX rendering for attention scores.
-
-Crafting the code
-I’m figuring out how to write HTML and JavaScript code to create an interactive visualization of Transformer self-attention, displaying tokens and
-connecting them with edges based on attention scores. No external libraries allowed.
-
-Mapping out tokenization
-Mapping out the process involves outlining tokens, drawing curved, non-overlapping edges proportional to attention scores, and visualizing these scores
-with CSS instead of MathJax.
-
-Structuring HTML with attention scores
-I'm thinking about how to display tokens in HTML using spans and defining a 4x4 attention score matrix. Each token's focus on others should sum to 1,
-ensuring clarity and precision.
-
-Mapping attention
-I'm working through visualizing how attention flows from "The" to other tokens in a sentence. The edges, curved for clarity, will show proportional thickness
-and start/end at token centers, avoiding overlap.
-
-Setting up the stage
-I’m working through creating an HTML structure with 50px spacing at the top, presenting tokens, indicating edges on hover, and showing attention scores
-on click, all while ensuring clarity and alignment.
-
-Setting up the layout
-I’m beginning with a minimal HTML structure, adding CSS for styling (like margin, padding, font size) and positioning. This foundation sets up token and
-edge elements for attention scores.
-
-Setting up event handling
-I’m defining attention scores and referencing SVG elements. Tokens get mouseover, mouseout, and click event listeners, with functions to show/hide
-attention scores and draw/clear SVG edges.
-
-Tracing connections
-I’m detailing how to visualize and manage connections among tokens, their attention scores, and paths in SVG format. This involves removing old edges,
-adding new paths, and updating attention score displays.
-
-Enhancing table layout
-I’m adding CSS to style the table, centering it and adjusting padding and alignment. Next, I’ll tackle overlapping paths and curved edges for clarity.
-Tweaking the plot
-OK, let me see. I’m enhancing the drawEdges function to incorporate quadratic Bezier curves, aiming to boost graph visualization.
-
-Enhancing edges
-I’m thinking through the drawEdges function to add quadratic Bezier curves. The function dynamically adjusts stroke widths based on attention scores.
-
-Refining curvature adjustment
-I'm digging into the idea of tweaking curve profiles by matching curvature changes with index differences to avoid overlaps. Considering control point shifts
-or even slight overlaps might be practical due to time limits.
-
-Improving map functionality
-I'm working on the function, enhancing control points to prevent paths from overlapping. By clearing existing edges and mapping tokens to drawEdges
-their respective SVG elements, I’m reducing intersections and breaking up any overlap.
-
-Presenting attention scores
-I'm considering how to visually represent attention scores, aiming for neutrality and alignment. Utilizing a table with two columns for tokens and scores
-seems like the best approach.
-
-Ensuring table clarity
-I'm thinking through the use of a table for neatness, focusing on CSS for token and score alignment. Hover effects and consistent vertical spacing are
-considered.
-
-Showcasing the code
-I’m starting with a clear HTML structure, setting up styles and an SVG for edges. The script shows attention scores on token interaction, utilizing mouse
-events.</code></pre>
-<section id="reasoning-tokens" class="level2">
-<h2 class="anchored" data-anchor-id="reasoning-tokens">Reasoning Tokens</h2>
-<p>Questions on reasoning tokens - Are these using a different vocabulary from the wider model? - This does make OpenAI reasoning based models more black boxy.</p>
-<p><a href="https://platform.openai.com/docs/guides/reasoning/how-reasoning-works" class="uri">https://platform.openai.com/docs/guides/reasoning/how-reasoning-works</a></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://lawwu.github.io/til/posts/2024-09-12-o1-preview/o1_reasoning_tokens.png" class="img-fluid figure-img"></p>
-<figcaption>o1-preview reasoning tokens</figcaption>
-</figure>
-</div>
-</section>
-<section id="ai-explained-review" class="level2">
-<h2 class="anchored" data-anchor-id="ai-explained-review">AI Explained Review</h2>
-<p>On AI Explained’s simple-bench benchmark, o1-preview does seem like a step change from the previous generation of models.</p>
-<p>o1-preview is getting ~50% compared to other models 27% or less (though temperature was 1.0 when tested which is higher than other models)</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://lawwu.github.io/til/posts/2024-09-12-o1-preview/simple_bench_o1.png" class="img-fluid figure-img"></p>
-<figcaption>o1-preview on simple bench</figcaption>
-</figure>
-</div>
-<p>He think it is a new paradigm based on the step change improvement across a wide variety of domains and his benchmark Simple Bench.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://lawwu.github.io/til/posts/2024-09-12-o1-preview/o1_benchmarks.png" class="img-fluid figure-img"></p>
-<figcaption>o1-preview benchmarks</figcaption>
-</figure>
-</div>
-<p>o1 outperforms expert humans in GPQA Diamond (PhD-Level Science questions)!</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://lawwu.github.io/til/posts/2024-09-12-o1-preview/o1_reasoning.png" class="img-fluid figure-img"></p>
-<figcaption>o1-preview beats expert humans</figcaption>
-</figure>
-</div>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>llm</category>
-  <category>reasoning</category>
-  <guid>https://lawwu.github.io/til/posts/2024-09-12-o1-preview/</guid>
-  <pubDate>Thu, 12 Sep 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
