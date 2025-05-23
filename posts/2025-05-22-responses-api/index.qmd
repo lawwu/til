@@ -10,6 +10,6 @@ OpenAI's Responses API is becoming an Agent API from Steven Heidel's [tweet](htt
 
 ![Responses API Tweet](responses_api_tweet.png)
 
-Pretty interesting how OpenAI is moving up the stack where with an API call you can basically configure a tool calling [ReAct agent](https://arxiv.org/abs/2210.03629). Over the last year, agent framework SDKs like LangGraph provide utilities to [create react agents](https://python.langchain.com/api_reference/langchain/agents/langchain.agents.react.agent.create_react_agent.html). Now with the Responses API, you can create this tool calling agent that can call remote MCP servers, code interpreter, RAG, image generation and we search tools natively.
+Pretty interesting how OpenAI is moving up the stack where with an API call you can basically configure a tool calling [ReAct agent](https://arxiv.org/abs/2210.03629). Over the last year, agent framework SDKs like [LangGraph](https://github.com/langchain-ai/langgraph) provide utilities to [create react agents](https://python.langchain.com/api_reference/langchain/agents/langchain.agents.react.agent.create_react_agent.html). Now with the Responses API, you can create this tool calling agent that can call remote MCP servers, code interpreter, RAG, image generation and we search tools natively.
  
-Docs: https://openai.com/index/new-tools-and-features-in-the-responses-api/
+Docs: <https://openai.com/index/new-tools-and-features-in-the-responses-api/>
