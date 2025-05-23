@@ -28,8 +28,8 @@
 <figcaption>Responses API Tweet</figcaption>
 </figure>
 </div>
-<p>Pretty interesting how OpenAI is moving up the stack where with an API call you can basically configure a tool calling <a href="https://arxiv.org/abs/2210.03629">ReAct agent</a>. Over the last year, agent framework SDKs like LangGraph provide utilities to <a href="https://python.langchain.com/api_reference/langchain/agents/langchain.agents.react.agent.create_react_agent.html">create react agents</a>. Now with the Responses API, you can create this tool calling agent that can call remote MCP servers, code interpreter, RAG, image generation and we search tools natively.</p>
-<p>Docs: https://openai.com/index/new-tools-and-features-in-the-responses-api/</p>
+<p>Pretty interesting how OpenAI is moving up the stack where with an API call you can basically configure a tool calling <a href="https://arxiv.org/abs/2210.03629">ReAct agent</a>. Over the last year, agent framework SDKs like <a href="https://github.com/langchain-ai/langgraph">LangGraph</a> provide utilities to <a href="https://python.langchain.com/api_reference/langchain/agents/langchain.agents.react.agent.create_react_agent.html">create react agents</a>. Now with the Responses API, you can create this tool calling agent that can call remote MCP servers, code interpreter, RAG, image generation and we search tools natively.</p>
+<p>Docs: <a href="https://openai.com/index/new-tools-and-features-in-the-responses-api/" class="uri">https://openai.com/index/new-tools-and-features-in-the-responses-api/</a></p>
 
 
 
