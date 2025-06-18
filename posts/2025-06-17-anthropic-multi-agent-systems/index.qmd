@@ -5,7 +5,7 @@ date: "2025-06-17"
 categories: [LLMs, Agents]
 ---
 
-Some takeaways from reading Anthropic's fantastic post on [How we built our multi-agent research system](https://www.anthropic.com/engineering/built-multi-agent-research-system). I can tell it's written by someone or a team that has spent time in the trenches building and architecting this system.
+Some takeaways from reading Anthropic's fantastic post on [How we built our multi-agent research system](https://www.anthropic.com/engineering/built-multi-agent-research-system). This is [Simon Willison's thoughts on the post too](https://simonwillison.net/2025/Jun/14/multi-agent-research-system/). I can tell it's written by someone or a team that has spent time in the trenches building and architecting this system.
 
 These two diagrams were helpful. I've been seeing these process diagrams more. I wonder if it's because AI can generate these diagrams easily and so developers are including them in documentation more.
 
