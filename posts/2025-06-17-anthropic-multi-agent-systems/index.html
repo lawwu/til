@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lawrence Wu">
-<meta name="dcterms.date" content="2025-03-18">
+<meta name="dcterms.date" content="2025-06-17">
 
-<title>uv and Python projects – til</title>
+<title>Learnings from Building Multi-Agent Systems – til</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -160,9 +160,10 @@ cookieconsent.run({
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">uv and Python projects</h1>
+      <h1 class="title">Learnings from Building Multi-Agent Systems</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">python</div>
+                <div class="quarto-category">LLMs</div>
+                <div class="quarto-category">Agents</div>
               </div>
                   </div>
   </div>
@@ -180,7 +181,7 @@ cookieconsent.run({
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">March 18, 2025</p>
+        <p class="date">June 17, 2025</p>
       </div>
     </div>
     
@@ -201,15 +202,27 @@ cookieconsent.run({
 
 
 
-<p>I learned recently you can use uv to install Python. Likely will use uv instead of <code>pyenv</code> to install and manage Python versions going forward.</p>
-<p>There also seems to be a tipping point where it is moving from the tool you would use to install requirements with <code>uv pip install -r requirements.txt</code> to the all-in-one tool to install Python, manage dependencies and setup your Python project too.</p>
-<p>Some project templates that look interesting:</p>
+<p>Some takeaways from reading Anthropic’s fantastic post on <a href="https://www.anthropic.com/engineering/built-multi-agent-research-system">How we built our multi-agent research system</a>. This is <a href="https://simonwillison.net/2025/Jun/14/multi-agent-research-system/">Simon Willison’s thoughts on the post too</a>. I can tell it’s written by someone or a team that has spent time in the trenches building and architecting this system.</p>
+<p>These two diagrams were helpful. I’ve been seeing these process diagrams more. I wonder if it’s because AI can generate these diagrams easily and so developers are including them in documentation more.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="mas_high_level.png" class="img-fluid figure-img"></p>
+<figcaption>High-Level Architecture</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="mas_process_diagram.png" class="img-fluid figure-img"></p>
+<figcaption>Process Diagram</figcaption>
+</figure>
+</div>
+<p>Some learnings: - Multi-Agent Systems (MAS) are good for breadth-first search queries - MAS work because they spend enough tokens to solve the problem - increased token usage explained 80% of the variance - MAS are much more expensive: agents use 4x more tokens than chats and Multi-Agent systems us 15x more tokens than chats - I learned about <a href="https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking#interleaved-thinking">Interleaved thinking</a> - which enables Claude to think between tool calls and make more sophisticated reasoning after receiving tool results. Google’s Gemini 2.5 models also <a href="https://ai.google.dev/gemini-api/docs/thinking">do this</a>. - Prompt Engineering is still massively important in creating Multi-Agent systems - prompting the orchestrator to delegate well - “Agent-tool interfaces are as critical as human-computer interfaces. Using the right tool is efficient—often, it’s strictly necessary. For instance, an agent searching the web for context that only exists in Slack is doomed from the start. With <a href="https://modelcontextprotocol.io/introduction">MCP servers</a> that give the model access to external tools, this problem compounds, as agents encounter unseen tools with descriptions of wildly varying quality. We gave our agents explicit heuristics: for example, examine all available tools first, match tool usage to user intent, search the web for broad external exploration, or prefer specialized tools over generic ones. Bad tool descriptions can send agents down completely wrong paths, so each tool needs a distinct purpose and a clear description.”” - Thought this tool-testing agent was cool “<strong>Let agents improve themselves</strong>. We found that the Claude 4 models can be excellent prompt engineers. When given a prompt and a failure mode, they are able to diagnose why the agent is failing and suggest improvements. We even created a tool-testing agent—when given a flawed MCP tool, it attempts to use the tool and then rewrites the tool description to avoid failures. By testing the tool dozens of times, this agent found key nuances and bugs. This process for improving tool ergonomics resulted in a 40% decrease in task completion time for future agents using the new description, because they were able to avoid most mistakes.””</p>
+<p>They also have a section on Evaluations that was helpful:</p>
 <ul>
-<li><a href="https://github.com/jlevy/simple-modern-uv">simple-modern-uv</a></li>
-<li><a href="https://github.com/fpgmaas/cookiecutter-uv">cookiecutter-uv</a></li>
-<li><a href="https://github.com/pawamoy/copier-uv">copier-uv</a></li>
+<li>Starting evals with small samples</li>
+<li>“We experimented with multiple judges to evaluate each component, but found that a single LLM call with a single prompt outputting scores from 0.0-1.0 and a pass-fail grade was the most consistent and aligned with human judgements.””</li>
+<li>Still having human evals after implementing automated LLM-as-judge evals</li>
 </ul>
-<p>I also learned about <a href="https://github.com/copier-org/copier">copier</a> which is a format templates can follow which allows you to <a href="https://github.com/jlevy/simple-modern-uv#updating-your-project-template">pull future changes to the template</a> back into your project.</p>
 
 
 
