@@ -12,6 +12,34 @@
 <generator>quarto-1.7.32</generator>
 <lastBuildDate>Tue, 17 Jun 2025 00:00:00 GMT</lastBuildDate>
 <item>
+  <title>Lethal Trifecta for AI Agents</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-06-17-lethal-trifecta/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Simon Willison coined a new term called the <a href="https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/">lethal trifecta</a>. As someone that uses AI every day and has been experimenting with MCP Servers in the last few months, I was surprised at the new attack vectors that MCP Servers unlock.</p>
+<p>The lethal trifecta is to quote Simon:</p>
+<ul>
+<li><strong>Access to your private data</strong> — one of the most common purposes of tools in the first place!</li>
+<li><strong>Exposure to untrusted content</strong> — any mechanism by which text (or images) controlled by a malicious attacker could become available to your LLM</li>
+<li><strong>The ability to externally communicate</strong> in a way that could be used to steal your data (I often call this “exfiltration” but I’m not confident that term is widely understood.)</li>
+</ul>
+<p>Github’s MCP server <a href="https://simonwillison.net/2025/May/26/github-mcp-exploited/">exploit from May 2025</a> is an example of this.</p>
+
+
+
+ ]]></description>
+  <category>LLMs</category>
+  <category>Agents</category>
+  <category>Hacking</category>
+  <guid>https://lawwu.github.io/til/posts/2025-06-17-lethal-trifecta/</guid>
+  <pubDate>Tue, 17 Jun 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Learnings from Building Multi-Agent Systems</title>
   <dc:creator>Lawrence Wu</dc:creator>
   <link>https://lawwu.github.io/til/posts/2025-06-17-anthropic-multi-agent-systems/</link>
@@ -4174,32 +4202,6 @@ font-style: inherit;">-q</span> 4</span></code></pre></div>
   <category>tools</category>
   <guid>https://lawwu.github.io/til/posts/2024-09-19-apple-focus/</guid>
   <pubDate>Thu, 19 Sep 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>History of Python HTTP Clients</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-09-17-python-http-clients/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Learned about the history of Python HTTP clients: <code>urllib</code> to <code>Requests</code> to now <code>httpx</code> and <code>aiohttp</code> from this article by <a href="https://www.speakeasy.com/post/python-http-clients-requests-vs-httpx-vs-aiohttp">SpeakEasy</a>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://lawwu.github.io/til/posts/2024-09-17-python-http-clients/http_clients.png" class="img-fluid figure-img"></p>
-<figcaption>Python HTTP Clients</figcaption>
-</figure>
-</div>
-<p>The above company, SpeakEasy generates SDKs from an OpenAPI spec (looks Mistral uses them). I think OpenAI uses a competitor called [Stainless](https://www.stainlessapi.com.</p>
-
-
-
- ]]></description>
-  <category>python</category>
-  <guid>https://lawwu.github.io/til/posts/2024-09-17-python-http-clients/</guid>
-  <pubDate>Tue, 17 Sep 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
