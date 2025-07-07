@@ -1,0 +1,13 @@
+---
+title: "US Online Passport Renewal"
+author: "Lawrence Wu"
+date: "2025-07-07"
+categories: [Random]
+---
+
+Based on this WSJ article, [America Has Pulled Off the Impossible. It Made Getting a Passport Simple](https://www.wsj.com/business/us-passport-online-renewal-e58b51d1), I learned that it's now possible to renew your US Passport online. I thought this was too good to be true so I tried going through the process. I found out I was eligible! The process was pretty easy on phone:
+
+- fill out some personal data
+- take a picture of yourself (the service will automatically crop your picture). Though it doesn't accept HEIC images, only JPEG less than 10mb so I had to convert HEIC to JPEG and shrink it a little to upload it.
+
+The application process was relatively pain-free and I was delightfully surprised. Gone are the days of making an appointment at a post office, paying for passport pictures. Love it.
