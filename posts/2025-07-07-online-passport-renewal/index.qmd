@@ -11,3 +11,10 @@ Based on this WSJ article, [America Has Pulled Off the Impossible. It Made Getti
 - take a picture of yourself (the service will automatically crop your picture). Though it doesn't accept HEIC images, only JPEG less than 10mb so I had to convert HEIC to JPEG and shrink it a little to upload it.
 
 The application process was relatively pain-free and I was delightfully surprised. Gone are the days of making an appointment at a post office, paying for passport pictures. Love it.
+
+Timeline:
+
+- 2025-07-07 - Applied, Payment Pending
+- 2025-07-09 - U.S. Department of State has received your application. Application Status: In Process
+- 2025-07-10, 8pm - Approved
+- 2025-07-10, 10:30pm - Shipped
