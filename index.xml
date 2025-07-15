@@ -34,6 +34,7 @@
 <li>2025-07-10, 8pm - Approved</li>
 <li>2025-07-10, 10:30pm - Shipped</li>
 <li>2025-07-11 - Printing and preparing to give it to you. (I thought it was shipped already??)</li>
+<li>2025-07-15 - Received the passport in the mail!</li>
 </ul>
 
 
@@ -42,34 +43,6 @@
   <category>Random</category>
   <guid>https://lawwu.github.io/til/posts/2025-07-07-online-passport-renewal/</guid>
   <pubDate>Mon, 07 Jul 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Lethal Trifecta for AI Agents</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2025-06-17-lethal-trifecta/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Simon Willison coined a new term called the <a href="https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/">lethal trifecta</a>. As someone that uses AI every day and has been experimenting with MCP Servers in the last few months, I was surprised at the new attack vectors that MCP Servers unlock.</p>
-<p>The lethal trifecta is to quote Simon:</p>
-<ul>
-<li><strong>Access to your private data</strong> — one of the most common purposes of tools in the first place!</li>
-<li><strong>Exposure to untrusted content</strong> — any mechanism by which text (or images) controlled by a malicious attacker could become available to your LLM</li>
-<li><strong>The ability to externally communicate</strong> in a way that could be used to steal your data (I often call this “exfiltration” but I’m not confident that term is widely understood.)</li>
-</ul>
-<p>Github’s MCP server <a href="https://simonwillison.net/2025/May/26/github-mcp-exploited/">exploit from May 2025</a> is an example of this.</p>
-
-
-
- ]]></description>
-  <category>LLMs</category>
-  <category>Agents</category>
-  <category>Hacking</category>
-  <guid>https://lawwu.github.io/til/posts/2025-06-17-lethal-trifecta/</guid>
-  <pubDate>Tue, 17 Jun 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Learnings from Building Multi-Agent Systems</title>
@@ -109,6 +82,34 @@
   <category>LLMs</category>
   <category>Agents</category>
   <guid>https://lawwu.github.io/til/posts/2025-06-17-anthropic-multi-agent-systems/</guid>
+  <pubDate>Tue, 17 Jun 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Lethal Trifecta for AI Agents</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-06-17-lethal-trifecta/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Simon Willison coined a new term called the <a href="https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/">lethal trifecta</a>. As someone that uses AI every day and has been experimenting with MCP Servers in the last few months, I was surprised at the new attack vectors that MCP Servers unlock.</p>
+<p>The lethal trifecta is to quote Simon:</p>
+<ul>
+<li><strong>Access to your private data</strong> — one of the most common purposes of tools in the first place!</li>
+<li><strong>Exposure to untrusted content</strong> — any mechanism by which text (or images) controlled by a malicious attacker could become available to your LLM</li>
+<li><strong>The ability to externally communicate</strong> in a way that could be used to steal your data (I often call this “exfiltration” but I’m not confident that term is widely understood.)</li>
+</ul>
+<p>Github’s MCP server <a href="https://simonwillison.net/2025/May/26/github-mcp-exploited/">exploit from May 2025</a> is an example of this.</p>
+
+
+
+ ]]></description>
+  <category>LLMs</category>
+  <category>Agents</category>
+  <category>Hacking</category>
+  <guid>https://lawwu.github.io/til/posts/2025-06-17-lethal-trifecta/</guid>
   <pubDate>Tue, 17 Jun 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
@@ -1694,33 +1695,6 @@ font-style: inherit;">}</span></span></code></pre></div>
   <pubDate>Fri, 25 Apr 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>uv and Python projects</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>I learned recently you can use uv to install Python. Likely will use uv instead of <code>pyenv</code> to install and manage Python versions going forward.</p>
-<p>There also seems to be a tipping point where it is moving from the tool you would use to install requirements with <code>uv pip install -r requirements.txt</code> to the all-in-one tool to install Python, manage dependencies and setup your Python project too.</p>
-<p>Some project templates that look interesting:</p>
-<ul>
-<li><a href="https://github.com/jlevy/simple-modern-uv">simple-modern-uv</a></li>
-<li><a href="https://github.com/fpgmaas/cookiecutter-uv">cookiecutter-uv</a></li>
-<li><a href="https://github.com/pawamoy/copier-uv">copier-uv</a></li>
-</ul>
-<p>I also learned about <a href="https://github.com/copier-org/copier">copier</a> which is a format templates can follow which allows you to <a href="https://github.com/jlevy/simple-modern-uv#updating-your-project-template">pull future changes to the template</a> back into your project.</p>
-
-
-
- ]]></description>
-  <category>python</category>
-  <guid>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</guid>
-  <pubDate>Tue, 18 Mar 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
   <title>src layout vs flat layout in Python projects</title>
   <dc:creator>Lawrence Wu</dc:creator>
   <link>https://lawwu.github.io/til/posts/2025-03-18-flat-vs-src-layouts/</link>
@@ -1780,6 +1754,33 @@ font-style: inherit;">}</span></span></code></pre></div>
  ]]></description>
   <category>python</category>
   <guid>https://lawwu.github.io/til/posts/2025-03-18-flat-vs-src-layouts/</guid>
+  <pubDate>Tue, 18 Mar 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>uv and Python projects</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I learned recently you can use uv to install Python. Likely will use uv instead of <code>pyenv</code> to install and manage Python versions going forward.</p>
+<p>There also seems to be a tipping point where it is moving from the tool you would use to install requirements with <code>uv pip install -r requirements.txt</code> to the all-in-one tool to install Python, manage dependencies and setup your Python project too.</p>
+<p>Some project templates that look interesting:</p>
+<ul>
+<li><a href="https://github.com/jlevy/simple-modern-uv">simple-modern-uv</a></li>
+<li><a href="https://github.com/fpgmaas/cookiecutter-uv">cookiecutter-uv</a></li>
+<li><a href="https://github.com/pawamoy/copier-uv">copier-uv</a></li>
+</ul>
+<p>I also learned about <a href="https://github.com/copier-org/copier">copier</a> which is a format templates can follow which allows you to <a href="https://github.com/jlevy/simple-modern-uv#updating-your-project-template">pull future changes to the template</a> back into your project.</p>
+
+
+
+ ]]></description>
+  <category>python</category>
+  <guid>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</guid>
   <pubDate>Tue, 18 Mar 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
@@ -4014,38 +4015,6 @@ font-style: inherit;">0</span>].message.content)</span></code></pre></div>
   <pubDate>Fri, 11 Oct 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Juan Carlos Izpisua Belmonte &amp; Yamanaka Factors</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-10-03-yamanaka-factors/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>I was watching one of the videos from the All-In Summit 2024:</p>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/uUjF3RG28SQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>Sometimes YouTube videos are too long so I will grab the <a href="https://lawwu.github.io/transcripts/transcript_uUjF3RG28SQ.html">transcript</a>, also possible to do <a href="https://github.com/jdepoix/youtube-transcript-api">programmatically</a> or via web tools like this <a href="https://youtubetranscript.com/">one</a>. And then I’ll drop it into ChatGPT with a prompt: “What are the main points and takeaways from this talk?”. Example <a href="https://chatgpt.com/share/66fda61a-5d8c-8011-a679-eebeb0c51d35">here</a>.</p>
-<p>Aging and Disease Connection: The speaker, Juan Carlos Izpisua Belmonte, explains how age is the biggest risk factor for many diseases. As we age, cells lose their resilience or “buffer capacity,” making them more vulnerable to disease.</p>
-<ul>
-<li>Yamanaka Factors and Cell Reprogramming: Yamanaka’s discovery of four proteins (Yamanaka factors) that can reprogram adult cells into embryonic-like stem cells plays a crucial role. The focus now is on “partial reprogramming,” where a short pulse of these factors can rejuvenate cells without causing them to lose their identity (which could otherwise lead to cancer or malfunction).</li>
-<li>Chromatin and the Epigenome: Belmonte explains how chromatin (DNA packaging) can either be open (leading to aging and disease) or closed (correlating with health and youth). Altering the chromatin to a more closed state can rejuvenate cells and potentially reverse disease.</li>
-<li>Application Beyond Mice: This rejuvenation technology has been successfully tested in mice, including fixing genetic mutations and extending the lifespan of diseased mice. The next step is to apply these findings to human cells and organs, focusing on improving their resilience to disease without altering their genome.</li>
-<li>Potential for Human Applications: Altos Labs aims to apply these techniques in humans, starting with ex vivo organ rejuvenation (e.g., preparing discarded organs for transplantation). The ultimate goal is to develop methods that can increase human cells’ buffer capacity, thereby extending health span and delaying or reversing aging-related diseases.</li>
-<li>Future of Rejuvenation Therapies: The talk emphasizes the long-term potential of partial cell reprogramming to revolutionize human health by combating diseases linked to aging. The approach is described as a combination of cutting-edge science and industry, with billions of dollars invested in fundamental research and safe applications for human health.</li>
-<li>Chamath asks whether lifestyle choices like exercise can slow the aging process or improve cellular buffer capacity. Belmonte reveals that the gene expression changes induced by exercise resemble those triggered by the short pulses of Yamanaka factors, showing that lifestyle interventions can have a significant impact on cellular health and longevity.</li>
-</ul>
-<p>I found it fascinating that cellular aging could be reversed. The easiest way we have access to that is through simple exercise which triggers gene expression changes induced by short pulses of Yamanka factors!</p>
-
-
-
- ]]></description>
-  <category>aging</category>
-  <category>exercise</category>
-  <guid>https://lawwu.github.io/til/posts/2024-10-03-yamanaka-factors/</guid>
-  <pubDate>Wed, 02 Oct 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
   <title>Whisper large-v3-turbo</title>
   <dc:creator>Lawrence Wu</dc:creator>
   <link>https://lawwu.github.io/til/posts/2024-10-02-whisper-v3-turbo/</link>
@@ -4075,6 +4044,38 @@ Across languages, the turbo model performs similarly to large-v2, though it show
   <category>llm</category>
   <category>asr</category>
   <guid>https://lawwu.github.io/til/posts/2024-10-02-whisper-v3-turbo/</guid>
+  <pubDate>Wed, 02 Oct 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Juan Carlos Izpisua Belmonte &amp; Yamanaka Factors</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-10-03-yamanaka-factors/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I was watching one of the videos from the All-In Summit 2024:</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/uUjF3RG28SQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Sometimes YouTube videos are too long so I will grab the <a href="https://lawwu.github.io/transcripts/transcript_uUjF3RG28SQ.html">transcript</a>, also possible to do <a href="https://github.com/jdepoix/youtube-transcript-api">programmatically</a> or via web tools like this <a href="https://youtubetranscript.com/">one</a>. And then I’ll drop it into ChatGPT with a prompt: “What are the main points and takeaways from this talk?”. Example <a href="https://chatgpt.com/share/66fda61a-5d8c-8011-a679-eebeb0c51d35">here</a>.</p>
+<p>Aging and Disease Connection: The speaker, Juan Carlos Izpisua Belmonte, explains how age is the biggest risk factor for many diseases. As we age, cells lose their resilience or “buffer capacity,” making them more vulnerable to disease.</p>
+<ul>
+<li>Yamanaka Factors and Cell Reprogramming: Yamanaka’s discovery of four proteins (Yamanaka factors) that can reprogram adult cells into embryonic-like stem cells plays a crucial role. The focus now is on “partial reprogramming,” where a short pulse of these factors can rejuvenate cells without causing them to lose their identity (which could otherwise lead to cancer or malfunction).</li>
+<li>Chromatin and the Epigenome: Belmonte explains how chromatin (DNA packaging) can either be open (leading to aging and disease) or closed (correlating with health and youth). Altering the chromatin to a more closed state can rejuvenate cells and potentially reverse disease.</li>
+<li>Application Beyond Mice: This rejuvenation technology has been successfully tested in mice, including fixing genetic mutations and extending the lifespan of diseased mice. The next step is to apply these findings to human cells and organs, focusing on improving their resilience to disease without altering their genome.</li>
+<li>Potential for Human Applications: Altos Labs aims to apply these techniques in humans, starting with ex vivo organ rejuvenation (e.g., preparing discarded organs for transplantation). The ultimate goal is to develop methods that can increase human cells’ buffer capacity, thereby extending health span and delaying or reversing aging-related diseases.</li>
+<li>Future of Rejuvenation Therapies: The talk emphasizes the long-term potential of partial cell reprogramming to revolutionize human health by combating diseases linked to aging. The approach is described as a combination of cutting-edge science and industry, with billions of dollars invested in fundamental research and safe applications for human health.</li>
+<li>Chamath asks whether lifestyle choices like exercise can slow the aging process or improve cellular buffer capacity. Belmonte reveals that the gene expression changes induced by exercise resemble those triggered by the short pulses of Yamanaka factors, showing that lifestyle interventions can have a significant impact on cellular health and longevity.</li>
+</ul>
+<p>I found it fascinating that cellular aging could be reversed. The easiest way we have access to that is through simple exercise which triggers gene expression changes induced by short pulses of Yamanka factors!</p>
+
+
+
+ ]]></description>
+  <category>aging</category>
+  <category>exercise</category>
+  <guid>https://lawwu.github.io/til/posts/2024-10-03-yamanaka-factors/</guid>
   <pubDate>Wed, 02 Oct 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
