@@ -10,7 +10,29 @@
 <atom:link href="https://lawwu.github.io/til/index.xml" rel="self" type="application/rss+xml"/>
 <description>Lawrence Wu&#39;s Today I Learned</description>
 <generator>quarto-1.7.32</generator>
-<lastBuildDate>Mon, 07 Jul 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 04 Aug 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Using Hyprnote to Transcribe Meetings</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-08-05-hyprnote-transcribe-meetings/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I learned about <a href="https://github.com/fastrepl/hyprnote">Hyprnote</a>, a small application that uses local LLMs to transcribe meetings. I’ve been using it the last week or so. It’s surprisingly useful: I no longer have to go to Sharepoint to download transcripts for Teams calls (and request access for them if I was not the owner of the meeting) and I also get transcripts for non-Teams calls. Because this all runs locally, no data is leaving my Mac.</p>
+<p>There are basically 4 panes: - Left-hand side bar that shows the previous meetings - Middle bar that shows either notes you take (in Markdown) or a generated summary of the meeting - Right-hand side that shows the transcription (with speaker diarization)</p>
+<p>For transcription, they are leveraging the <a href="https://github.com/openai/whisper">whisper</a> models. I’m using Large which turns out to be <code>ggml-large-v3-turbo-q8_0.bin</code>.</p>
+<p>For summaries, they are leveraging a custom model called <code>hypr-llm.gguf</code> that is 1.11GB.</p>
+
+
+
+ ]]></description>
+  <category>Whisper</category>
+  <guid>https://lawwu.github.io/til/posts/2025-08-05-hyprnote-transcribe-meetings/</guid>
+  <pubDate>Mon, 04 Aug 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>US Online Passport Renewal</title>
   <dc:creator>Lawrence Wu</dc:creator>
@@ -4167,55 +4189,6 @@ Across languages, the turbo model performs similarly to large-v2, though it show
   <category>jupyter</category>
   <guid>https://lawwu.github.io/til/posts/2024-09-26-github-jupyter-diffs/</guid>
   <pubDate>Thu, 26 Sep 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Moshi - Real-Time Voice Chatbot</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-09-20-moshi-real-time-chatbot/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>To install:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># on a M series Mac</span></span>
-<span id="cb1-2"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># brew install rust</span></span>
-<span id="cb1-3"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">python3</span> <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">-m</span> venv venv</span>
-<span id="cb1-4"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">source</span> venv/bin/activate</span>
-<span id="cb1-5"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">pip</span> install moshi_mlx</span>
-<span id="cb1-6"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># run moshi (will download the quantized model) and you can chat with it</span></span>
-<span id="cb1-7"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">python</span> <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">-m</span> moshi_mlx.local <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">-q</span> 4</span></code></pre></div>
-<p>I setup this up on two laptops and recorded Moshi talking to Moshi (after seeding it with a topic on basketball):</p>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/bL-hYq2F7ow" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-
-
-
- ]]></description>
-  <category>llm</category>
-  <category>voice</category>
-  <guid>https://lawwu.github.io/til/posts/2024-09-20-moshi-real-time-chatbot/</guid>
-  <pubDate>Fri, 20 Sep 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
