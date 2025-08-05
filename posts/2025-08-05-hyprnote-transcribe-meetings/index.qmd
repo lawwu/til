@@ -1,0 +1,17 @@
+---
+title: "Using Hyprnote to Transcribe Meetings"
+author: "Lawrence Wu"
+date: "2025-08-04"
+categories: [Whisper]
+---
+
+I learned about [Hyprnote](https://github.com/fastrepl/hyprnote), a small application that uses local LLMs to transcribe meetings. I've been using it the last week or so. It's surprisingly useful: I no longer have to go to Sharepoint to download transcripts for Teams calls (and request access for them if I was not the owner of the meeting) and I also get transcripts for non-Teams calls. Because this all runs locally, no data is leaving my Mac.
+
+There are basically 4 panes:
+- Left-hand side bar that shows the previous meetings
+- Middle bar that shows either notes you take (in Markdown) or a generated summary of the meeting
+- Right-hand side that shows the transcription (with speaker diarization)
+
+For transcription, they are leveraging the [whisper](https://github.com/openai/whisper) models. I'm using Large which turns out to be `ggml-large-v3-turbo-q8_0.bin`.
+
+For summaries, they are leveraging a custom model called `hypr-llm.gguf` that is 1.11GB.
