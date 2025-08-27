@@ -1,0 +1,17 @@
+---
+title: "Exporting Hyprnote to Obsidian"
+author: "Lawrence Wu"
+date: "2025-08-26"
+categories: [Whisper]
+---
+
+I started using [Hyprnote](https://github.com/fastrepl/hyprnote) a [couple weeks ago](https://lawwu.github.io/til/posts/2025-08-05-hyprnote-transcribe-meetings/). I've found it useful transcribing meetings so I do not need to take copius notes since I can always rely on the transcript.
+
+I learned today you can export the Hyprnote AI Summary and full transcript to Obsidian.
+
+To do this:
+
+- Install the community plugin [local REST API](https://github.com/coddingtonbear/obsidian-local-rest-api) for Obsidian
+- Click the checkbox to "Enable Non-Encrypted HTTP Server", copy the API Key
+- In Hypernote --> Settings --> Integrations tab --> paste the API Key. You can also configure the folder these notes to a specific Obsidian folder.
+- In Hypernote --> From any note, you can click Share and you should see the notes exported to Obsidian.
