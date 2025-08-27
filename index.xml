@@ -9,8 +9,35 @@
 <link>https://lawwu.github.io/til/</link>
 <atom:link href="https://lawwu.github.io/til/index.xml" rel="self" type="application/rss+xml"/>
 <description>Lawrence Wu&#39;s Today I Learned</description>
-<generator>quarto-1.7.32</generator>
-<lastBuildDate>Mon, 04 Aug 2025 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.7.33</generator>
+<lastBuildDate>Tue, 26 Aug 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Exporting Hyprnote to Obsidian</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-08-26-hyprnote-and-obsidian/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I started using <a href="https://github.com/fastrepl/hyprnote">Hyprnote</a> a <a href="https://lawwu.github.io/til/posts/2025-08-05-hyprnote-transcribe-meetings/">couple weeks ago</a>. I’ve found it useful transcribing meetings so I do not need to take copius notes since I can always rely on the transcript.</p>
+<p>I learned today you can export the Hyprnote AI Summary and full transcript to Obsidian.</p>
+<p>To do this:</p>
+<ul>
+<li>Install the community plugin <a href="https://github.com/coddingtonbear/obsidian-local-rest-api">local REST API</a> for Obsidian</li>
+<li>Click the checkbox to “Enable Non-Encrypted HTTP Server”, copy the API Key</li>
+<li>In Hypernote –&gt; Settings –&gt; Integrations tab –&gt; paste the API Key. You can also configure the folder these notes to a specific Obsidian folder.</li>
+<li>In Hypernote –&gt; From any note, you can click Share and you should see the notes exported to Obsidian.</li>
+</ul>
+
+
+
+ ]]></description>
+  <category>Whisper</category>
+  <guid>https://lawwu.github.io/til/posts/2025-08-26-hyprnote-and-obsidian/</guid>
+  <pubDate>Tue, 26 Aug 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Using Hyprnote to Transcribe Meetings</title>
   <dc:creator>Lawrence Wu</dc:creator>
@@ -75,6 +102,34 @@
   <pubDate>Mon, 07 Jul 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>Lethal Trifecta for AI Agents</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-06-17-lethal-trifecta/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Simon Willison coined a new term called the <a href="https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/">lethal trifecta</a>. As someone that uses AI every day and has been experimenting with MCP Servers in the last few months, I was surprised at the new attack vectors that MCP Servers unlock.</p>
+<p>The lethal trifecta is to quote Simon:</p>
+<ul>
+<li><strong>Access to your private data</strong> — one of the most common purposes of tools in the first place!</li>
+<li><strong>Exposure to untrusted content</strong> — any mechanism by which text (or images) controlled by a malicious attacker could become available to your LLM</li>
+<li><strong>The ability to externally communicate</strong> in a way that could be used to steal your data (I often call this “exfiltration” but I’m not confident that term is widely understood.)</li>
+</ul>
+<p>Github’s MCP server <a href="https://simonwillison.net/2025/May/26/github-mcp-exploited/">exploit from May 2025</a> is an example of this.</p>
+
+
+
+ ]]></description>
+  <category>LLMs</category>
+  <category>Agents</category>
+  <category>Hacking</category>
+  <guid>https://lawwu.github.io/til/posts/2025-06-17-lethal-trifecta/</guid>
+  <pubDate>Tue, 17 Jun 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Learnings from Building Multi-Agent Systems</title>
   <dc:creator>Lawrence Wu</dc:creator>
   <link>https://lawwu.github.io/til/posts/2025-06-17-anthropic-multi-agent-systems/</link>
@@ -112,34 +167,6 @@
   <category>LLMs</category>
   <category>Agents</category>
   <guid>https://lawwu.github.io/til/posts/2025-06-17-anthropic-multi-agent-systems/</guid>
-  <pubDate>Tue, 17 Jun 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Lethal Trifecta for AI Agents</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2025-06-17-lethal-trifecta/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Simon Willison coined a new term called the <a href="https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/">lethal trifecta</a>. As someone that uses AI every day and has been experimenting with MCP Servers in the last few months, I was surprised at the new attack vectors that MCP Servers unlock.</p>
-<p>The lethal trifecta is to quote Simon:</p>
-<ul>
-<li><strong>Access to your private data</strong> — one of the most common purposes of tools in the first place!</li>
-<li><strong>Exposure to untrusted content</strong> — any mechanism by which text (or images) controlled by a malicious attacker could become available to your LLM</li>
-<li><strong>The ability to externally communicate</strong> in a way that could be used to steal your data (I often call this “exfiltration” but I’m not confident that term is widely understood.)</li>
-</ul>
-<p>Github’s MCP server <a href="https://simonwillison.net/2025/May/26/github-mcp-exploited/">exploit from May 2025</a> is an example of this.</p>
-
-
-
- ]]></description>
-  <category>LLMs</category>
-  <category>Agents</category>
-  <category>Hacking</category>
-  <guid>https://lawwu.github.io/til/posts/2025-06-17-lethal-trifecta/</guid>
   <pubDate>Tue, 17 Jun 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
@@ -1725,6 +1752,33 @@ font-style: inherit;">}</span></span></code></pre></div>
   <pubDate>Fri, 25 Apr 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>uv and Python projects</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I learned recently you can use uv to install Python. Likely will use uv instead of <code>pyenv</code> to install and manage Python versions going forward.</p>
+<p>There also seems to be a tipping point where it is moving from the tool you would use to install requirements with <code>uv pip install -r requirements.txt</code> to the all-in-one tool to install Python, manage dependencies and setup your Python project too.</p>
+<p>Some project templates that look interesting:</p>
+<ul>
+<li><a href="https://github.com/jlevy/simple-modern-uv">simple-modern-uv</a></li>
+<li><a href="https://github.com/fpgmaas/cookiecutter-uv">cookiecutter-uv</a></li>
+<li><a href="https://github.com/pawamoy/copier-uv">copier-uv</a></li>
+</ul>
+<p>I also learned about <a href="https://github.com/copier-org/copier">copier</a> which is a format templates can follow which allows you to <a href="https://github.com/jlevy/simple-modern-uv#updating-your-project-template">pull future changes to the template</a> back into your project.</p>
+
+
+
+ ]]></description>
+  <category>python</category>
+  <guid>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</guid>
+  <pubDate>Tue, 18 Mar 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
   <title>src layout vs flat layout in Python projects</title>
   <dc:creator>Lawrence Wu</dc:creator>
   <link>https://lawwu.github.io/til/posts/2025-03-18-flat-vs-src-layouts/</link>
@@ -1784,33 +1838,6 @@ font-style: inherit;">}</span></span></code></pre></div>
  ]]></description>
   <category>python</category>
   <guid>https://lawwu.github.io/til/posts/2025-03-18-flat-vs-src-layouts/</guid>
-  <pubDate>Tue, 18 Mar 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>uv and Python projects</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>I learned recently you can use uv to install Python. Likely will use uv instead of <code>pyenv</code> to install and manage Python versions going forward.</p>
-<p>There also seems to be a tipping point where it is moving from the tool you would use to install requirements with <code>uv pip install -r requirements.txt</code> to the all-in-one tool to install Python, manage dependencies and setup your Python project too.</p>
-<p>Some project templates that look interesting:</p>
-<ul>
-<li><a href="https://github.com/jlevy/simple-modern-uv">simple-modern-uv</a></li>
-<li><a href="https://github.com/fpgmaas/cookiecutter-uv">cookiecutter-uv</a></li>
-<li><a href="https://github.com/pawamoy/copier-uv">copier-uv</a></li>
-</ul>
-<p>I also learned about <a href="https://github.com/copier-org/copier">copier</a> which is a format templates can follow which allows you to <a href="https://github.com/jlevy/simple-modern-uv#updating-your-project-template">pull future changes to the template</a> back into your project.</p>
-
-
-
- ]]></description>
-  <category>python</category>
-  <guid>https://lawwu.github.io/til/posts/2025-03-18-uv-python-projects/</guid>
   <pubDate>Tue, 18 Mar 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
@@ -4045,38 +4072,6 @@ font-style: inherit;">0</span>].message.content)</span></code></pre></div>
   <pubDate>Fri, 11 Oct 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Whisper large-v3-turbo</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-10-02-whisper-v3-turbo/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>OpenAI released a new version of their Whisper model caled <code>large-v3-turbo</code>. There is already <code>ggml</code> versions available <a href="https://huggingface.co/ggerganov/whisper.cpp/tree/main">here</a>.</p>
-<ul>
-<li><code>ggml-large-v3-turbo.bin</code></li>
-<li><code>ggml-large-v3-turbo-q5_0.bin</code></li>
-</ul>
-<p>HuggingFace has a model card <a href="https://huggingface.co/openai/whisper-large-v3-turbo">here</a>. There’s a Github discussion <a href="https://github.com/openai/whisper/discussions/2363">here</a> talking about the model. It’s basically a distilled version of <code>large-v3</code>:</p>
-<pre><code>We’re releasing a new Whisper model named large-v3-turbo, or turbo for short. It is an optimized version of Whisper large-v3 and has only 4 decoder layers—just like the tiny model—down from the 32 in the large series.
-
-This work is inspired by Distil-Whisper, where the authors observed that using a smaller decoder can greatly improve transcription speed while causing minimal degradation in accuracy. Unlike Distil-Whisper, which used distillation to train a smaller model, Whisper turbo was fine-tuned for two more epochs over the same amount of multilingual transcription data used for training large-v3, i.e. excluding translation data, on which we don’t expect turbo to perform well.
-
-Across languages, the turbo model performs similarly to large-v2, though it shows larger degradation on some languages like Thai and Cantonese. Whisper turbo performs better on FLEURS, which consists of cleaner recordings than Common Voice. The figure below shows the turbo model’s performance on the subset of languages in the Common Voice 15 and FLEURS datasets where large-v3 scored a 20% error rate or lower.</code></pre>
-<p>I started using this model in my <a href="https://github.com/lawwu/transcripts/commit/4385305b1bf928e46d9f323cd1d4295dd231add8">transcripts repo</a>.</p>
-
-
-
- ]]></description>
-  <category>whisper</category>
-  <category>llm</category>
-  <category>asr</category>
-  <guid>https://lawwu.github.io/til/posts/2024-10-02-whisper-v3-turbo/</guid>
-  <pubDate>Wed, 02 Oct 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
   <title>Juan Carlos Izpisua Belmonte &amp; Yamanaka Factors</title>
   <dc:creator>Lawrence Wu</dc:creator>
   <link>https://lawwu.github.io/til/posts/2024-10-03-yamanaka-factors/</link>
@@ -4106,6 +4101,38 @@ Across languages, the turbo model performs similarly to large-v2, though it show
   <category>aging</category>
   <category>exercise</category>
   <guid>https://lawwu.github.io/til/posts/2024-10-03-yamanaka-factors/</guid>
+  <pubDate>Wed, 02 Oct 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Whisper large-v3-turbo</title>
+  <dc:creator>Lawrence Wu</dc:creator>
+  <link>https://lawwu.github.io/til/posts/2024-10-02-whisper-v3-turbo/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>OpenAI released a new version of their Whisper model caled <code>large-v3-turbo</code>. There is already <code>ggml</code> versions available <a href="https://huggingface.co/ggerganov/whisper.cpp/tree/main">here</a>.</p>
+<ul>
+<li><code>ggml-large-v3-turbo.bin</code></li>
+<li><code>ggml-large-v3-turbo-q5_0.bin</code></li>
+</ul>
+<p>HuggingFace has a model card <a href="https://huggingface.co/openai/whisper-large-v3-turbo">here</a>. There’s a Github discussion <a href="https://github.com/openai/whisper/discussions/2363">here</a> talking about the model. It’s basically a distilled version of <code>large-v3</code>:</p>
+<pre><code>We’re releasing a new Whisper model named large-v3-turbo, or turbo for short. It is an optimized version of Whisper large-v3 and has only 4 decoder layers—just like the tiny model—down from the 32 in the large series.
+
+This work is inspired by Distil-Whisper, where the authors observed that using a smaller decoder can greatly improve transcription speed while causing minimal degradation in accuracy. Unlike Distil-Whisper, which used distillation to train a smaller model, Whisper turbo was fine-tuned for two more epochs over the same amount of multilingual transcription data used for training large-v3, i.e. excluding translation data, on which we don’t expect turbo to perform well.
+
+Across languages, the turbo model performs similarly to large-v2, though it shows larger degradation on some languages like Thai and Cantonese. Whisper turbo performs better on FLEURS, which consists of cleaner recordings than Common Voice. The figure below shows the turbo model’s performance on the subset of languages in the Common Voice 15 and FLEURS datasets where large-v3 scored a 20% error rate or lower.</code></pre>
+<p>I started using this model in my <a href="https://github.com/lawwu/transcripts/commit/4385305b1bf928e46d9f323cd1d4295dd231add8">transcripts repo</a>.</p>
+
+
+
+ ]]></description>
+  <category>whisper</category>
+  <category>llm</category>
+  <category>asr</category>
+  <guid>https://lawwu.github.io/til/posts/2024-10-02-whisper-v3-turbo/</guid>
   <pubDate>Wed, 02 Oct 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
@@ -4167,34 +4194,6 @@ Across languages, the turbo model performs similarly to large-v2, though it show
   <category>agent</category>
   <guid>https://lawwu.github.io/til/posts/2024-09-27-github-copilot-workspace/</guid>
   <pubDate>Fri, 27 Sep 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Turn on Rich Jupyter diff’s in Github</title>
-  <dc:creator>Lawrence Wu</dc:creator>
-  <link>https://lawwu.github.io/til/posts/2024-09-26-github-jupyter-diffs/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Github.com has different features hidden behind a “Feature Preview” menu. You can get there by clicking your profile and go to “Feature Preview.”</p>
-<p>One of the options is to turn on Rich Jupyter Diff’s in Github:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://lawwu.github.io/til/posts/2024-09-26-github-jupyter-diffs/jupyter_diffs.png" class="img-fluid figure-img"></p>
-<figcaption>Rich Jupyter Diffs in Github, nice</figcaption>
-</figure>
-</div>
-<p>This follows a trend of large companies (Microsoft who owns Githbub) using open source tooling (the diff software likely is just using <a href="https://github.com/jupyter/nbdime">nbdime</a>), making it free and making paid services like <a href="https://www.reviewnb.com/#pricing">ReviewNB</a> obsolete.</p>
-
-
-
- ]]></description>
-  <category>github</category>
-  <category>jupyter</category>
-  <guid>https://lawwu.github.io/til/posts/2024-09-26-github-jupyter-diffs/</guid>
-  <pubDate>Thu, 26 Sep 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

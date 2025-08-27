@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lawrence Wu">
-<meta name="dcterms.date" content="2024-09-20">
+<meta name="dcterms.date" content="2025-08-26">
 
-<title>Moshi - Real-Time Voice Chatbot – til</title>
+<title>Exporting Hyprnote to Obsidian – til</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,41 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -195,10 +160,9 @@ cookieconsent.run({
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Moshi - Real-Time Voice Chatbot</h1>
+      <h1 class="title">Exporting Hyprnote to Obsidian</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">llm</div>
-                <div class="quarto-category">voice</div>
+                <div class="quarto-category">Whisper</div>
               </div>
                   </div>
   </div>
@@ -216,7 +180,7 @@ cookieconsent.run({
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 20, 2024</p>
+        <p class="date">August 26, 2025</p>
       </div>
     </div>
     
@@ -237,16 +201,15 @@ cookieconsent.run({
 
 
 
-<p>To install:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on a M series Mac</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># brew install rust</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv venv</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> venv/bin/activate</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install moshi_mlx</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># run moshi (will download the quantized model) and you can chat with it</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> moshi_mlx.local <span class="at">-q</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>I setup this up on two laptops and recorded Moshi talking to Moshi (after seeding it with a topic on basketball):</p>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/bL-hYq2F7ow" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>I started using <a href="https://github.com/fastrepl/hyprnote">Hyprnote</a> a <a href="https://lawwu.github.io/til/posts/2025-08-05-hyprnote-transcribe-meetings/">couple weeks ago</a>. I’ve found it useful transcribing meetings so I do not need to take copius notes since I can always rely on the transcript.</p>
+<p>I learned today you can export the Hyprnote AI Summary and full transcript to Obsidian.</p>
+<p>To do this:</p>
+<ul>
+<li>Install the community plugin <a href="https://github.com/coddingtonbear/obsidian-local-rest-api">local REST API</a> for Obsidian</li>
+<li>Click the checkbox to “Enable Non-Encrypted HTTP Server”, copy the API Key</li>
+<li>In Hypernote –&gt; Settings –&gt; Integrations tab –&gt; paste the API Key. You can also configure the folder these notes to a specific Obsidian folder.</li>
+<li>In Hypernote –&gt; From any note, you can click Share and you should see the notes exported to Obsidian.</li>
+</ul>
 
 
 
